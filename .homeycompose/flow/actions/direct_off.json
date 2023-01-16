@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Direct Audio off",
+        "de": "Direktes Audio aus"
+    },
+    "titleFormatted": {
+        "en": "Direct Audio off",
+        "de": "Direktes Audio aus"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}

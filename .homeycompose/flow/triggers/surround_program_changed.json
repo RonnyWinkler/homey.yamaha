@@ -1,0 +1,21 @@
+{
+    "title": {
+        "en": "Surround program changed",
+        "de": "Surround-Programm hat sich geändert"
+    },
+    "tokens": [{
+            "name": "surround_program",
+            "type": "string",
+            "title": {
+                "en": "Value",
+                "de": "Wert"
+            },
+            "example": "5ch Stereo"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=receiver"
+    }]
+}

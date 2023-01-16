@@ -1,0 +1,72 @@
+{
+    "id": "receiver",
+    "name": {
+        "en": "Receiver",
+        "de": "Receiver"
+    },
+    "images": {
+        "large": "/drivers/receiver/assets/images/large.png",
+        "small": "/drivers/receiver/assets/images/small.png"
+    },
+    "class": "amplifier",
+    "connectivity": [ "lan" ],
+    "capabilities": [
+        "onoff",
+        "volume_set",
+        "volume_up",
+        "volume_down",
+        "volume_mute",
+
+        "direct",
+
+        "speaker_playing",
+        "speaker_next",
+        "speaker_prev",
+        "speaker_shuffle",
+        "speaker_repeat",
+        "speaker_artist",
+        "speaker_album",
+        "speaker_track",
+        "speaker_duration",
+        "speaker_position",
+
+        "input",
+        "surround_program"
+    ],
+    "pair": [
+        {
+            "id": "discover",
+            "template": "loading",
+            "navigation": {
+                "next": "add_by_ip"
+            }
+        },
+        {
+            "id": "add_by_ip",
+            "navigation": {
+                "next": "check_ip"
+            }
+        },
+        {
+            "id": "check_ip",
+            "template": "loading",
+            "navigation": {
+                "next": "list_devices",
+                "prev": "add_by_ip"
+            }
+        },
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add_devices",
+                "prev": "add_by_ip"
+            },
+            "options": { "singular": false }
+        },
+        {
+            "id": "add_devices",
+            "template": "add_devices"
+        }
+    ]
+}

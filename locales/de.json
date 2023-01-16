@@ -1,0 +1,11 @@
+{
+    "pair":{
+        "add_by_ip":{
+            "title": "Manuell hinzufügen",
+            "ip": "IP-Addresse"
+        }
+    },
+    "error":{
+        "device_unavailable": "Verbindung nicht möglich. Prüfe die IP-Einstellungen in den Geräte.-Einstellungen."
+    }
+}

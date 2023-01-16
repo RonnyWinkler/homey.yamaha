@@ -1,0 +1,11 @@
+{
+    "pair":{
+        "add_by_ip":{
+            "title": "Add manually",
+            "ip": "IP address"
+        }
+    },
+    "error":{
+        "device_unavailable": "Connection not possible. Check IP configuration in device settings."
+    }
+}

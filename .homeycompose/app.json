@@ -1,0 +1,47 @@
+{
+  "id": "com.yamaha.yxc",
+  "version": "0.0.1",
+  "compatibility": ">=8.1.0",
+  "sdk": 3,
+  "name": {
+    "en": "Yamaha",
+    "de": "Yamaha"
+  },
+  "description": {
+    "en": "Discover True Sound",
+    "de": "Discover True Sound"
+  },
+  "category": [
+    "music",
+    "appliances"
+  ],
+  "author": {
+    "name": "Ronny Winkler",
+    "email": "ronny.winkler@web.de"
+  },
+  "brandColor":"#4B1E78",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png"
+  },
+  "source": "https://github.com/RonnyWinkler/homey.yamaha",
+  "homeyCommunityTopicId": 0,
+  "permissions": [],
+  "contributing": {
+      "donate": {
+          "paypal": {
+              "username": "winklerronny"
+          }
+      }
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Ronny Winkler",
+        "email": "ronny.winkler@web.de"
+      }
+    ],
+    "translators": [
+    ]
+  }
+}
