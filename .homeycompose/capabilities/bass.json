@@ -1,0 +1,12 @@
+{
+    "type": "boolean",
+    "title": {
+      "en": "Bass",
+      "de": "Bass"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "uiComponent": "button",
+    "icon": "/assets/capability_icons/bass.svg"
+  }

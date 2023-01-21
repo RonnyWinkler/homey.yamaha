@@ -1,0 +1,56 @@
+[
+    {
+        "id": "ip",
+        "type": "text",
+        "label": { 
+            "en": "IP address",
+            "de": "IP-Adresse"
+        },
+        "value": ""
+    },
+    {
+        "id": "type",
+        "type": "label",
+        "label": { 
+            "en": "Type",
+            "de": "Typ"
+        },
+        "value": ""
+    },
+    {
+        "id": "interval",
+        "type": "number",
+        "label": { 
+            "en": "Poll interval",
+            "de": "Abruf-Intervall"
+        },
+        "min": 1,
+        "value": 1
+    },
+    {
+        "id": "interval_unit",
+        "type": "dropdown",
+        "label": { 
+            "en": "Interval unit",
+            "de": "Intervall-Einheit"
+        },
+        "value": "min",
+        "values":[
+            {
+                "id": "min",
+                "label":{
+                    "en": "Minutes",
+                    "de": "Minuten"
+                }
+            },
+            {
+                "id": "sec",
+                "label":{
+                    "en": "Seconds",
+                    "de": "Sekunden"
+                }
+            }
+        ]
+    }
+
+]

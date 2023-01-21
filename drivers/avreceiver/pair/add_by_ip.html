@@ -12,7 +12,7 @@
     Homey.on("alert", function (message) {
         Homey.alert(message); 
     });
-    
+
     Homey.emit("getReceiverIp").then(function (ip) {
                 document.getElementById('ip').value = ip; 
             });

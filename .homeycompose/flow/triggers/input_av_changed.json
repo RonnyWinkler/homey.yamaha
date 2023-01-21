@@ -1,0 +1,21 @@
+{
+    "title": {
+        "en": "Input changed",
+        "de": "Eingang hat sich geändert"
+    },
+    "tokens": [{
+            "name": "input",
+            "type": "string",
+            "title": {
+                "en": "Value",
+                "de": "Wert"
+            },
+            "example": "tuner"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=avreceiver"
+    }]
+}

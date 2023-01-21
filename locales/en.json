@@ -2,7 +2,9 @@
     "pair":{
         "add_by_ip":{
             "title": "Add manually",
-            "ip": "IP address"
+            "ip": "IP address",
+            "search": "Start device discovery",
+            "not_found": "Device not found"
         }
     },
     "error":{

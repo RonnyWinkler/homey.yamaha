@@ -2,7 +2,9 @@
     "pair":{
         "add_by_ip":{
             "title": "Manuell hinzufügen",
-            "ip": "IP-Addresse"
+            "ip": "IP-Addresse",
+            "search": "Starte die Gerätesuche",
+            "not_found": "Gerät nicht gefunden"
         }
     },
     "error":{

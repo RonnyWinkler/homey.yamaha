@@ -1,0 +1,78 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select NetRadio favorite",
+        "de": "Wähle NetRadio-Favorit"
+    },
+    "titleFormatted": {
+        "en": "Select NetRadio favorite number [[item]].",
+        "de": "Wähle NetRadio-Favorit Nummer [[item]]."
+    },
+    "hint": { 
+      "en": "The receiver must be in the NetRadio playback mode of a favorites list.",
+      "de": "Der Receiver muss sich im NetRadio Wiedergabemodus einer Favoritenliste befinden."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+        },
+        {
+          "type": "dropdown",
+          "name": "item",
+          "title": { 
+              "en": "Favorite number",
+              "de": "Favoriten-Nummer"
+          },
+          "values": [
+            {
+              "id": "1",
+              "title": {
+                "en": "1"
+              }
+            },
+            {
+              "id": "2",
+              "title": {
+                "en": "2"
+              }
+            },
+            {
+              "id": "4",
+              "title": {
+                "en": "4"
+              }
+            },
+            {
+              "id": "5",
+              "title": {
+                "en": "5"
+              }
+            },
+            {
+              "id": "6",
+              "title": {
+                "en": "6"
+              }
+            },
+            {
+              "id": "7",
+              "title": {
+                "en": "7"
+              }
+            },
+            {
+              "id": "8",
+              "title": {
+                "en": "8"
+              }
+            }
+          ],
+          "placeholder": { 
+            "en": "Favorite number",
+            "de": "Favoriten-Nummer"
+          }
+        }
+    ]
+}

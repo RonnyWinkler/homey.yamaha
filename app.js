@@ -33,6 +33,18 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionInputAvSelect = this.homey.flow.getActionCard('input_av_select')
+    this._flowActionInputAvSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.inputSelect(args.input);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'input_av_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     this._flowActionSurroundProgramSelect = this.homey.flow.getActionCard('surround_program_select')
     this._flowActionSurroundProgramSelect.registerRunListener(async (args, state) => {
       try{
@@ -40,7 +52,19 @@ class yamahaApp extends Homey.App {
         return true;
       }
       catch(error){
-        this.error("Error executing flowAction 'input_select': "+  error.message);
+        this.error("Error executing flowAction 'surround_program_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionSurroundProgramAvSelect = this.homey.flow.getActionCard('surround_program_av_select')
+    this._flowActionSurroundProgramAvSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.surroundProgramSelect(args.surround_program);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'surround_program_av_select': "+  error.message);
         throw new Error(error.message);
       }
     });
@@ -65,6 +89,90 @@ class yamahaApp extends Homey.App {
       }
       catch(error){
         this.error("Error executing flowAction 'direct_off': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionEnhancerOn = this.homey.flow.getActionCard('enhancer_on')
+    this._flowActionEnhancerOn.registerRunListener(async (args, state) => {
+      try{
+        await args.device.enhancerSet(true);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'enhancer_on': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionEnhancerOff = this.homey.flow.getActionCard('enhancer_off')
+    this._flowActionEnhancerOff.registerRunListener(async (args, state) => {
+      try{
+        await args.device.enhancerSet(false);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'enhancer_off': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionBassOn = this.homey.flow.getActionCard('bass_on')
+    this._flowActionBassOn.registerRunListener(async (args, state) => {
+      try{
+        await args.device.bassSet(true);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'bass_on': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionBassOff = this.homey.flow.getActionCard('bass_off')
+    this._flowActionBassOff.registerRunListener(async (args, state) => {
+      try{
+        await args.device.bassSet(false);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'bass_off': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    // this._flowActionNetRadioItemSelect = this.homey.flow.getActionCard('netradio_item_select')
+    // this._flowActionNetRadioItemSelect.registerRunListener(async (args, state) => {
+    //   try{
+    //     await args.device.selectNetRadioListItem(args.item);
+    //     return true;
+    //   }
+    //   catch(error){
+    //     this.error("Error executing flowAction 'netradio_item_select': "+  error.message);
+    //     throw new Error(error.message);
+    //   }
+    // });
+
+    this._flowActionNetRadioPresetSelect = this.homey.flow.getActionCard('netradio_preset_select')
+    this._flowActionNetRadioPresetSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectNetRadioPreset(args.item);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'netradio_preset_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    
+    this._flowActionSendRcCode = this.homey.flow.getActionCard('send_rc_code')
+    this._flowActionSendRcCode.registerRunListener(async (args, state) => {
+      try{
+        await args.device.sendRcCode(args.code);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'send_rc_code': "+  error.message);
         throw new Error(error.message);
       }
     });

@@ -2,5 +2,17 @@
   "0.0.1": {
     "en": "Initial release",
     "de": "Initiales Release"
+  },
+  "0.0.2": {
+    "en": "Improved pair view. Added 'Direct, Enhancer, Bass' as dynamic capabilities.",
+    "de": "Pair-Dialog verbessert. 'Direct, Enhancer, Bass' als dynamische Attribute ergänzt."
+  },
+  "0.0.3": {
+    "en": "Fix for dynamic added/removing of dynamic capabilities 'Direct, Enhancer, Bass'.",
+    "de": "Korrektur für Hinzufügen/Entfernen dynamischer Attribute 'Direct, Enhancer, Bass'."
+  },
+  "0.1.0": {
+    "en": "Added AV Receiver device.",
+    "de": "AV-Receiver hinzugefügt."
   }
 }

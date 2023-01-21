@@ -11,6 +11,7 @@ class receiverDevice extends Homey.Device {
     async onInit() {
         this.log('Device init: '+this.getName()+' ID: '+this.getData().id);
 
+        await this._fixCapabilities();
         // device attributes
         this._intervalUpdateDevice = null;
         this._yamaha = null;
@@ -18,23 +19,24 @@ class receiverDevice extends Homey.Device {
             minVol: 0,
             maxVol: 100
         }
-        this.mediaCover = null;
-        this.mediaImage = await this.homey.images.createImage();
-        this.mediaImage.setStream(async (stream) => {
-            return await this.upateAlbumArtImage(stream);
+        this._mediaCover = "";
+        this._mediaImage = await this.homey.images.createImage();
+        this._mediaImage.setStream(async (stream) => {
+            return await this._upateAlbumArtImage(stream);
         });
-        await this.setAlbumArtImage(this.mediaImage);
-        // this.setCameraImage('artwork', "Artwork", this.mediaImage);
+        await this.setAlbumArtImage(this._mediaImage);
+
+        await this._connect();
+        await this._checkFeatures();
 
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (capabilityValues, capabilityOptions) => {
             await this._onCapability( capabilityValues, capabilityOptions);
         }, CAPABILITY_DEBOUNCE);
 
-        await this._connect();
         await this._startInterval();
     } // end onInit
 
-    async fixCapabilities() {
+    async _fixCapabilities() {
         let deprecatedCapabilities = [
             ],
             newCapabilities = [
@@ -54,9 +56,34 @@ class receiverDevice extends Homey.Device {
         }
     }
 
+    async _checkFeatures(){
+        let features = await this._yamaha.getFeatures();
+        if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
+            let funct = features.zone[0].func_list;
+            if (funct.indexOf("direct") == -1 && this.hasCapability("direct")){
+                this.removeCapability("direct");
+            }
+            if (funct.indexOf("direct") > -1 && !this.hasCapability("direct")){
+                this.addCapability("direct");
+            }
+            if (funct.indexOf("enhancer") == -1 && this.hasCapability("enhancer")){
+                this.removeCapability("enhancer");
+            }
+            if (funct.indexOf("enhancer") > -1 && !this.hasCapability("enhancer")){
+                this.addCapability("enhancer");
+            }
+            if (funct.indexOf("bass_extension") == -1 && this.hasCapability("bass")){
+                this.removeCapability("bass");
+            }
+            if (funct.indexOf("bass_extension") > -1 && !this.hasCapability("bass")){
+                this.addCapability("bass");
+            }
+        }
+    }
+
     // Device update (polling) Yamaha => Homey ========================================================================================================
     async _updateDevice(){
-        this.log("_updateDevice() ID: "+this.getData().id+' Name: '+this.getName());
+        // this.log("_updateDevice() ID: "+this.getData().id+' Name: '+this.getName());
         if (!this._yamaha){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
         }
@@ -87,8 +114,17 @@ class receiverDevice extends Homey.Device {
         // surround program
         await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
         // direct
-        await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
-
+        if (status.direct != undefined && this.hasCapability("direct")){
+            await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
+        }
+        // enhancer
+        if (status.enhancer != undefined && this.hasCapability("enhancer")){
+            await this.setCapabilityValue("enhancer", status.enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
+        }
+        // bass_extension, set only if provided by API
+        if (status.bass_extension != undefined && this.hasCapability("bass")){
+            await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
+        }
         // play info
         let source = "netusb";
         switch (this.getCapabilityValue("input")){
@@ -96,24 +132,24 @@ class receiverDevice extends Homey.Device {
                 source = "tuner"
                 break;
             case "cd":
-                source = "tuner"
+                source = "cd"
                 break;
         }
         let playInfo = await this._yamaha.getPlayInfo(source);
         // this.log(playInfo);
-        if (playInfo.artist != undefined){
+        if (status.power == 'on' && playInfo.artist != undefined){
             await this.setCapabilityValue("speaker_artist", playInfo.artist ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
         else{
             await this.setCapabilityValue("speaker_artist", "" ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
-        if (playInfo.album != undefined){
+        if (status.power == 'on' && playInfo.album != undefined){
             await this.setCapabilityValue("speaker_album", playInfo.album ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
         else{
             await this.setCapabilityValue("speaker_album", "" ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
-        if (playInfo.track != undefined){
+        if (status.power == 'on' && playInfo.track != undefined){
             await this.setCapabilityValue("speaker_track", playInfo.track ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
         else{
@@ -121,13 +157,13 @@ class receiverDevice extends Homey.Device {
         }
 
 
-        if (playInfo.playback != undefined){
+        if (status.power == 'on' && playInfo.playback != undefined){
             await this.setCapabilityValue("speaker_playing", (playInfo.playback == "play") ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
         else{
             await this.setCapabilityValue("speaker_playing", false ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
-        if (playInfo.repeat != undefined){
+        if (status.power == 'on' && playInfo.repeat != undefined){
             switch (playInfo.repeat){
                 case "off":
                     await this.setCapabilityValue("speaker_repeat", "none").catch(error => this.log("_updateDevice() capability error: ", error));
@@ -145,31 +181,31 @@ class receiverDevice extends Homey.Device {
         else{
             await this.setCapabilityValue("speaker_repeat", "none" ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
-        if (playInfo.shuffle != undefined){
+        if (status.power == 'on' && playInfo.shuffle != undefined){
             await this.setCapabilityValue("speaker_shuffle", (playInfo.shuffle == "on") ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
         else{
             await this.setCapabilityValue("speaker_shuffle", false ).catch(error => this.log("_updateDevice() capability error: ", error));
         }
 
-        if (playInfo.albumart_url != undefined){
-            if (this.mediaCover != playInfo.albumart_url){
-                this.mediaCover = playInfo.albumart_url;
-                await this.mediaImage.update();
+        if (status.power == 'on' && playInfo.albumart_url != undefined){
+            if (this._mediaCover != playInfo.albumart_url){
+                this._mediaCover = playInfo.albumart_url;
+                await this._mediaImage.update();
             }
         }
         else{
-            if (this.mediaCover != null){
-                this.mediaCover = null;
-                await this.mediaImage.update();
+            if (this._mediaCover != ""){
+                this._mediaCover = "";
+                await this._mediaImage.update();
             }
         }
 
     }
 
-    async upateAlbumArtImage(stream){
+    async _upateAlbumArtImage(stream){
         try{
-            let url = "http://" + this.getSetting("ip") + this.mediaCover;
+            let url = "http://" + this.getSetting("ip") + this._mediaCover;
             let res = await this.homey.app.httpGetStream(url);
             return await res.pipe(stream);
         }
@@ -191,7 +227,7 @@ class receiverDevice extends Homey.Device {
                 source = "tuner"
                 break;
             case "cd":
-                source = "tuner"
+                source = "cd"
                 break;
         }
 
@@ -243,12 +279,22 @@ class receiverDevice extends Homey.Device {
             await this._yamaha.setDirect(capabilityValues["direct"]);
         }
 
+        if( capabilityValues["enhancer"] != undefined){
+            await this._yamaha.setEnhancer(capabilityValues["enhancer"]);
+        }
+
+        if( capabilityValues["bass"] != undefined){
+            await this._yamaha.setBassExtension(capabilityValues["bass"]);
+        }
+
         if( capabilityValues["input"] != undefined){
             await this._yamaha.setInput(capabilityValues["input"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["surround_program"] != undefined){
             await this._yamaha.setSound(capabilityValues["surround_program"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["speaker_repeat"] != undefined){
@@ -305,7 +351,7 @@ class receiverDevice extends Homey.Device {
 
         if (updateDevice == true){
             this.homey.setTimeout(() => 
-                this._updateDevice(),  1000 );
+                this._updateDevice(),  500 );
         }
     }
 
@@ -409,8 +455,33 @@ class receiverDevice extends Homey.Device {
         await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
     }
     async directSet(direct){
-        await this._yamaha.setDirect(direct);
-        await this.setCapabilityValue("direct", direct ).catch(error => this.log("directSet() capability error: ", error));
+        if (this.hasCapability("direct")){
+            await this._yamaha.setDirect(direct);
+            await this.setCapabilityValue("direct", direct ).catch(error => this.log("directSet() capability error: ", error));
+        }
     }
+    async enhancerSet(enhancer){
+        if (this.hasCapability("enhancer")){
+            await this._yamaha.setEnhancer(enhancer);
+            await this.setCapabilityValue("enhancer", enhancer ).catch(error => this.log("enhancerSet() capability error: ", error));
+        }
+    }
+    async bassSet(bass){
+        if (this.hasCapability("bass")){
+            await this._yamaha.setBassExtension(bass);
+            await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
+        }
+    }
+    async selectNetRadioPreset(item){
+        await this._yamaha.recallPreset(item);
+        this.homey.setTimeout(() => 
+            this._updateDevice(),  500 );
+    }
+    async sendRcCode(code){
+        await this._yamaha.SendGetToDevice('/system/sendIrCode?code='+code);
+    }
+
+    
+
 }
 module.exports = receiverDevice;

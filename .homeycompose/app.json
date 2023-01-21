@@ -1,6 +1,6 @@
 {
   "id": "com.yamaha.yxc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -25,7 +25,7 @@
     "large": "/assets/images/large.png"
   },
   "source": "https://github.com/RonnyWinkler/homey.yamaha",
-  "homeyCommunityTopicId": 0,
+  "homeyCommunityTopicId": 75167,
   "permissions": [],
   "contributing": {
       "donate": {
