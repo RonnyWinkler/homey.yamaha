@@ -1,5 +1,4 @@
 {
-    "highlight": true,
     "title": {
         "en": "Select NetRadio preset",
         "de": "Wähle NetRadio-Preset"
@@ -10,7 +9,7 @@
     },
     "hint": { 
         "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
-        "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rife danach den Preset mit diesem Flow auf."
+        "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
     },
     "args": [
         {

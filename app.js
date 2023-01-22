@@ -164,7 +164,75 @@ class yamahaApp extends Homey.App {
         throw new Error(error.message);
       }
     });
-    
+    this._flowActionNetRadioPresetNext = this.homey.flow.getActionCard('netradio_preset_next')
+    this._flowActionNetRadioPresetNext.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectNetRadioPresetNext();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'netradio_preset_next': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionNetRadioPresetPrev = this.homey.flow.getActionCard('netradio_preset_prev')
+    this._flowActionNetRadioPresetPrev.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectNetRadioPresetPrev();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'netradio_preset_prev': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionTunerPresetSelect = this.homey.flow.getActionCard('tuner_preset_select')
+    this._flowActionTunerPresetSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectTunerPreset(args.item, args.band);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'tuner_preset_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionTunerPresetNext = this.homey.flow.getActionCard('tuner_preset_next')
+    this._flowActionTunerPresetNext.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectTunerPresetNext();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'tuner_preset_next': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionTunerPresetPrev = this.homey.flow.getActionCard('tuner_preset_prev')
+    this._flowActionTunerPresetPrev.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectTunerPresetPrev();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'tuner_preset_prev': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionTunerPresetSelectAv = this.homey.flow.getActionCard('tuner_preset_select_av')
+    this._flowActionTunerPresetSelectAv.registerRunListener(async (args, state) => {
+      try{
+        await args.device.selectTunerPreset(args.item);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'tuner_preset_select_av': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     this._flowActionSendRcCode = this.homey.flow.getActionCard('send_rc_code')
     this._flowActionSendRcCode.registerRunListener(async (args, state) => {
       try{
@@ -173,6 +241,30 @@ class yamahaApp extends Homey.App {
       }
       catch(error){
         this.error("Error executing flowAction 'send_rc_code': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionSendApiRequest = this.homey.flow.getActionCard('send_api_request')
+    this._flowActionSendApiRequest.registerRunListener(async (args, state) => {
+      try{
+        await args.device.sendApiRequest(args.request);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'send_api_request': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionSendApiRequestAv = this.homey.flow.getActionCard('send_api_request_av')
+    this._flowActionSendApiRequestAv.registerRunListener(async (args, state) => {
+      try{
+        await args.device.sendApiRequest(args.request);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'send_api_request_av': "+  error.message);
         throw new Error(error.message);
       }
     });

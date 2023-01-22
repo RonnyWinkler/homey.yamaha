@@ -1,0 +1,33 @@
+{
+    "title": {
+        "en": "Send API request",
+        "de": "Sende API-Aufruf"
+    },
+    "titleFormatted": {
+        "en": "Send API request [[request]].",
+        "de": "Sende API-Aufruf [[request]]."
+    },
+    "hint": { 
+        "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",
+        "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+        },
+        {
+            "type": "text",
+            "name": "request",
+            "title": { 
+                "en": "API request",
+                "de": "API-Aufruf"
+            },
+            "hint": { 
+                "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",
+                "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>."
+            }
+        }
+    ]
+}

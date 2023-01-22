@@ -1,0 +1,21 @@
+{
+    "title": {
+        "en": "Select previous tuner preset",
+        "de": "Wähle vorherigen Tuner-Preset"
+    },
+    "titleFormatted": {
+        "en": "Select previous tuner preset.",
+        "de": "Wähle vorherigen Tuner-Preset."
+    },
+    "hint": { 
+        "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+        "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}

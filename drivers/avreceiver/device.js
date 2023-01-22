@@ -461,8 +461,16 @@ class receiverDevice extends Homey.Device {
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
+    async selectTunerPreset(item){
+        await this._yamaha.selectTunerPreset(item);
+        this.homey.setTimeout(() => 
+            this._updateDevice(),  500 );
+    }
     async sendRcCode(code){
         await this._yamaha.sendRcCode(code);
+    }
+    async sendApiRequest(request){
+        await this._yamaha.sendXML(request);
     }
 
 }

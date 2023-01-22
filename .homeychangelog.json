@@ -14,5 +14,9 @@
   "0.1.0": {
     "en": "Added AV Receiver device.",
     "de": "AV-Receiver hinzugefügt."
+  },
+  "0.1.1": {
+    "en": "Added flow actions to select/switch NetRadio/Tuner presets. Prev/Next buttons will loop through presets for NetRadio and Tuner.",
+    "de": "FLok-Aktionskarten hinzugefügt zur Selektion bzw. Wechsel von NetRadio/Tuner-Presets. Vorheriger/Nächster-Button wechselt die Presets für NetRadio und Tuner."
   }
 }

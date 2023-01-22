@@ -221,8 +221,9 @@ class receiverDevice extends Homey.Device {
         this.log("_onCapability(): ", capabilityValues, capabilityOptions);
         let updateDevice = false;
 
+        let input = this.getCapabilityValue("input");
         let source = "netusb";
-        switch (this.getCapabilityValue("input")){
+        switch (input){
             case "tuner":
                 source = "tuner"
                 break;
@@ -328,8 +329,16 @@ class receiverDevice extends Homey.Device {
         }
         if( capabilityValues["speaker_prev"] != undefined){
             switch (source){
+                case "tuner":
+                    await this.selectTunerPresetPrev();
+                    break;
                 case "netusb":
-                    await this._yamaha.prevNet();
+                    if (input == "net_radio"){
+                        this.selectNetRadioPresetPrev();
+                    }
+                    else{
+                        await this._yamaha.prevNet();
+                    }
                     break;
                 case "cd":
                     await this._yamaha.prevCD();
@@ -339,8 +348,16 @@ class receiverDevice extends Homey.Device {
         }
         if( capabilityValues["speaker_next"] != undefined){
             switch (source){
+                case "tuner":
+                    await this.selectTunerPresetNext();
+                    break;
                 case "netusb":
-                    await this._yamaha.nextNet();
+                    if (input == "net_radio"){
+                        this.selectNetRadioPresetNext();
+                    }
+                    else{
+                        await this._yamaha.nextNet();
+                    }
                     break;
                 case "cd":
                     await this._yamaha.nextCD();
@@ -472,15 +489,99 @@ class receiverDevice extends Homey.Device {
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
         }
     }
+
     async selectNetRadioPreset(item){
         await this._yamaha.recallPreset(item);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
+    async selectNetRadioPresetNext(){
+        let playInfo = await this._yamaha.getPlayInfo('netusb');
+        if (playInfo && playInfo.artist){
+            let preset = await this._yamaha.getPresetInfo();  
+            if (preset && preset.preset_info){
+                preset = preset.preset_info;
+                for (let i=0; i<preset.length; i++){
+                    if (preset[i].text != '' && preset[i].text == playInfo.artist){
+                        if (i<preset.length-1 && preset[i+1].text != ''){
+                            this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+i+2+' ('+preset[i+1].text+')' );
+                            await this._yamaha.recallPreset(i+2);
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  1000 );
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  5000 );
+                        }
+                        else{
+                            this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: 1 ('+preset[0].text+')' );
+                            await this._yamaha.recallPreset(1);
+                            // Preset switch takes really long. Update playInfo 2x
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  1000 );
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  5000 );
+                        }
+                    }
+                }
+            }
+        }
+    }
+    async selectNetRadioPresetPrev(){
+        let playInfo = await this._yamaha.getPlayInfo('netusb');
+        if (playInfo && playInfo.artist){
+            let preset = await this._yamaha.getPresetInfo();  
+            if (preset && preset.preset_info){
+                preset = preset.preset_info;
+                for (let i=0; i<preset.length; i++){
+                    if (preset[i].text != '' && preset[i].text == playInfo.artist){
+                        if (i>0 && preset[i-1].text != ''){
+                            this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+(i)+' ('+preset[i-1].text+')' );
+                            await this._yamaha.recallPreset(i);
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  1000 );
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  5000 );
+                        }
+                        else{
+                            // get last entry
+                            let prev = preset.length-1;
+                            for (let j=preset.length-1; j>0 && preset[j].text == ''; j--){
+                                prev = j;
+                            }
+                            this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+prev+' ('+preset[prev-1].text+')' );
+                            await this._yamaha.recallPreset(prev);
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  1000 );
+                            this.homey.setTimeout(() => 
+                                this._updateDevice(),  5000 );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    async selectTunerPreset(item, band){
+        await this._yamaha.SendGetToDevice('/tuner/recallPreset?zone=main&band='+band+'&num='+item);
+        this.homey.setTimeout(() => 
+            this._updateDevice(),  500 );
+    }
+    async selectTunerPresetNext(){
+        await this._yamaha.switchPresetTuner('next');
+        this.homey.setTimeout(() => 
+            this._updateDevice(),  500 );
+    }
+    async selectTunerPresetPrev(){
+        await this._yamaha.switchPresetTuner('previous');
+        this.homey.setTimeout(() => 
+            this._updateDevice(),  500 );
+    }
+
     async sendRcCode(code){
         await this._yamaha.SendGetToDevice('/system/sendIrCode?code='+code);
     }
-
+    async sendApiRequest(request){
+        await this._yamaha.SendGetToDevice(request);
+    }
     
 
 }

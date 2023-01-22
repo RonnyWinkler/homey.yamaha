@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -927,7 +927,50 @@
         "id": "input_select"
       },
       {
-        "highlight": true,
+        "title": {
+          "en": "Select next NetRadio preset",
+          "de": "Wähle nächsten NetRadio-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select next NetRadio preset.",
+          "de": "Wähle nächsten NetRadio-Preset."
+        },
+        "hint": {
+          "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "netradio_preset_next"
+      },
+      {
+        "title": {
+          "en": "Select previous NetRadio preset",
+          "de": "Wähle vorherigen NetRadio-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select previous NetRadio preset.",
+          "de": "Wähle vorherigen NetRadio-Preset."
+        },
+        "hint": {
+          "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "netradio_preset_prev"
+      },
+      {
         "title": {
           "en": "Select NetRadio preset",
           "de": "Wähle NetRadio-Preset"
@@ -938,7 +981,7 @@
         },
         "hint": {
           "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
-          "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rife danach den Preset mit diesem Flow auf."
+          "de": "Weise deinem NetRadio-Favorit einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
         },
         "args": [
           {
@@ -963,6 +1006,74 @@
           }
         ],
         "id": "netradio_preset_select"
+      },
+      {
+        "title": {
+          "en": "Send API request",
+          "de": "Sende API-Aufruf"
+        },
+        "titleFormatted": {
+          "en": "Send API request [[request]].",
+          "de": "Sende API-Aufruf [[request]]."
+        },
+        "hint": {
+          "en": "The API request contains URL path and parameters like /main/setPower?power=on.",
+          "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. /main/setPower?power=on."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "text",
+            "name": "request",
+            "title": {
+              "en": "API request",
+              "de": "API-Aufruf"
+            },
+            "hint": {
+              "en": "The API request contains URL path and parameters like /main/setPower?power=on.",
+              "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. /main/setPower?power=on."
+            }
+          }
+        ],
+        "id": "send_api_request"
+      },
+      {
+        "title": {
+          "en": "Send API request",
+          "de": "Sende API-Aufruf"
+        },
+        "titleFormatted": {
+          "en": "Send API request [[request]].",
+          "de": "Sende API-Aufruf [[request]]."
+        },
+        "hint": {
+          "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",
+          "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+          },
+          {
+            "type": "text",
+            "name": "request",
+            "title": {
+              "en": "API request",
+              "de": "API-Aufruf"
+            },
+            "hint": {
+              "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",
+              "de": "Der API-Aufruf enthält den URL-Pfad sowie Parameter wie z.B. <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>."
+            }
+          }
+        ],
+        "id": "send_api_request_av"
       },
       {
         "highlight": true,
@@ -1464,6 +1575,152 @@
           }
         ],
         "id": "surround_program_select"
+      },
+      {
+        "title": {
+          "en": "Select next tuner preset",
+          "de": "Wähle nächeten Tuner-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select next tuner preset.",
+          "de": "Wähle nächsten Tuner-Preset."
+        },
+        "hint": {
+          "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "tuner_preset_next"
+      },
+      {
+        "title": {
+          "en": "Select previous tuner preset",
+          "de": "Wähle vorherigen Tuner-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select previous tuner preset.",
+          "de": "Wähle vorherigen Tuner-Preset."
+        },
+        "hint": {
+          "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "tuner_preset_prev"
+      },
+      {
+        "title": {
+          "en": "Select tuner preset",
+          "de": "Wähle Tuner-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select tuner preset number [[item]] for band [[band]].",
+          "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]."
+        },
+        "hint": {
+          "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "number",
+            "name": "item",
+            "title": {
+              "en": "Preset number",
+              "de": "Preset-Nummer"
+            },
+            "min": 1,
+            "max": 40,
+            "step": 1,
+            "placeholder": {
+              "en": "Preset number",
+              "de": "Preset-Nummer"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "band",
+            "title": {
+              "en": "Band",
+              "de": "Band"
+            },
+            "values": [
+              {
+                "id": "fm",
+                "title": {
+                  "en": "FM"
+                }
+              },
+              {
+                "id": "am",
+                "title": {
+                  "en": "AM"
+                }
+              },
+              {
+                "id": "dab",
+                "title": {
+                  "en": "DAB"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "tuner_preset_select"
+      },
+      {
+        "title": {
+          "en": "Select tuner preset",
+          "de": "Wähle Tuner-Preset"
+        },
+        "titleFormatted": {
+          "en": "Select tuner preset number [[item]].",
+          "de": "Wähle Tuner-Preset-Nummer [[item]]."
+        },
+        "hint": {
+          "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
+          "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+          },
+          {
+            "type": "number",
+            "name": "item",
+            "title": {
+              "en": "Preset number",
+              "de": "Preset-Nummer"
+            },
+            "min": 1,
+            "max": 40,
+            "step": 1,
+            "placeholder": {
+              "en": "Preset number",
+              "de": "Preset-Nummer"
+            }
+          }
+        ],
+        "id": "tuner_preset_select_av"
       }
     ]
   },
