@@ -90,36 +90,12 @@ class receiverDevice extends Homey.Device {
         }
     }
 
-    // async _checkFeatures(){
-    //     let features = await this._yamaha.getFeatures();
-    //     if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
-    //         let funct = features.zone[0].func_list;
-    //         if (funct.indexOf("direct") == -1 && this.hasCapability("direct")){
-    //             this.removeCapability("direct");
-    //         }
-    //         if (funct.indexOf("direct") > -1 && !this.hasCapability("direct")){
-    //             this.addCapability("direct");
-    //         }
-    //         if (funct.indexOf("enhancer") == -1 && this.hasCapability("enhancer")){
-    //             this.removeCapability("enhancer");
-    //         }
-    //         if (funct.indexOf("enhancer") > -1 && !this.hasCapability("enhancer")){
-    //             this.addCapability("enhancer");
-    //         }
-    //         if (funct.indexOf("bass_extension") == -1 && this.hasCapability("bass")){
-    //             this.removeCapability("bass");
-    //         }
-    //         if (funct.indexOf("bass_extension") > -1 && !this.hasCapability("bass")){
-    //             this.addCapability("bass");
-    //         }
-    //     }
-    // }
-
     // Device update (polling) Yamaha => Homey ========================================================================================================
     async _updateDevice(){
         // this.log("_updateDevice() ID: "+this.getData().id+' Name: '+this.getName());
         if (!this._yamaha){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.log("_updateDevice() Error checking Yamaha API. Set device unavailable.");
             return;
         }
         let basicStatus = {};
@@ -129,6 +105,7 @@ class receiverDevice extends Homey.Device {
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.log("_updateDevice() Error reading device basic status from API. Set device unavailable.");
             return;
         }
 
@@ -252,7 +229,7 @@ class receiverDevice extends Homey.Device {
             return await res.pipe(stream);
         }
         catch(error){
-            this.error("Error updating album art image: ", error.message);
+            this.log("Error updating album art image: ", error.message);
             stream.end();
             throw new Error("Artwork image error");
         }
@@ -351,7 +328,7 @@ class receiverDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("connect(): ", error.message);
+            this.log("_connect() Error creating API instance: ", error.message);
             this._yamaha = null;
         }
     }

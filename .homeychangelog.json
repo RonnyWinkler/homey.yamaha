@@ -26,5 +26,9 @@
   "0.2.1": {
     "en": "Error handling for http connect errors.",
     "de": "Fehlerbehandlung für http Verbindungsfehler."
+  },
+  "0.2.2": {
+    "en": "Error handling for http connect errors.",
+    "de": "Fehlerbehandlung für http Verbindungsfehler."
   }
 }

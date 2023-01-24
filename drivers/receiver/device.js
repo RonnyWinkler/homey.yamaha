@@ -70,7 +70,15 @@ class receiverDevice extends Homey.Device {
     }
 
     async _checkFeatures(){
-        let features = await this._yamaha.getFeatures();
+        let features = {};
+        try{
+            features = await this._yamaha.getFeatures();
+        }
+        catch(error){
+            this.log("_checkFeatures() Error reading device features.", error.message);
+            return;
+        }
+
         if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
             let funct = features.zone[0].func_list;
             if (funct.indexOf("direct") == -1 && this.hasCapability("direct")){
@@ -137,6 +145,8 @@ class receiverDevice extends Homey.Device {
         // this.log("_updateDevice() ID: "+this.getData().id+' Name: '+this.getName());
         if (!this._yamaha){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.log("_updateDevice() Error checking Yamaha API. Set device unavailable.");
+            return;
         }
         let deviceInfo = {};
         try{
@@ -145,6 +155,8 @@ class receiverDevice extends Homey.Device {
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.log("_updateDevice() Error reading device info from API. Set device unavailable.");
+            return;
         }
 
         let status = {};
@@ -215,7 +227,7 @@ class receiverDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.log("_updateDevice() Error reading device status: ", error);
+            this.log("_updateDevice() Error reading device status: ", error.message);
         }
 
         // play info
@@ -335,7 +347,7 @@ class receiverDevice extends Homey.Device {
             }
         }
         catch(error){
-            // this.log("_updateDevice() Error update playInfo: ", error.message)
+            this.log("_updateDevice() Error update playInfo: ", error.message)
         }
         if (!hasPlayInfo){
             await this.setCapabilityValue("speaker_artist", "" ).catch(error => this.log("_updateDevice() capability error: ", error));
@@ -359,7 +371,7 @@ class receiverDevice extends Homey.Device {
             return await res.pipe(stream);
         }
         catch(error){
-            this.error("Error updating album art image: ", error.message);
+            this.log("Error updating album art image: ", error.message);
             stream.end();
             throw new Error("Artwork image error");
         }
@@ -553,7 +565,7 @@ class receiverDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("connect(): ", error.message);
+            this.log("_connect() Error creating API instance: ", error.message);
             this._yamaha = null;
         }
     }

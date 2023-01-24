@@ -1,4 +1,4 @@
-...und steuern Sie Ihren Yamaha-Receiver oder Ihr Musicast-Gerät von Homey aus.
+...und steuern Sie Ihren Yamaha-Receiver oder Ihr MusicCast-Gerät von Homey aus.
 
 Steuere Hauptfunktionen wie:
 - an / aus
@@ -13,7 +13,3 @@ Steuere Medien, abhängig vom gewählten Eingang (Net, USB, CD):
 Medieninformationen wie Künstler und Titel werden im Homey-Gerät angezeigt.
 
 Um Ihren Receiver einzuschalten, muss Netzwerk-Standby im Receiver aktiviert sein.
-
-Informationen zu kompatiblen Modellen finden Sie auf der folgenden Website.
-AV-Receiver:
-https://uk.yamaha.com/en/products/audio_visual/apps/av_controller/index.html
