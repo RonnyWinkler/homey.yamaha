@@ -115,6 +115,48 @@ class receiverDriver extends Homey.Driver {
       
     } // end onPair
 
+    async onRepair(session, device) {
+        this.log("onRepair()");
+
+        let log = {};
+        let title = '';
+
+        session.setHandler('onDeviceData', async (selection) => {
+            switch (selection){
+                case 'deviceInfo':
+                    title = 'Device Info';
+                    log = await device.getDeviceInfo();
+                    await session.showView("device");
+                    break;
+                case 'deviceFeatures':
+                    title = 'Device Features';
+                    log = await device.getDeviceFeatures();
+                    await session.showView("device");
+                    break;
+                case 'deviceStatus':
+                    title = 'Device Status';
+                    log = await device.getDeviceStatus();
+                    await session.showView("device");
+                    break;
+                case 'devicePlayInfo':
+                    title = 'Device Play Info';
+                    log = await device.getDevicePlayInfo();
+                    await session.showView("device");
+                    break;
+            }
+            return true;       
+        });
+
+        session.setHandler('getDeviceData', async () => {
+            return {
+                log: log,
+                title: title 
+            };
+        });
+    
+
+    } // end onRepair
+
     async getDeviceData(ip){
         try{
             let yamaha = new YamahaYXC(ip);

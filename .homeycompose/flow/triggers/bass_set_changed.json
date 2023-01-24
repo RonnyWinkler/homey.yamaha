@@ -1,0 +1,17 @@
+{
+    "title": {
+      "en": "Bass has changed",
+      "de": "Bass hat sich geändert"
+    },
+    "tokens": [
+      {
+        "name": "bass_set",
+        "type": "number",
+        "title": {
+          "en": "Bass",
+          "de": "Bass"
+        },
+        "example": 0.5
+      }
+    ]
+  }

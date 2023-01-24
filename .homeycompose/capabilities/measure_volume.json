@@ -1,0 +1,12 @@
+{
+    "type": "number",
+    "title": {
+      "en": "Volume",
+      "de": "Lautstärke"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "uiComponent": "sensor",
+    "icon": "/assets/capability_icons/volume.svg"
+  }

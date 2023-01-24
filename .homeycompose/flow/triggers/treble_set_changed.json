@@ -1,0 +1,17 @@
+{
+    "title": {
+      "en": "Treble has changed",
+      "de": "Höhen haben sich geändert"
+    },
+    "tokens": [
+      {
+        "name": "treble_set",
+        "type": "number",
+        "title": {
+          "en": "Treble",
+          "de": "Höhen"
+        },
+        "example": 0.5
+      }
+    ]
+  }

@@ -1,0 +1,23 @@
+{
+    "title": {
+      "en": "Set treble to",
+      "de": "Höhen setzen auf"
+    },
+    "titleFormatted": {
+      "en": "Set treble to [[treble_set]]",
+      "de": "Höhen setzen auf [[treble_set]]"
+    },
+    "args": [
+      {
+        "name": "treble_set",
+        "type": "range",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "value": 0.5,
+        "label": "%",
+        "labelMultiplier": 100,
+        "labelDecimals": 0
+      }
+    ]
+  }

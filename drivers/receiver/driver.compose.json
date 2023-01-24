@@ -13,6 +13,8 @@
     "capabilities": [
         "onoff",
         "volume_set",
+        "bass_set",
+        "treble_set",
         "volume_up",
         "volume_down",
         "volume_mute",
@@ -29,7 +31,12 @@
         "speaker_position",
 
         "input",
-        "surround_program"
+        "surround_program",
+        "tuner_band",
+
+        "measure_volume",
+        "measure_bass",
+        "measure_treble"
     ],
     "pair": [
         {
@@ -73,5 +80,23 @@
             "id": "add_devices",
             "template": "add_devices"
         }
+    ],
+    "repair": [
+        {
+            "id": "select",
+            "navigation": {
+                "prev": "done"        
+            }
+        },
+        {
+            "id": "device",
+            "navigation": {
+                "prev": "select"        
+            }
+        },
+        {
+            "id": "done",
+            "template": "done"
+        }      
     ]
 }

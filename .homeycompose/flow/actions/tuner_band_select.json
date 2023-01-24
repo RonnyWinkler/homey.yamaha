@@ -1,0 +1,46 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select tuner band",
+        "de": "Wähle ein Tuner-Band"
+    },
+    "titleFormatted": {
+        "en": "Select tuner band [[band]].",
+        "de": "Wähle ein Tuner-Band [[band]]."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+          "type": "dropdown",
+          "name": "band",
+          "title": { 
+              "en": "Band",
+              "de": "Band"
+          },
+          "values": [
+            {
+              "id": "fm",
+              "title": {
+                "en": "FM"
+              }
+            },
+            {
+              "id": "am",
+              "title": {
+                "en": "AM"
+              }
+            },
+            {
+              "id": "dab",
+              "title": {
+                "en": "DAB"
+              }
+            }
+          ]
+        }
+    ]
+}

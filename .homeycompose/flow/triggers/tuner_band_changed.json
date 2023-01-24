@@ -1,0 +1,21 @@
+{
+    "title": {
+        "en": "Tuner band changed",
+        "de": "Tuner-Band hat sich geändert"
+    },
+    "tokens": [{
+            "name": "tuner_band",
+            "type": "string",
+            "title": {
+                "en": "Band",
+                "de": "Band"
+            },
+            "example": "fm"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=receiver"
+    }]
+}

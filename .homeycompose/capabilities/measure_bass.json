@@ -1,0 +1,12 @@
+{
+    "type": "number",
+    "title": {
+      "en": "Bass",
+      "de": "Bass"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "uiComponent": "sensor",
+    "icon": "/assets/capability_icons/bass.svg"
+  }

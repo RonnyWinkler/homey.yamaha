@@ -7,6 +7,16 @@
             "not_found": "Device not found"
         }
     },
+    "repair": {
+        "title":{
+            "select": "Receiver detail selection",
+            "device": "Receiver data",
+            "deviceInfo": "Device Info",
+            "deviceFeatures": "Device Features",
+            "deviceStatus": "Device Status",
+            "devicePlayInfo": "Device Play Info"
+        }  
+    },
     "error":{
         "device_unavailable": "Connection not possible. Check IP configuration in device settings."
     }

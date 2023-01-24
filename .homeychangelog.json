@@ -18,5 +18,9 @@
   "0.1.1": {
     "en": "Added flow actions to select/switch NetRadio/Tuner presets. Prev/Next buttons will loop through presets for NetRadio and Tuner.",
     "de": "FLok-Aktionskarten hinzugefügt zur Selektion bzw. Wechsel von NetRadio/Tuner-Presets. Vorheriger/Nächster-Button wechselt die Presets für NetRadio und Tuner."
+  },
+  "0.2.0": {
+    "en": "MusicCast Receiver: improved play info, switch netradio/tuner preset with next/prev button, added bass/trebble slider, added measures for volume/bass/treble.",
+    "de": "MusicCast Receiver: verbesserte Play-Info, Wechsel zw. NetRadio/Tuner Presets mit Next/Prev-Button, Bass/Höhen-Slider ergänzt, Einige Werte ergänzt für Lautstärke/Bass/Höheh."
   }
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -46,6 +46,24 @@
   },
   "flow": {
     "triggers": [
+      {
+        "title": {
+          "en": "Bass has changed",
+          "de": "Bass hat sich geändert"
+        },
+        "tokens": [
+          {
+            "name": "bass_set",
+            "type": "number",
+            "title": {
+              "en": "Bass",
+              "de": "Bass"
+            },
+            "example": 0.5
+          }
+        ],
+        "id": "bass_set_changed"
+      },
       {
         "title": {
           "en": "Input changed",
@@ -145,6 +163,49 @@
           }
         ],
         "id": "surround_program_changed"
+      },
+      {
+        "title": {
+          "en": "Treble has changed",
+          "de": "Höhen haben sich geändert"
+        },
+        "tokens": [
+          {
+            "name": "treble_set",
+            "type": "number",
+            "title": {
+              "en": "Treble",
+              "de": "Höhen"
+            },
+            "example": 0.5
+          }
+        ],
+        "id": "treble_set_changed"
+      },
+      {
+        "title": {
+          "en": "Tuner band changed",
+          "de": "Tuner-Band hat sich geändert"
+        },
+        "tokens": [
+          {
+            "name": "tuner_band",
+            "type": "string",
+            "title": {
+              "en": "Band",
+              "de": "Band"
+            },
+            "example": "fm"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "tuner_band_changed"
       }
     ],
     "actions": [
@@ -183,6 +244,30 @@
           }
         ],
         "id": "bass_on"
+      },
+      {
+        "title": {
+          "en": "Set bass auf",
+          "de": "Bass setzen to"
+        },
+        "titleFormatted": {
+          "en": "Set bass to [[bass_set]]",
+          "de": "Bass setzen auf [[bass_set]]"
+        },
+        "args": [
+          {
+            "name": "bass_set",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ],
+        "id": "bass_set"
       },
       {
         "title": {
@@ -1578,6 +1663,77 @@
       },
       {
         "title": {
+          "en": "Set treble to",
+          "de": "Höhen setzen auf"
+        },
+        "titleFormatted": {
+          "en": "Set treble to [[treble_set]]",
+          "de": "Höhen setzen auf [[treble_set]]"
+        },
+        "args": [
+          {
+            "name": "treble_set",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ],
+        "id": "treble_set"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select tuner band",
+          "de": "Wähle ein Tuner-Band"
+        },
+        "titleFormatted": {
+          "en": "Select tuner band [[band]].",
+          "de": "Wähle ein Tuner-Band [[band]]."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "dropdown",
+            "name": "band",
+            "title": {
+              "en": "Band",
+              "de": "Band"
+            },
+            "values": [
+              {
+                "id": "fm",
+                "title": {
+                  "en": "FM"
+                }
+              },
+              {
+                "id": "am",
+                "title": {
+                  "en": "AM"
+                }
+              },
+              {
+                "id": "dab",
+                "title": {
+                  "en": "DAB"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "tuner_band_select"
+      },
+      {
+        "title": {
           "en": "Select next tuner preset",
           "de": "Wähle nächeten Tuner-Preset"
         },
@@ -1875,6 +2031,8 @@
       "capabilities": [
         "onoff",
         "volume_set",
+        "bass_set",
+        "treble_set",
         "volume_up",
         "volume_down",
         "volume_mute",
@@ -1889,7 +2047,11 @@
         "speaker_duration",
         "speaker_position",
         "input",
-        "surround_program"
+        "surround_program",
+        "tuner_band",
+        "measure_volume",
+        "measure_bass",
+        "measure_treble"
       ],
       "pair": [
         {
@@ -1934,6 +2096,24 @@
         {
           "id": "add_devices",
           "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
         }
       ],
       "settings": [
@@ -2005,6 +2185,24 @@
       "setable": true,
       "uiComponent": "button",
       "icon": "/assets/capability_icons/bass.svg"
+    },
+    "bass_set": {
+      "title": {
+        "en": "Set bass",
+        "de": "Bass setzen"
+      },
+      "type": "number",
+      "desc": {
+        "en": "Bass",
+        "de": "Bass"
+      },
+      "chartType": "stepLine",
+      "min": -1,
+      "max": 1,
+      "decimals": 2,
+      "setable": true,
+      "getable": true,
+      "uiComponent": "slider"
     },
     "direct": {
       "type": "boolean",
@@ -2664,6 +2862,42 @@
         }
       ]
     },
+    "measure_bass": {
+      "type": "number",
+      "title": {
+        "en": "Bass",
+        "de": "Bass"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/bass.svg"
+    },
+    "measure_treble": {
+      "type": "number",
+      "title": {
+        "en": "Treble",
+        "de": "Höhen"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/treble.svg"
+    },
+    "measure_volume": {
+      "type": "number",
+      "title": {
+        "en": "Volume",
+        "de": "Lautstärke"
+      },
+      "insights": false,
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/volume.svg"
+    },
     "surround_program": {
       "type": "enum",
       "title": {
@@ -3090,6 +3324,53 @@
           "id": "Surround Decoder",
           "title": {
             "en": "Surround Decoder"
+          }
+        }
+      ]
+    },
+    "treble_set": {
+      "title": {
+        "en": "Set treble",
+        "de": "Höhen setzen"
+      },
+      "type": "number",
+      "desc": {
+        "en": "Treble",
+        "de": "Höhen"
+      },
+      "chartType": "stepLine",
+      "min": -1,
+      "max": 1,
+      "decimals": 2,
+      "setable": true,
+      "getable": true,
+      "uiComponent": "slider"
+    },
+    "tuner_band": {
+      "type": "enum",
+      "title": {
+        "en": "Tuner band",
+        "de": "Tuner-Band"
+      },
+      "getable": true,
+      "setable": true,
+      "values": [
+        {
+          "id": "fm",
+          "title": {
+            "en": "FM"
+          }
+        },
+        {
+          "id": "am",
+          "title": {
+            "en": "AM"
+          }
+        },
+        {
+          "id": "dab",
+          "title": {
+            "en": "DAB"
           }
         }
       ]

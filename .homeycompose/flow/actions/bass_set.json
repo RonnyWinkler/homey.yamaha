@@ -1,0 +1,23 @@
+{
+    "title": {
+      "en": "Set bass auf",
+      "de": "Bass setzen to"
+    },
+    "titleFormatted": {
+      "en": "Set bass to [[bass_set]]",
+      "de": "Bass setzen auf [[bass_set]]"
+    },
+    "args": [
+      {
+        "name": "bass_set",
+        "type": "range",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "value": 0.5,
+        "label": "%",
+        "labelMultiplier": 100,
+        "labelDecimals": 0
+      }
+    ]
+  }

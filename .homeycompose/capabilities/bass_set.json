@@ -1,0 +1,18 @@
+{
+    "title": {
+      "en": "Set bass",
+      "de": "Bass setzen"
+    },
+    "type": "number",
+    "desc": {
+      "en": "Bass",
+      "de": "Bass"
+    },
+    "chartType": "stepLine",
+    "min": -1,
+    "max": 1,
+    "decimals": 2,
+    "setable": true,
+    "getable": true,
+    "uiComponent": "slider"
+  }

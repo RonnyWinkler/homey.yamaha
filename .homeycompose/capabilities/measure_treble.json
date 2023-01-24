@@ -1,0 +1,12 @@
+{
+    "type": "number",
+    "title": {
+      "en": "Treble",
+      "de": "Höhen"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "uiComponent": "sensor",
+    "icon": "/assets/capability_icons/treble.svg"
+  }

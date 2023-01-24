@@ -141,6 +141,30 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionBassSet = this.homey.flow.getActionCard('bass_set')
+    this._flowActionBassSet.registerRunListener(async (args, state) => {
+      try{
+        await args.device.bassSet(args.bass_set);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'bass_set': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionTrebleSet = this.homey.flow.getActionCard('treble_set')
+    this._flowActionTrebleSet.registerRunListener(async (args, state) => {
+      try{
+        await args.device.trebleSet(args.treble_set);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'treble_set': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     // this._flowActionNetRadioItemSelect = this.homey.flow.getActionCard('netradio_item_select')
     // this._flowActionNetRadioItemSelect.registerRunListener(async (args, state) => {
     //   try{
@@ -229,6 +253,18 @@ class yamahaApp extends Homey.App {
       }
       catch(error){
         this.error("Error executing flowAction 'tuner_preset_select_av': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionTunerBandSelect = this.homey.flow.getActionCard('tuner_band_select')
+    this._flowActionTunerBandSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.tunerBandSelect(args.band);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'tuner_band_select': "+  error.message);
         throw new Error(error.message);
       }
     });

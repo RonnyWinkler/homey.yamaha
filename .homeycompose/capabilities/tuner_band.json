@@ -1,0 +1,29 @@
+{
+    "type": "enum",
+    "title": {
+      "en": "Tuner band",
+      "de": "Tuner-Band"
+    },
+    "getable": true,
+    "setable": true,
+    "values": [
+      {
+        "id": "fm",
+        "title": {
+          "en": "FM"
+        }
+      },
+      {
+        "id": "am",
+        "title": {
+          "en": "AM"
+        }
+      },
+      {
+        "id": "dab",
+        "title": {
+          "en": "DAB"
+        }
+      }
+    ]
+  }
