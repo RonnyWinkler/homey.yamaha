@@ -33,7 +33,12 @@ class receiverDevice extends Homey.Device {
         await this._checkFeatures();
 
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (capabilityValues, capabilityOptions) => {
-            await this._onCapability( capabilityValues, capabilityOptions);
+            try{
+                await this._onCapability( capabilityValues, capabilityOptions);
+            }
+            catch(error){
+                this.log("_onCapability() Error: ",error);
+            }
         }, CAPABILITY_DEBOUNCE);
 
         await this._startInterval();
@@ -142,83 +147,80 @@ class receiverDevice extends Homey.Device {
             this.setUnavailable(this.homey.__("error.device_unavailable"));
         }
 
-        // Device status
-        let status = await this._yamaha.getStatus();
-        // this.log(status);
-        // Store technical range settings
-        this._deviceState.maxVol = status.max_volume;
-        // onoff
-        await this.setCapabilityValue("onoff", (status.power == 'on') ).catch(error => this.log("_updateDevice() capability error: ", error));
-        // volume
-        let volume = (status.volume - this._deviceState.minVol) / (this._deviceState.maxVol - this._deviceState.minVol);
-        await this.setCapabilityValue("volume_set", volume );
-        // numeric volume (like on the display)
-        if (status.actual_volume != undefined && status.actual_volume.value != undefined){
-            await this.setCapabilityValue("measure_volume", status.actual_volume.value );
-        }
-        else{
-            await this.setCapabilityValue("measure_volume", volume );
-        }
-
-        if (status.mute != undefined){
-            await this.setCapabilityValue("volume_mute", status.mute ).catch(error => this.log("_updateDevice() capability error: ", error));
-        }
-        // bass slider
-        if (this.hasCapability("bass_set")){
-            if (    status.tone_control != undefined 
-                    && status.tone_control.bass != undefined
-                    && this._deviceState.range_step.tone_control != undefined){
-                await this.setCapabilityValue("bass_set", status.tone_control.bass );
-                await this.setCapabilityValue("measure_bass", status.tone_control.bass );
-            }
-            else{            
-                await this.setCapabilityValue("bass_set", 0 );
-                await this.setCapabilityValue("measure_bass", 0 );
-            }
-        }
-        // treble slider
-        if (this.hasCapability("treble_set")){
-            if (    status.tone_control != undefined 
-                    && status.tone_control.treble != undefined
-                    && this._deviceState.range_step.tone_control != undefined){
-                await this.setCapabilityValue("treble_set", status.tone_control.treble );
-                await this.setCapabilityValue("measure_treble", status.tone_control.treble );
+        let status = {};
+        try{
+            // Device status
+            status = await this._yamaha.getStatus();
+            // this.log(status);
+            // Store technical range settings
+            this._deviceState.maxVol = status.max_volume;
+            // onoff
+            await this.setCapabilityValue("onoff", (status.power == 'on') ).catch(error => this.log("_updateDevice() capability error: ", error));
+            // volume
+            let volume = (status.volume - this._deviceState.minVol) / (this._deviceState.maxVol - this._deviceState.minVol);
+            await this.setCapabilityValue("volume_set", volume );
+            // numeric volume (like on the display)
+            if (status.actual_volume != undefined && status.actual_volume.value != undefined){
+                await this.setCapabilityValue("measure_volume", status.actual_volume.value );
             }
             else{
-                await this.setCapabilityValue("treble_set", 0 );
-                await this.setCapabilityValue("measure_treble", 0 );
+                await this.setCapabilityValue("measure_volume", volume );
+            }
+
+            if (status.mute != undefined){
+                await this.setCapabilityValue("volume_mute", status.mute ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // bass slider
+            if (this.hasCapability("bass_set")){
+                if (    status.tone_control != undefined 
+                        && status.tone_control.bass != undefined
+                        && this._deviceState.range_step.tone_control != undefined){
+                    await this.setCapabilityValue("bass_set", status.tone_control.bass );
+                    await this.setCapabilityValue("measure_bass", status.tone_control.bass );
+                }
+                else{            
+                    await this.setCapabilityValue("bass_set", 0 );
+                    await this.setCapabilityValue("measure_bass", 0 );
+                }
+            }
+            // treble slider
+            if (this.hasCapability("treble_set")){
+                if (    status.tone_control != undefined 
+                        && status.tone_control.treble != undefined
+                        && this._deviceState.range_step.tone_control != undefined){
+                    await this.setCapabilityValue("treble_set", status.tone_control.treble );
+                    await this.setCapabilityValue("measure_treble", status.tone_control.treble );
+                }
+                else{
+                    await this.setCapabilityValue("treble_set", 0 );
+                    await this.setCapabilityValue("measure_treble", 0 );
+                }
+            }
+
+            // input
+            await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
+            // surround program
+            await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
+            // direct
+            if (status.direct != undefined && this.hasCapability("direct")){
+                await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // enhancer
+            if (status.enhancer != undefined && this.hasCapability("enhancer")){
+                await this.setCapabilityValue("enhancer", status.enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // bass_extension, set only if provided by API
+            if (status.bass_extension != undefined && this.hasCapability("bass")){
+                await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
         }
+        catch(error){
+            this.log("_updateDevice() Error reading device status: ", error);
+        }
 
-        // input
-        await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
-        // surround program
-        await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
-        // direct
-        if (status.direct != undefined && this.hasCapability("direct")){
-            await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
-        }
-        // enhancer
-        if (status.enhancer != undefined && this.hasCapability("enhancer")){
-            await this.setCapabilityValue("enhancer", status.enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
-        }
-        // bass_extension, set only if provided by API
-        if (status.bass_extension != undefined && this.hasCapability("bass")){
-            await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
-        }
         // play info
         let hasPlayInfo = false;
         let playInfo = {};
-        // let source = "netusb";
-        // switch (this.getCapabilityValue("input")){
-        //     case "tuner":
-        //         source = "tuner"
-        //         break;
-        //     case "cd":
-        //         source = "cd"
-        //         break;
-        // }
-        // let playInfo = await this._yamaha.getPlayInfo(source);
         try{
             if (status.power == 'on'){
                 switch (this.getCapabilityValue("input")){
@@ -348,8 +350,6 @@ class receiverDevice extends Homey.Device {
                 await this._mediaImage.update();
             }
         }
-
-
     }
 
     async _upateAlbumArtImage(stream){

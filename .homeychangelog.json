@@ -22,5 +22,9 @@
   "0.2.0": {
     "en": "MusicCast Receiver: improved play info, switch netradio/tuner preset with next/prev button, added bass/trebble slider, added measures for volume/bass/treble.",
     "de": "MusicCast Receiver: verbesserte Play-Info, Wechsel zw. NetRadio/Tuner Presets mit Next/Prev-Button, Bass/Höhen-Slider ergänzt, Einige Werte ergänzt für Lautstärke/Bass/Höheh."
+  },
+  "0.2.1": {
+    "en": "Error handling for http connect errors.",
+    "de": "Fehlerbehandlung für http Verbindungsfehler."
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "com.yamaha.yxc",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {

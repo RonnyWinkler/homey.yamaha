@@ -56,7 +56,12 @@ class receiverDevice extends Homey.Device {
         // await this._checkFeatures();
 
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (capabilityValues, capabilityOptions) => {
-            await this._onCapability( capabilityValues, capabilityOptions);
+            try{
+                await this._onCapability( capabilityValues, capabilityOptions);
+            }
+            catch(error){
+                this.log("_onCapability() Error: ",error);
+            }
         }, CAPABILITY_DEBOUNCE);
 
         await this._startInterval();
