@@ -1,7 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
-const YamahaYXC = require('yamaha-yxc-nodejs').YamahaYXC;
+const YamahaYXC = require('../../lib/yamaha_yxc');
 
 const CAPABILITY_DEBOUNCE = 500;
 const DEFAULT_ZONE = 'main';
@@ -822,7 +822,7 @@ class receiverDevice extends Homey.Device {
     }
 
     async selectTunerPreset(item, band){
-        await this._yamaha.SendGetToDevice('/tuner/recallPreset?zone='+DEFAULT_ZONE+'&band='+band+'&num='+item);
+        await this._yamaha.setTunerPreset(item, band);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
@@ -853,12 +853,11 @@ class receiverDevice extends Homey.Device {
     }
 
     async sendRcCode(code){
-        await this._yamaha.SendGetToDevice('/system/sendIrCode?code='+code);
+        await this._yamaha.sendIrCode(code);
     }
     async sendApiRequest(request){
         await this._yamaha.SendGetToDevice(request);
     }
-    
 
 }
 module.exports = receiverDevice;

@@ -1,6 +1,6 @@
 "use strict";
 const Homey = require('homey');
-const YamahaYXC = require('yamaha-yxc-nodejs').YamahaYXC;
+const YamahaYXC = require('../../lib/yamaha_yxc');
 
 class receiverDriver extends Homey.Driver {
     onPair(session) {
@@ -28,16 +28,6 @@ class receiverDriver extends Homey.Driver {
                                     }
                                     // if not found (exception), the add as discoverred device
                                     catch(error){
-                                        // let device = {
-                                        //     name: discover[i]["x-modelname"].split(":")[2],
-                                        //     data: {
-                                        //         id: discover[i]["x-modelname"].split(":")[1]
-                                        //     },
-                                        //     settings:{
-                                        //         ip: discover[i].address,
-                                        //         type: discover[i]["x-modelname"].split(":")[0]
-                                        //     }
-                                        // };
                                         devices.push(device);
                                     }
                                 }
@@ -72,16 +62,6 @@ class receiverDriver extends Homey.Driver {
                     }
                     // if not found (exception), the add as discoverred device
                     catch(error){
-                        // let device = {
-                        //     name: details.model_name,
-                        //     data: {
-                        //         id: details.device_id
-                        //     },
-                        //     settings:{
-                        //         ip: yamaha.ip,
-                        //         type: details.model_name
-                        //     }
-                        // };
                         devices.push(device);
                     }
                     if (devices.length > 0){
@@ -163,10 +143,20 @@ class receiverDriver extends Homey.Driver {
             let system = await yamaha.getDeviceInfo();
             this.log("API data: ", system);
             if (system && system.device_id && system.model_name ){
+                let deviceId = '';
+                if (system.device_id != undefined){
+                    deviceId = system.device_id; 
+                }
+                else{
+                    deviceId = system.system_id;
+                }
+                if (deviceId == ''){
+                    deviceId = this.getUIID();
+                }
                 let device = {
                     name: system.model_name,
                     data: {
-                        id: system.device_id
+                        id: deviceId
                     },
                     settings:{
                         ip: ip,
@@ -182,6 +172,15 @@ class receiverDriver extends Homey.Driver {
         catch(error){
             throw new Error("Invalid devide data from discovered IP ", ip);
         }
+    }
+
+    getUIID() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
     }
 
 }

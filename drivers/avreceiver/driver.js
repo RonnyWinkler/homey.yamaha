@@ -1,6 +1,8 @@
 "use strict";
 const Homey = require('homey');
-// const YamahaAV = require("../../lib/yamaha-nodejs");
+
+// dynamic require at pairing
+// const YamahaAV = require("../../lib/yamaha_av");
 
 class receiverDriver extends Homey.Driver {
     onPair(session) {
@@ -11,8 +13,6 @@ class receiverDriver extends Homey.Driver {
         session.setHandler('showView', async (view) => {
             if (view === 'discover') {
                 this.log("showView:discover" );
-                // let yamaha = new YamahaAV();
-                // let yamaha = new(require("../../lib/yamaha-nodejs"));
                 let yamaha = new (require("../../lib/yamaha_av"))();
                 let discover = [];
                 try{

@@ -2,31 +2,8 @@
 
 const Homey = require('homey');
 
-// const SurroundProgramTranslate = {
-//     'Action Game': 'ACTION_GAME',
-//     'Roleplaying Game': 'ROLEPLAYING_GAME',
-//     'Music Video': 'MUSIC_VIDEO',
-//     'Standard': 'STANDARD',
-//     'Spectacle': 'SPECTACLE',
-//     'Sci-Fi': 'SCI-FI',
-//     'Adventure': 'ADVENTURE',
-//     'Drama': 'DRAMA',
-//     'Hall in Munich': 'HALL_IN_MUNICH',
-//     'Hall in Vienna': 'HALL_IN_VIENNA',
-//     'Chamber': 'CHAMBER',
-//     'Cellar Club': 'CELLAR_CLUB',
-//     'Church in Royaumont': 'CHURCH_IN_RAYAUMONT',
-//     'The Roxy Theatre': 'THE_ROXY_THEATRE',
-//     'The Bottom Line': 'THE_BOTTOM_LINE',
-//     'Sports': 'SPORTS',
-//     'Enhanced': 'ENHANCED',
-//     'Mono Movie': 'MONO_MOVIE',
-//     '2ch Stereo': '2CH_STEREO',
-//     '5ch Stereo': '5CH_STEREO',
-//     '7ch Stereo': '7CH_STEREO',
-//     '9ch Stereo': '9CH_STEREO',
-//     'Surround Decoder': 'SURROUND_DECODER'
-// };
+// dynamic require in _connect()
+// require("../../lib/yamaha_av");
 
 const CAPABILITY_DEBOUNCE = 500;
 
