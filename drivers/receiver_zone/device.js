@@ -1,10 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
-const YamahaYXC = require('../../lib/yamaha_yxc');
 
 const CAPABILITY_DEBOUNCE = 500;
-const DEFAULT_ZONE = 'main';
 
 const PLAY_SOURCE = {
     'tuner': 'tuner',
@@ -25,16 +23,41 @@ const PLAY_SOURCE = {
     'mc_link': 'netusb'
 };
 
-class receiverDevice extends Homey.Device {
+
+class receiverZoneDevice extends Homey.Device {
 
     // Device init ========================================================================================================
     async onInit() {
-        this.log('Device init: '+this.getName()+' ID: '+this.getData().id);
+        this.log('Device init: '+this.getName()+' ID: '+this.getData().id + '/' + this.getData().zone);
 
         await this._fixCapabilities();
+
+    } // end onInit
+
+    async initDevice(api){
+        this.log('Zone init: '+this.getName()+' ID: '+this.getData().id);
         // device attributes
-        this._intervalUpdateDevice = null;
-        this._yamaha = null;
+        try{
+            this._yamaha = api;
+        }
+        catch(error){
+            this.setUnavailable(this.homey.__("error.zone_unavailable"));
+            this.log("_updateDevice() Error getting parent receiver. Set device unavailable.");
+        }
+
+        this._zone = this.getData().zone; 
+        switch (this._zone){
+            case "zone2":
+                this._zoneId = 1;
+                break;
+            case "zone3":
+                this._zoneId = 2;
+                break;
+            case "zone4":
+                this._zoneId = 3;
+                break;
+        }
+
         this._deviceState = {
             minVol: 0,
             maxVol: 100,
@@ -48,7 +71,6 @@ class receiverDevice extends Homey.Device {
         });
         await this.setAlbumArtImage(this._mediaImage);
 
-        await this._connect();
         await this._checkFeatures();
 
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (capabilityValues, capabilityOptions) => {
@@ -59,21 +81,13 @@ class receiverDevice extends Homey.Device {
                 this.log("_onCapability() Error: ",error);
             }
         }, CAPABILITY_DEBOUNCE);
-
-        this._initZoneDevices();
-
-        await this._startInterval();
-    } // end onInit
+        
+    }
 
     async _fixCapabilities() {
         let deprecatedCapabilities = [
-
             ],
             newCapabilities = [
-                "tuner_band",
-                "measure_volume",
-                "measure_bass",
-                "measure_treble"
             ];
         for (let i in deprecatedCapabilities) {
             let deprecatedCapability = deprecatedCapabilities[i];
@@ -90,6 +104,17 @@ class receiverDevice extends Homey.Device {
         }
     }
 
+
+    _getParentDevice(){
+        let receivers = this.homey.drivers.getDriver('receiver').getDevices();
+        for (let i=0; i<receivers.length; i++){
+            if (receivers[i].getData().id = this.getData().id){
+                return receivers[i];
+            }
+        }
+        throw new Error("No parent device found");
+    }
+
     async _checkFeatures(){
         let features = {};
         try{
@@ -100,8 +125,32 @@ class receiverDevice extends Homey.Device {
             return;
         }
 
-        if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
-            let funct = features.zone[0].func_list;
+        if (features && features.zone && features.zone[this._zoneId] && features.zone[this._zoneId].func_list ){
+            let funct = features.zone[this._zoneId].func_list;
+            if (funct.indexOf("power") == -1 && this.hasCapability("onoff")){
+                await  this.removeCapability("onoff");
+            }
+            if (funct.indexOf("power") > -1 && !this.hasCapability("onoff")){
+                 this.addCapability("onoff");
+            }
+            if (funct.indexOf("volume") == -1 && this.hasCapability("volume_set")){
+                await  this.removeCapability("volume_set");
+            }
+            if (funct.indexOf("volume") > -1 && !this.hasCapability("volume_set")){
+                 this.addCapability("volume_set");
+            }
+            if (funct.indexOf("actual_volume") == -1 && this.hasCapability("measure_volume")){
+                await  this.removeCapability("measure_volume");
+            }
+            if (funct.indexOf("actual_volume") > -1 && !this.hasCapability("measure_volume")){
+                 this.addCapability("measure_volume");
+            }
+            if (funct.indexOf("sound_program") == -1 && this.hasCapability("surround_program")){
+                await  this.removeCapability("surround_program");
+            }
+            if (funct.indexOf("sound_program") > -1 && !this.hasCapability("surround_program")){
+                 this.addCapability("surround_program");
+            }
             if (funct.indexOf("direct") == -1 && this.hasCapability("direct")){
                await  this.removeCapability("direct");
             }
@@ -125,7 +174,7 @@ class receiverDevice extends Homey.Device {
         try{
             this._deviceState['range_step'] = {};
             for (let i=0; i<features.zone.length; i++){
-                if (features.zone[i].id == DEFAULT_ZONE){
+                if (features.zone[i].id == this._zone){
                     for (let j=0; j<features.zone[i].range_step.length; j++){
                         this._deviceState.range_step[features.zone[i].range_step[j].id] = features.zone[i].range_step[j];
                     }
@@ -177,7 +226,7 @@ class receiverDevice extends Homey.Device {
     async _updateDevice(){
         // this.log("_updateDevice() ID: "+this.getData().id+' Name: '+this.getName());
         if (!this._yamaha){
-            this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.setUnavailable(this.homey.__("error.zone_unavailable"));
             this.log("_updateDevice() Error checking Yamaha API. Set device unavailable.");
             return;
         }
@@ -187,7 +236,7 @@ class receiverDevice extends Homey.Device {
            this.setAvailable();
         }
         catch(error){
-            this.setUnavailable(this.homey.__("error.device_unavailable"));
+            this.setUnavailable(this.homey.__("error.zone_unavailable"));
             this.log("_updateDevice() Error reading device info from API. Set device unavailable.");
             return;
         }
@@ -195,24 +244,30 @@ class receiverDevice extends Homey.Device {
         let status = {};
         try{
             // Device status
-            status = await this._yamaha.getStatus();
+            status = await this._yamaha.getStatus(this._zone);
             // this.log(status);
             // Store technical range settings
             this._deviceState.maxVol = status.max_volume;
             // onoff
-            await this.setCapabilityValue("onoff", (status.power == 'on') ).catch(error => this.log("_updateDevice() capability error: ", error));
-            // volume
-            let volume = (status.volume - this._deviceState.minVol) / (this._deviceState.maxVol - this._deviceState.minVol);
-            await this.setCapabilityValue("volume_set", volume );
-            // numeric volume (like on the display)
-            if (status.actual_volume != undefined && status.actual_volume.value != undefined){
-                await this.setCapabilityValue("measure_volume", status.actual_volume.value );
+            if (this.hasCapability("onoff")){
+                await this.setCapabilityValue("onoff", (status.power == 'on') ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
-            else{
-                await this.setCapabilityValue("measure_volume", volume );
+            // volume
+            if (this.hasCapability("volume_set")){
+                let volume = (status.volume - this._deviceState.minVol) / (this._deviceState.maxVol - this._deviceState.minVol);
+                await this.setCapabilityValue("volume_set", volume );
+            }
+            // numeric volume (like on the display)
+            if (this.hasCapability("measure_volume")){
+                if (status.actual_volume != undefined && status.actual_volume.value != undefined){
+                    await this.setCapabilityValue("measure_volume", status.actual_volume.value );
+                }
+                else{
+                    await this.setCapabilityValue("measure_volume", volume );
+                }
             }
 
-            if (status.mute != undefined){
+            if (status.mute != undefined && this.hasCapability("volume_mute")){
                 await this.setCapabilityValue("volume_mute", status.mute ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
             // bass slider
@@ -243,9 +298,13 @@ class receiverDevice extends Homey.Device {
             }
 
             // input
-            await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
+            if (status.input != undefined && this.hasCapability("input")){
+                await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
             // surround program
-            await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
+            if (status.sound_program != undefined && this.hasCapability("sound_program")){
+                await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
             // direct
             if (status.direct != undefined && this.hasCapability("direct")){
                 await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
@@ -294,12 +353,12 @@ class receiverDevice extends Homey.Device {
                 hasPlayInfo = true;
                 // this.log(playInfo);
 
-                // Tuner band
-                if (playInfo.band != undefined){
-                    await this.setCapabilityValue("tuner_band", playInfo.band ).catch(
-                        //error => this.log("_updateDevice() capability error: ", error)
-                        );
-                }
+                // // Tuner band
+                // if (playInfo.band != undefined && this.hasCapability("tuner_band")){
+                //     await this.setCapabilityValue("tuner_band", playInfo.band ).catch(
+                //         //error => this.log("_updateDevice() capability error: ", error)
+                //         );
+                // }
                 // Artist, album, track
                 if (playInfo.artist != undefined){
                     await this.setCapabilityValue("speaker_artist", playInfo.artist ).catch(error => this.log("_updateDevice() capability error: ", error));
@@ -395,18 +454,12 @@ class receiverDevice extends Homey.Device {
                 await this._mediaImage.update();
             }
         }
-
-        try{
-            await this._updateZoneDevices();
-        }
-        catch(error){
-            this.log("_updateDevice() Error updating zone devices: ", error.message)
-        }
     }
 
     async _upateAlbumArtImage(stream){
         try{
-            let url = "http://" + this.getSetting("ip") + this._mediaCover;
+            let ip = this._getParentDevice().getSetting("ip");
+            let url = "http://" + ip + this._mediaCover;
             let res = await this.homey.app.httpGetStream(url);
             return await res.pipe(stream);
         }
@@ -427,17 +480,18 @@ class receiverDevice extends Homey.Device {
 
         if( capabilityValues["onoff"] != undefined){
             if (capabilityValues["onoff"] == true){
-                await this._yamaha.powerOn();
+                await this._yamaha.powerOn(this._zone);
             }
             else{
-                await this._yamaha.powerOff();
+                await this._yamaha.powerOff(this._zone);
             }
+            updateDevice = 1;
         }
         
         if( capabilityValues["volume_set"] != undefined){
             let volume = capabilityValues["volume_set"] * (this._deviceState.maxVol - this._deviceState.minVol) +  this._deviceState.minVol;
             volume = Math.round(volume);
-            await this._yamaha.setVolumeTo(volume);
+            await this._yamaha.setVolumeTo(volume, this._zone);
             updateDevice = 1;
         }
 
@@ -463,47 +517,46 @@ class receiverDevice extends Homey.Device {
 
         if( capabilityValues["volume_mute"] != undefined){
             if (capabilityValues["volume_mute"] == true){
-                await this._yamaha.muteOn();
+                await this._yamaha.muteOn(this._zone);
             }
             else{
-                await this._yamaha.muteOff();
+                await this._yamaha.muteOff(this._zone);
             }
+            updateDevice = 1;
         }
 
         if( capabilityValues["direct"] != undefined){
-            await this._yamaha.setDirect(capabilityValues["direct"]);
+            await this._yamaha.setDirect(capabilityValues["direct"], this._zone);
+            updateDevice = 1;
         }
 
         if( capabilityValues["enhancer"] != undefined){
-            await this._yamaha.setEnhancer(capabilityValues["enhancer"]);
+            await this._yamaha.setEnhancer(capabilityValues["enhancer"], this._zone);
+            updateDevice = 1;
         }
 
         if( capabilityValues["bass"] != undefined){
-            await this._yamaha.setBassExtension(capabilityValues["bass"]);
+            await this._yamaha.setBassExtension(capabilityValues["bass"], this._zone);
+            updateDevice = 1;
         }
 
         if( capabilityValues["bass_set"] != undefined){
-            await this._yamaha.setBassTo(capabilityValues["bass_set"]);
+            await this._yamaha.setBassTo(capabilityValues["bass_set"], this._zone);
             updateDevice = 1;
         }
 
         if( capabilityValues["treble_set"] != undefined){
-            await this._yamaha.setTrebleTo(capabilityValues["treble_set"]);
+            await this._yamaha.setTrebleTo(capabilityValues["treble_set"], this._zone);
             updateDevice = 1;
         }
 
         if( capabilityValues["input"] != undefined){
-            await this._yamaha.setInput(capabilityValues["input"]);
+            await this._yamaha.setInput(capabilityValues["input"], this._zone);
             updateDevice = 2;
         }
 
         if( capabilityValues["surround_program"] != undefined){
-            await this._yamaha.setSound(capabilityValues["surround_program"]);
-            updateDevice = 1;
-        }
-
-        if( capabilityValues["tuner_band"] != undefined){
-            await this._yamaha.setBand(capabilityValues["tuner_band"]);
+            await this._yamaha.setSound(capabilityValues["surround_program"], this._zone);
             updateDevice = 1;
         }
 
@@ -586,70 +639,6 @@ class receiverDevice extends Homey.Device {
         }
     }
 
-    async _updateZoneDevices(){
-        let zones = this.homey.drivers.getDriver('receiver_zone').getDevices();
-        for (let i=0; i<zones.length; i++){
-            if (zones[i].getData().id = this.getData().id){
-                zones[i].updateDevice();
-            }
-        }
-    }
-
-    async _initZoneDevices(){
-        let zones = this.homey.drivers.getDriver('receiver_zone').getDevices();
-        for (let i=0; i<zones.length; i++){
-            if (zones[i].getData().id = this.getData().id){
-                zones[i].initDevice(this._yamaha);
-            }
-        }
-    }
-
-    // API handling ========================================================================================================
-    async _connect(ip = null){
-        try{
-            if (ip){
-                this._yamaha = new YamahaYXC(ip);  
-            }
-            else{
-                this._yamaha = new YamahaYXC(this.getSetting("ip"));  
-            }
-        }
-        catch(error){
-            this.log("_connect() Error creating API instance: ", error.message);
-            this._yamaha = null;
-        }
-    }
-
-    async _startInterval(interval = null, unit = null){
-        let scanInterval;
-        if (interval != null){
-            scanInterval = interval;
-        }
-        else{
-            scanInterval = await this.getSetting('interval');
-        }
-        let scanIntervalUnit;
-        if (unit != null){
-            scanIntervalUnit = unit;
-        }
-        else{
-            scanIntervalUnit = await this.getSetting('interval_unit');
-        }
-        if (scanIntervalUnit == "min"){
-            scanInterval = scanInterval * 60;
-        }
-        this.log('_startInterval() Interval: '+scanInterval, ' sec');
-        
-        if (this._intervalUpdateDevice){
-            this.homey.clearInterval(this._intervalUpdateDevice);
-        }
-        this._intervalUpdateDevice = this.homey.setInterval(() => 
-            this._updateDevice(),  scanInterval * 1000 );
-
-        // Start first update immediately
-        this._updateDevice();
-    }
-
     // Device handling ========================================================================================================
     /**
      * onSettings is called when the user updates the device's settings.
@@ -659,35 +648,38 @@ class receiverDevice extends Homey.Device {
      * @param {string[]} event.changedKeys An array of keys changed since the previous version
      * @returns {Promise<string|void>} return a custom message that will be displayed
      */
-    async onSettings({ oldSettings, newSettings, changedKeys }) {
-        this.log('Settings where changed: ', newSettings);
-        if (changedKeys.indexOf("ip") >= 0 ){
-            try{
-                let localYamaha = new YamahaYXC(newSettings["ip"]); 
-                await localYamaha.getDeviceInfo();
-                await this._connect(newSettings["ip"]);
-            }
-            catch(error){
-                throw new Error(error.message);
-            }
-        }
+    // async onSettings({ oldSettings, newSettings, changedKeys }) {
+    //     this.log('Settings where changed: ', newSettings);
+    //     if (changedKeys.indexOf("ip") >= 0 ){
+    //         try{
+    //             let localYamaha = new YamahaYXC(newSettings["ip"]); 
+    //             await localYamaha.getDeviceInfo();
+    //             await this._connect(newSettings["ip"]);
+    //         }
+    //         catch(error){
+    //             throw new Error(error.message);
+    //         }
+    //     }
 
-        if (changedKeys.indexOf("interval") >= 0 || changedKeys.indexOf("interval_unit") >= 0){
-            // Update device data with a short delay of 1sec
-            this._startInterval(newSettings["interval"], newSettings["interval_unit"]);
-        }
-    }
+    //     if (changedKeys.indexOf("interval") >= 0 || changedKeys.indexOf("interval_unit") >= 0){
+    //         // Update device data with a short delay of 1sec
+    //         this._startInterval(newSettings["interval"], newSettings["interval_unit"]);
+    //     }
+    // }
     
     onAdded() {
         this.log('device added: ', this.getData().id);
 
+        try{
+            this.initDevice(this._getParentDevice().getApi());
+        }
+        catch(error){
+            this.log("onAdded() Error getting parent receiver API instance.");
+        }
     } // end onAdded
 
     onDeleted() {
         this.log('device deleted:', this.getData().id);
-        if (this._intervalUpdateDevice){
-            this.homey.clearInterval(this._intervalUpdateDevice);
-        }
 
     } // end onDeleted
 
@@ -695,6 +687,7 @@ class receiverDevice extends Homey.Device {
     _getPlaySource(input){
         return PLAY_SOURCE[input];
     }
+    
     async _getPlayInfoNet(){
         let playInfo = await this._yamaha.getPlayInfo('netusb');
         return {
@@ -707,6 +700,7 @@ class receiverDevice extends Homey.Device {
             albumart_url: playInfo.albumart_url
         }
     }
+
     async _getPlayInfoTuner(){
         let playInfo = await this._yamaha.getPlayInfo('tuner');
         let band = '';
@@ -772,13 +766,8 @@ class receiverDevice extends Homey.Device {
             cd: await this._yamaha.getPlayInfo('cd')
         }
     }
-    getApi(){
-        if (this._yamaha){
-            return this._yamaha;
-        }
-        else{
-            throw new Error("Api not available");
-        }
+    async updateDevice(){
+        await this._updateDevice();
     }
 
     // Flow actions  ========================================================================================================
@@ -810,11 +799,17 @@ class receiverDevice extends Homey.Device {
     }
 
     async selectNetRadioPreset(item){
+        if (this.getCapabilityValue("input") != 'net_radio'){
+            throw new Error("NetRadio input is not active");
+        }
         await this._yamaha.recallPreset(item);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async selectNetRadioPresetNext(){
+        if (this.getCapabilityValue("input") != 'net_radio'){
+            throw new Error("NetRadio input is not active");
+        }
         let playInfo = await this._yamaha.getPlayInfo('netusb');
         if (playInfo && playInfo.artist){
             let preset = await this._yamaha.getPresetInfo();  
@@ -846,6 +841,9 @@ class receiverDevice extends Homey.Device {
         }
     }
     async selectNetRadioPresetPrev(){
+        if (this.getCapabilityValue("input") != 'net_radio'){
+            throw new Error("NetRadio input is not active");
+        }
         let playInfo = await this._yamaha.getPlayInfo('netusb');
         if (playInfo && playInfo.artist){
             let preset = await this._yamaha.getPresetInfo();  
@@ -883,42 +881,54 @@ class receiverDevice extends Homey.Device {
     }
 
     async selectTunerPreset(item, band){
+        if (this.getCapabilityValue("input") != 'tuner'){
+            throw new Error("Tuner input is not active");
+        }
         await this._yamaha.setTunerPreset(item, band);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async selectTunerPresetNext(){
+        if (this.getCapabilityValue("input") != 'tuner'){
+            throw new Error("Tuner input is not active");
+        }
         await this._yamaha.switchPresetTuner('next');
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async selectTunerPresetPrev(){
+        if (this.getCapabilityValue("input") != 'tuner'){
+            throw new Error("Tuner input is not active");
+        }
         await this._yamaha.switchPresetTuner('previous');
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async tunerBandSelect(band){
+        if (this.getCapabilityValue("input") != 'tuner'){
+            throw new Error("Tuner input is not active");
+        }
         await this._yamaha.setBand(band);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async bassSet(bass_set){
-        await this._yamaha.setBassTo(bass_set);
+        await this._yamaha.setBassTo(bass_set, this._zone);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
     async trebleSet(treble_set){
-        await this._yamaha.setTrebleTo(treble_set);
+        await this._yamaha.setTrebleTo(treble_set, this._zone);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
 
-    async sendRcCode(code){
-        await this._yamaha.sendIrCode(code);
-    }
-    async sendApiRequest(request){
-        await this._yamaha.SendGetToDevice(request);
-    }
+    // async sendRcCode(code){
+    //     await this._yamaha.sendIrCode(code);
+    // }
+    // async sendApiRequest(request){
+    //     await this._yamaha.SendGetToDevice(request);
+    // }
 
 }
-module.exports = receiverDevice;
+module.exports = receiverZoneDevice;

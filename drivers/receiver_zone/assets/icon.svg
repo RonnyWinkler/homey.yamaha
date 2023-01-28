@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:6.8;">
+    <g transform="matrix(1.1,0,0,1.1,-1.7,-0.65)">
+        <path d="M5,20L5,12L2,12L12,3L22,12L17,12L17,10.19L12,5.69L7,10.19L7,20L5,20Z" style="fill-rule:nonzero;"/>
+    </g>
+    <g id="icon.svg" transform="matrix(0.0183697,0,0,0.0183697,15.5,17.9516)">
+        <g transform="matrix(1,0,0,1,-435.5,-185)">
+            <clipPath id="_clip1">
+                <rect x="0" y="0" width="871" height="370"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(1,0,0,1,92.1415,-708.623)">
+                    <g id="Layer-1" serif:id="Layer 1">
+                        <g id="rect851" transform="matrix(0.98903,0,0,0.985792,3.75581,14.8517)">
+                            <rect x="-86.85" y="713.915" width="859.926" height="331.404" style="fill:none;stroke:black;stroke-width:20.15px;"/>
+                        </g>
+                        <path id="path859" d="M-41.598,1045.39L-41.518,1066.03C-41.479,1075.94 77.946,1075.41 77.946,1066.03L77.457,1045.39L-41.598,1045.39Z" style="fill-rule:nonzero;stroke:black;stroke-width:9.92px;stroke-linejoin:miter;stroke-miterlimit:4;"/>
+                        <path id="path859-7" d="M619.57,1045.01L619.651,1065.65C619.689,1075.56 739.337,1075.02 739.115,1065.65L738.625,1045.01L619.57,1045.01Z" style="fill-rule:nonzero;stroke:black;stroke-width:9.92px;stroke-linejoin:miter;stroke-miterlimit:4;"/>
+                        <circle id="path882" cx="679.862" cy="947.912" r="50.003" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                        <rect id="rect886" x="190.789" y="772.058" width="316.083" height="77.951" style="stroke:black;stroke-width:11.23px;stroke-miterlimit:4;"/>
+                        <circle id="path888" cx="271.982" cy="928.622" r="16.607" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                        <circle id="path888-3" cx="322.875" cy="928.622" r="16.607" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                        <circle id="path888-5" cx="373.768" cy="927.551" r="16.607" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                        <circle id="path888-6" cx="422.518" cy="927.551" r="16.607" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                        <circle id="path882-1" cx="16.2" cy="947.912" r="50.003" style="stroke:black;stroke-width:9.92px;stroke-miterlimit:4;"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

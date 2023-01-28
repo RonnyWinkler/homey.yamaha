@@ -1,0 +1,55 @@
+<!-- 
+<style>
+    .button {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        /* margin: 10px 0px;
+        left:-20px; */
+        cursor: pointer;
+    }
+</style> -->
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.select"));
+    // Homey.setNavigationClose();
+
+    function onSelectDeviceInfo(){
+        Homey.emit("onDeviceData", "deviceInfo");
+    }
+    function onSelectFeatures(){
+        Homey.emit("onDeviceData", "deviceFeatures");
+    }
+    function onSelectStatus(){
+        Homey.emit("onDeviceData", "deviceStatus");
+    }
+    function onSelectPlayInfo(){
+        Homey.emit("onDeviceData", "devicePlayInfo");
+    }
+
+</script>
+
+<div>
+    <fieldset>
+        <div>
+            <p>
+                <button id="btnDeviceInfo" class="homey-button-primary-full" onClick="onSelectDeviceInfo()" visibility = 'hidden'><span data-i18n="repair.title.deviceInfo"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnFeatures" class="homey-button-primary-full" onClick="onSelectFeatures()" visibility = 'hidden'><span data-i18n="repair.title.deviceFeatures"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnStatus" class="homey-button-primary-full" onClick="onSelectStatus()" visibility = 'hidden'><span data-i18n="repair.title.deviceStatus"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnPlayInfo" class="homey-button-primary-full" onClick="onSelectPlayInfo()" visibility = 'hidden'><span data-i18n="repair.title.devicePlayInfo"></span></button>
+            </p>
+        </div>
+    </fieldset>
+</div>

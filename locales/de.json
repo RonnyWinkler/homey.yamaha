@@ -5,6 +5,9 @@
             "ip": "IP-Addresse",
             "search": "Starte die Gerätesuche",
             "not_found": "Gerät nicht gefunden"
+        },
+        "list_devices_zone":{
+            "zone": "Zone"
         }
     },
     "repair": {
@@ -18,6 +21,7 @@
         }  
     },
     "error":{
-        "device_unavailable": "Verbindung nicht möglich. Prüfe die IP-Einstellungen in den Geräte.-Einstellungen."
+        "device_unavailable": "Verbindung nicht möglich. Prüfe die IP-Einstellungen in den Geräte.-Einstellungen.",
+        "zone_unavailable": "Verbundener Receiver wurde nicht gefunden odder ist nicht bereit."
     }
 }

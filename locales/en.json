@@ -5,6 +5,9 @@
             "ip": "IP address",
             "search": "Start device discovery",
             "not_found": "Device not found"
+        },
+        "list_devices_zone":{
+            "zone": "zone"
         }
     },
     "repair": {
@@ -18,6 +21,7 @@
         }  
     },
     "error":{
-        "device_unavailable": "Connection not possible. Check IP configuration in device settings."
+        "device_unavailable": "Connection not possible. Check IP configuration in device settings.",
+        "zone_unavailable": "Connected receiver not found or ready."
     }
 }

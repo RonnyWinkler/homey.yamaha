@@ -34,5 +34,9 @@
   "0.2.3": {
     "en": "API optimization to reduce used modules and memory.",
     "de": "API-Optimeierung zur Reduzierung verwendeter Module und Speicher."
+  },
+  "0.3.0": {
+    "en": "Added MusicCast zones (new device type).",
+    "de": "MusicCast-Zonen ergänzt (neuer Gerätetyp)."
   }
 }

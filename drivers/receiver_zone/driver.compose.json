@@ -1,0 +1,101 @@
+{
+    "id": "receiver",
+    "name": {
+        "en": "MusicCast Receiver Zone",
+        "de": "MusicCast Receiver-Zone"
+    },
+    "images": {
+        "large": "/drivers/receiver_zone/assets/images/large.png",
+        "small": "/drivers/receiver_zone/assets/images/small.png"
+    },
+    "class": "amplifier",
+    "connectivity": [ "lan" ],
+    "capabilities": [
+        "onoff",
+        "volume_set",
+        "bass_set",
+        "treble_set",
+        "volume_up",
+        "volume_down",
+        "volume_mute",
+
+        "speaker_playing",
+        "speaker_next",
+        "speaker_prev",
+        "speaker_shuffle",
+        "speaker_repeat",
+        "speaker_artist",
+        "speaker_album",
+        "speaker_track",
+        "speaker_duration",
+        "speaker_position",
+
+        "input",
+        "surround_program",
+
+        "measure_volume",
+        "measure_bass",
+        "measure_treble"
+    ],
+    "pair": [
+        {
+            "id": "list_devices_receiver",
+            "template": "list_devices",
+            "navigation": {
+                "next": "list_devices_zone"
+            },
+            "options": { 
+                "singular": true, 
+                "title": {
+                    "en": "Select receiver",
+                    "de": "Wähle einen Receiver"
+                },
+                "subtitle": {
+                    "en": "...you want to add a zone for.",
+                    "de": "...dem eine Zone hinzugefügt werden soll"
+                }
+            }
+        },
+        {
+            "id": "list_devices_zone",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add_devices",
+                "prev": "list_devices_receiver"
+            },
+            "options": { 
+                "singular": true, 
+                "title": {
+                    "en": "Select zone",
+                    "de": "Wähle eine Zone"
+                },
+                "subtitle": {
+                    "en": "...you want to add for the receiver.",
+                    "de": "...die dem Receiver hinzugefügt werden soll."
+                }
+            }
+        },
+        {
+            "id": "add_devices",
+            "template": "add_devices"
+        }
+    ],
+    "repair": [
+        {
+            "id": "select",
+            "navigation": {
+                "prev": "done"        
+            }
+        },
+        {
+            "id": "device",
+            "navigation": {
+                "prev": "select"        
+            }
+        },
+        {
+            "id": "done",
+            "template": "done"
+        }      
+    ]
+}
