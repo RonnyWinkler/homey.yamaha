@@ -99,9 +99,43 @@ class receiverDevice extends Homey.Device {
             this.log("_checkFeatures() Error reading device features.", error.message);
             return;
         }
-
+        // System features
+        if (features && features.system && features.system.func_list ){
+            let funct = features.system.func_list;
+            if (funct.indexOf("party_mode") == -1 && this.hasCapability("party")){
+               await  this.removeCapability("party");
+            }
+            if (funct.indexOf("party_mode") > -1 && !this.hasCapability("party")){
+                this.addCapability("party");
+            }
+        }
+        // Zone features
         if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
             let funct = features.zone[0].func_list;
+            if (funct.indexOf("power") == -1 && this.hasCapability("onoff")){
+                await  this.removeCapability("onoff");
+            }
+            if (funct.indexOf("power") > -1 && !this.hasCapability("onoff")){
+                 this.addCapability("onoff");
+            }
+            if (funct.indexOf("volume") == -1 && this.hasCapability("volume_set")){
+                await  this.removeCapability("volume_set");
+            }
+            if (funct.indexOf("volume") > -1 && !this.hasCapability("volume_set")){
+                 this.addCapability("volume_set");
+            }
+            if (funct.indexOf("actual_volume") == -1 && this.hasCapability("measure_volume")){
+                await  this.removeCapability("measure_volume");
+            }
+            if (funct.indexOf("actual_volume") > -1 && !this.hasCapability("measure_volume")){
+                 this.addCapability("measure_volume");
+            }
+            if (funct.indexOf("sound_program") == -1 && this.hasCapability("surround_program")){
+                await  this.removeCapability("surround_program");
+            }
+            if (funct.indexOf("sound_program") > -1 && !this.hasCapability("surround_program")){
+                 this.addCapability("surround_program");
+            }
             if (funct.indexOf("direct") == -1 && this.hasCapability("direct")){
                await  this.removeCapability("direct");
             }
@@ -257,6 +291,10 @@ class receiverDevice extends Homey.Device {
             // bass_extension, set only if provided by API
             if (status.bass_extension != undefined && this.hasCapability("bass")){
                 await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // party mode
+            if (status.party_enable != undefined && this.hasCapability("party")){
+                await this.setCapabilityValue("party", status.party_enable ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
         }
         catch(error){
@@ -480,6 +518,10 @@ class receiverDevice extends Homey.Device {
 
         if( capabilityValues["bass"] != undefined){
             await this._yamaha.setBassExtension(capabilityValues["bass"]);
+        }
+
+        if( capabilityValues["party"] != undefined){
+            await this._yamaha.setPartyMode(capabilityValues["party"]);
         }
 
         if( capabilityValues["bass_set"] != undefined){
@@ -806,6 +848,12 @@ class receiverDevice extends Homey.Device {
         if (this.hasCapability("bass")){
             await this._yamaha.setBassExtension(bass);
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
+        }
+    }
+    async partySet(party){
+        if (this.hasCapability("party")){
+            await this._yamaha.setPartyMode(party);
+            await this.setCapabilityValue("party", party ).catch(error => this.log("partySet() capability error: ", error));
         }
     }
 

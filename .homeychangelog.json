@@ -38,5 +38,9 @@
   "0.3.0": {
     "en": "Added MusicCast zones (new device type).",
     "de": "MusicCast-Zonen ergänzt (neuer Gerätetyp)."
+  },
+  "0.3.1": {
+    "en": "Added Party Mode.",
+    "de": "Party-Modus ergänzt."
   }
 }

@@ -124,7 +124,17 @@ class receiverZoneDevice extends Homey.Device {
             this.log("_checkFeatures() Error reading device features.", error.message);
             return;
         }
-
+        // System features
+        if (features && features.system && features.system.func_list ){
+            let funct = features.system.func_list;
+            if (funct.indexOf("party_mode") == -1 && this.hasCapability("party")){
+               await  this.removeCapability("party");
+            }
+            if (funct.indexOf("party_mode") > -1 && !this.hasCapability("party")){
+                this.addCapability("party");
+            }
+        }
+        // Zone features
         if (features && features.zone && features.zone[this._zoneId] && features.zone[this._zoneId].func_list ){
             let funct = features.zone[this._zoneId].func_list;
             if (funct.indexOf("power") == -1 && this.hasCapability("onoff")){
@@ -316,6 +326,10 @@ class receiverZoneDevice extends Homey.Device {
             // bass_extension, set only if provided by API
             if (status.bass_extension != undefined && this.hasCapability("bass")){
                 await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // party mode
+            if (status.party_enable != undefined && this.hasCapability("party")){
+                await this.setCapabilityValue("party", status.party_enable ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
         }
         catch(error){
@@ -540,6 +554,10 @@ class receiverZoneDevice extends Homey.Device {
             updateDevice = 1;
         }
 
+        if( capabilityValues["party"] != undefined){
+            await this._yamaha.setPartyMode(capabilityValues["party"]);
+        }
+
         if( capabilityValues["bass_set"] != undefined){
             await this._yamaha.setBassTo(capabilityValues["bass_set"], this._zone);
             updateDevice = 1;
@@ -757,7 +775,7 @@ class receiverZoneDevice extends Homey.Device {
         return await this._yamaha.getFeatures();
     }
     async getDeviceStatus(){
-        return await this._yamaha.getStatus();
+        return await this._yamaha.getStatus(this._zone);
     }
     async getDevicePlayInfo(){
         return {
@@ -795,6 +813,12 @@ class receiverZoneDevice extends Homey.Device {
         if (this.hasCapability("bass")){
             await this._yamaha.setBassExtension(bass);
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
+        }
+    }
+    async partySet(party){
+        if (this.hasCapability("party")){
+            await this._yamaha.setPartyMode(party);
+            await this.setCapabilityValue("party", party ).catch(error => this.log("partySet() capability error: ", error));
         }
     }
 

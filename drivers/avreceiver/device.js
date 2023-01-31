@@ -51,6 +51,7 @@ class receiverDevice extends Homey.Device {
         let deprecatedCapabilities = [
             ],
             newCapabilities = [
+                "party"
             ];
         for (let i in deprecatedCapabilities) {
             let deprecatedCapability = deprecatedCapabilities[i];
@@ -120,26 +121,32 @@ class receiverDevice extends Homey.Device {
        
         // surround_program
         try{
-            let surround_program = await this._yamaha.getCurrentSurroundProgram();
+            let surround_program = await this._yamaha.getCurrentSurroundProgram(true);
             await this.setCapabilityValue("surround_program_av", surround_program ).catch(error => this.log("_updateDevice() capability error: ", error));
         } catch(error){ this.log("_updateDevice() Error update input: ", error.message)}
 
         // direct
         try{
-            let direct = await this._yamaha.isDirectEnabled();
+            let direct = await this._yamaha.isDirectEnabled(true);
             await this.setCapabilityValue("direct", direct ).catch(error => this.log("_updateDevice() capability error: ", error));
         } catch(error){ this.log("_updateDevice() Error update direct: ", error.message)}
         
         // enhancer
         try{
-            let enhancer = await this._yamaha.isEnhancerEnabled();
+            let enhancer = await this._yamaha.isEnhancerEnabled(true);
             await this.setCapabilityValue("enhancer", enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
         } catch(error){ this.log("_updateDevice() Error update enhancer: ", error.message)}
 
         // bass
         try{
-            let bass = await this._yamaha.isExtraBassEnabled();
+            let bass = await this._yamaha.isExtraBassEnabled(true);
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("_updateDevice() capability error: ", error));
+        } catch(error){ this.log("_updateDevice() Error update bass: ", error.message)}
+
+        // party mode
+        try{
+            let party = await this._yamaha.isPartyModeEnabled(true);
+            await this.setCapabilityValue("party", party ).catch(error => this.log("_updateDevice() capability error: ", error));
         } catch(error){ this.log("_updateDevice() Error update bass: ", error.message)}
         
         // play info
@@ -245,18 +252,27 @@ class receiverDevice extends Homey.Device {
 
         if( capabilityValues["volume_mute"] != undefined){
             await this._yamaha.setMute(capabilityValues["volume_mute"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["direct"] != undefined){
             await this._yamaha.setDirect(capabilityValues["direct"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["enhancer"] != undefined){
             await this._yamaha.setEnhancer(capabilityValues["enhancer"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["bass"] != undefined){
             await this._yamaha.setExtraBass(capabilityValues["bass"]);
+            updateDevice = true;
+        }
+
+        if( capabilityValues["party"] != undefined){
+            await this._yamaha.setPartyMode(capabilityValues["party"]);
+            updateDevice = true;
         }
 
         if( capabilityValues["input_av"] != undefined){
@@ -408,6 +424,12 @@ class receiverDevice extends Homey.Device {
         if (this.hasCapability("bass")){
             await this._yamaha.setExtraBass(bass);
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
+        }
+    }
+    async partySet(party){
+        if (this.hasCapability("party")){
+            await this._yamaha.setPartyMode(party);
+            await this.setCapabilityValue("party", party ).catch(error => this.log("partySet() capability error: ", error));
         }
     }
     // async selectNetRadioListItem(item){

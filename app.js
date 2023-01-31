@@ -141,6 +141,30 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionPartyOn = this.homey.flow.getActionCard('party_on')
+    this._flowActionPartyOn.registerRunListener(async (args, state) => {
+      try{
+        await args.device.partySet(true);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'party_on': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionPartyOff = this.homey.flow.getActionCard('party_off')
+    this._flowActionPartyOff.registerRunListener(async (args, state) => {
+      try{
+        await args.device.partySet(false);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'party_off': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     this._flowActionBassSet = this.homey.flow.getActionCard('bass_set')
     this._flowActionBassSet.registerRunListener(async (args, state) => {
       try{

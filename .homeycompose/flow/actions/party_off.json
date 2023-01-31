@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Party Mode off",
+        "de": "Party-Modus aus"
+    },
+    "titleFormatted": {
+        "en": "Party Mode off",
+        "de": "Party-Modus aus"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone|avreceiver"
+        }
+    ]
+}
