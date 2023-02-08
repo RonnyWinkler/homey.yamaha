@@ -42,5 +42,9 @@
   "0.3.1": {
     "en": "Added Party Mode.",
     "de": "Party-Modus ergänzt."
+  },
+  "0.3.2": {
+    "en": "Fix for wrong Bluetooth input value on AV reveiver.",
+    "de": "Korrektur für falschen Bluetooth-Input-Wert in AV-Receiver."
   }
 }

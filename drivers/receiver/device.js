@@ -171,6 +171,8 @@ class receiverDevice extends Homey.Device {
                 }
                 if (!this.hasCapability("bass_set")){
                     await this.addCapability("bass_set");
+                }
+                if (this.hasCapability("bass_set")){
                     await this.setCapabilityOptions("bass_set", {
                         min: this._deviceState.range_step.tone_control.min,
                         max: this._deviceState.range_step.tone_control.max,
@@ -182,6 +184,8 @@ class receiverDevice extends Homey.Device {
                 }
                 if (!this.hasCapability("treble_set")){
                     await this.addCapability("treble_set");
+                }
+                if (this.hasCapability("treble_set")){
                     await this.setCapabilityOptions("treble_set", {
                         min: this._deviceState.range_step.tone_control.min,
                         max: this._deviceState.range_step.tone_control.max,
