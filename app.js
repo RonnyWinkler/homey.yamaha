@@ -1,7 +1,4 @@
-if (process.env.DEBUG === '1')
-{
-    require('inspector').open(9222, '0.0.0.0', true);
-}
+
 
 'use strict';
 
@@ -14,6 +11,18 @@ class yamahaApp extends Homey.App {
    */
   async onInit() {
     this.log('Yamaha app has been initialized');
+
+    if (process.env.DEBUG === '1'){
+      if (this.homey.platform == "local"){
+        if (this.homey.platformVersion < 2){
+          require('inspector').open(9222, '0.0.0.0', true);
+        }
+        else{
+          // require('inspector').waitForDebugger();
+          require('inspector').open(9222, '0.0.0.0', true);
+        }
+      }
+    }
 
     // Register flows listener
     await this.registerFlowActions();

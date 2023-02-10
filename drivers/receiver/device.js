@@ -316,6 +316,17 @@ class receiverDevice extends Homey.Device {
                     case 'usb':
                     case 'usb_dac':
                     case 'server':
+                    case "spotify":
+                    case "deezer":
+                    case "juke":
+                    case "airplay":
+                    case "radiko":
+                    case "qobuz":
+                    case "tidal":
+                    case "rhapsody":
+                    case "napster":
+                    case "pandora":
+                    case "siriusxm":
                         // play info including artist, track, album
                         playInfo = await this._getPlayInfoNet();
                         break;
@@ -410,12 +421,20 @@ class receiverDevice extends Homey.Device {
                 if (playInfo.albumart_url != undefined){
                     if (this._mediaCover != playInfo.albumart_url){
                         this._mediaCover = playInfo.albumart_url;
+
+                        this._mediaImage.setStream(async (stream) => {
+                            return await this._upateAlbumArtImage(stream);
+                        });
+                
                         await this._mediaImage.update();
                     }
                 }
                 else{
                     if (this._mediaCover != ""){
                         this._mediaCover = "";
+
+                        this._mediaImage.setUrl(null);
+
                         await this._mediaImage.update();
                     }
                 }
@@ -434,6 +453,9 @@ class receiverDevice extends Homey.Device {
 
             if (this._mediaCover != ""){
                 this._mediaCover = "";
+
+                this._mediaImage.setUrl(null);
+
                 await this._mediaImage.update();
             }
         }
@@ -447,9 +469,14 @@ class receiverDevice extends Homey.Device {
     }
 
     async _upateAlbumArtImage(stream){
+        if ( this._mediaCover == undefined || this._mediaCover == ""){
+            throw new Error("No artwork image available.");    
+        }
         try{
             let url = "http://" + this.getSetting("ip") + this._mediaCover;
             let res = await this.homey.app.httpGetStream(url);
+            res.on("error", (error) => {this.log(error);});
+            stream.on("error", (error) => {this.log(error);});
             return await res.pipe(stream);
         }
         catch(error){
@@ -470,9 +497,11 @@ class receiverDevice extends Homey.Device {
         if( capabilityValues["onoff"] != undefined){
             if (capabilityValues["onoff"] == true){
                 await this._yamaha.powerOn();
+                updateDevice = 2;
             }
             else{
                 await this._yamaha.powerOff();
+                updateDevice = 1;
             }
         }
         
@@ -568,7 +597,13 @@ class receiverDevice extends Homey.Device {
                         await this._yamaha.playNet();
                     }
                     else{
-                        await this._yamaha.pauseNet();
+                        if (input == "net_radio"){
+                            // Net radio only sopports play/stop, not pause
+                            await this._yamaha.stopNet();
+                        }
+                        else {
+                            await this._yamaha.pauseNet();
+                        }
                     }
                     break;
                 case "cd":

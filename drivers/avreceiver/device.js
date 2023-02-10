@@ -178,12 +178,20 @@ class receiverDevice extends Homey.Device {
                     if (playInfo.Play_Info.Album_ART.URL != undefined){
                         if (this._mediaCover != playInfo.Play_Info.Album_ART.URL){
                             this._mediaCover = playInfo.Play_Info.Album_ART.URL;
+
+                            this._mediaImage.setStream(async (stream) => {
+                                return await this._upateAlbumArtImage(stream);
+                            });
+
                             await this._mediaImage.update();
                         }       
                     }
                     else{
                         if (this._mediaCover != ""){
                             this._mediaCover = "";
+
+                            this._mediaImage.setUrl(null);
+
                             await this._mediaImage.update();
                         }    
                     }
@@ -207,9 +215,14 @@ class receiverDevice extends Homey.Device {
     }
 
     async _upateAlbumArtImage(stream){
+        if ( this._mediaCover == undefined || this._mediaCover == ""){
+            throw new Error("No artwork image available.");    
+        }
         try{
             let url = "http://" + this.getSetting("ip") + this._mediaCover;
             let res = await this.homey.app.httpGetStream(url);
+            res.on("error", (error) => {this.log(error);});
+            stream.on("error", (error) => {this.log(error);});
             return await res.pipe(stream);
         }
         catch(error){

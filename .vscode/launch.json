@@ -4,14 +4,45 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    {
-        "type": "node",
-        "request": "attach",
-        "restart": true,
-        "name": "Attach Yamaha to Homey",
-        "address": "192.168.1.13",
-        "port": 9222,
-        "localRoot": "${workspaceFolder}",
-        "remoteRoot": "/"
-    } ]
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Yamaha to HomeyDev",
+            "address": "192.168.1.13",
+            "port": 9222,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/"
+        }, 
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Yamaha to Homey23 LAN",
+            "address": "192.168.1.14",
+            "port": 9222,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Yamaha to Homey23 Wifi",
+            "address": "192.168.1.15",
+            "port": 9222,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Yamaha to Homey23 Docker",
+            "address": "192.168.1.15",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        }
+    ]
 }

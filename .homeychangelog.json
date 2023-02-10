@@ -46,5 +46,13 @@
   "0.3.2": {
     "en": "Fix for wrong Bluetooth input value on AV reveiver.",
     "de": "Korrektur für falschen Bluetooth-Input-Wert in AV-Receiver."
+  },
+  "0.3.3": {
+    "en": "Fix to show play info for streaming content. Fix for album art (HomeyPro23).",
+    "de": "Korrektur für PlayInfo-Anzeige bei Streaming-Anbietern. Korrektur für Album-Art (HomeyPro23)."
+  },
+  "0.3.4": {
+    "en": "Fix to show play info for streaming content. Fix for album art (HomeyPro23).",
+    "de": "Korrektur für PlayInfo-Anzeige bei Streaming-Anbietern. Korrektur für Album-Art (HomeyPro23)."
   }
 }
