@@ -761,7 +761,6 @@ class receiverDevice extends Homey.Device {
     
     onAdded() {
         this.log('device added: ', this.getData().id);
-
     } // end onAdded
 
     onDeleted() {
@@ -769,8 +768,14 @@ class receiverDevice extends Homey.Device {
         if (this._intervalUpdateDevice){
             this.homey.clearInterval(this._intervalUpdateDevice);
         }
-
     } // end onDeleted
+    
+    onUninit(){
+        this.log('device uninit:', this.getData().id);
+        if (this._intervalUpdateDevice){
+            this.homey.clearInterval(this._intervalUpdateDevice);
+        }
+    } // end onUninit
 
     // Helper functions ========================================================================================================
     _getPlaySource(input){

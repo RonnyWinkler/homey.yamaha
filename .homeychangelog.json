@@ -54,5 +54,9 @@
   "0.3.4": {
     "en": "Fix to show play info for streaming content. Fix for album art (HomeyPro23).",
     "de": "Korrektur für PlayInfo-Anzeige bei Streaming-Anbietern. Korrektur für Album-Art (HomeyPro23)."
+  },
+  "0.3.5": {
+    "en": "Fix: stop updates for deleted devices.",
+    "de": "Korrektur: Stoppe Aktualisierung für gelöschte Geräte."
   }
 }
