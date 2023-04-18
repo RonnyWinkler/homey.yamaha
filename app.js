@@ -24,6 +24,9 @@ class yamahaApp extends Homey.App {
       }
     }
 
+    this.distClientList = [];
+    this.distGroupList = [];
+
     // Register flows listener
     await this.registerFlowActions();
 
@@ -334,6 +337,90 @@ class yamahaApp extends Homey.App {
       }
       catch(error){
         this.error("Error executing flowAction 'send_api_request_av': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionDistServerAddClient = this.homey.flow.getActionCard('dist_server_add_client')
+    this._flowActionDistServerAddClient.registerRunListener(async (args, state) => {
+      try{
+        await args.device.distServerAddRemoveClient(args, "add");
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'dist_server_add_client': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionDistServerAddClient.registerArgumentAutocompleteListener('client', async (query, args) => {
+			this.distClientList = await args.device.getAutocompleteClientList();
+			return this.distClientList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+    // this._flowActionDistServerAddClient.registerArgumentAutocompleteListener('group', async (query, args) => {
+		// 	this.distGroupList = await args.device.getAutocompleteGroupList();
+		// 	return this.distGroupList.filter((result) => { 
+		// 		return result.name.toLowerCase().includes(query.toLowerCase());
+		// 	});
+		// });
+
+    this._flowActionDistServerRemoveClient = this.homey.flow.getActionCard('dist_server_remove_client')
+    this._flowActionDistServerRemoveClient.registerRunListener(async (args, state) => {
+      try{
+        await args.device.distServerAddRemoveClient(args, "remove");
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'dist_server_remove_client': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionDistServerAddClient.registerArgumentAutocompleteListener('client', async (query, args) => {
+			this.distClientList = await args.device.getAutocompleteClientList();
+			return this.distClientList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+    // this._flowActionDistServerAddClient.registerArgumentAutocompleteListener('group', async (query, args) => {
+		// 	this.distGroupList = await args.device.getAutocompleteGroupList();
+		// 	return this.distGroupList.filter((result) => { 
+		// 		return result.name.toLowerCase().includes(query.toLowerCase());
+		// 	});
+		// });
+
+    this._flowActionDistServerRemoveGroup = this.homey.flow.getActionCard('dist_server_remove_group')
+    this._flowActionDistServerRemoveGroup.registerRunListener(async (args, state) => {
+      try{
+        await args.device.distServerRemoveGroup();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'dist_server_remove_group': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionDistServerStart = this.homey.flow.getActionCard('dist_server_start')
+    this._flowActionDistServerStart.registerRunListener(async (args, state) => {
+      try{
+        await args.device.distServerStart();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'dist_server_start': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionDistServerStop = this.homey.flow.getActionCard('dist_server_stop')
+    this._flowActionDistServerStop.registerRunListener(async (args, state) => {
+      try{
+        await args.device.distServerStop();
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'dist_server_stop': "+  error.message);
         throw new Error(error.message);
       }
     });

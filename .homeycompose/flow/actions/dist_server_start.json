@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Distribution: Start distribution.",
+        "de": "Verteilung: Starte Verteilung."
+    },
+    "titleFormatted": {
+        "en": "Start distribution.",
+        "de": "Starte Verteilung."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}

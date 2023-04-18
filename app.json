@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -309,6 +309,112 @@
           }
         ],
         "id": "direct_on"
+      },
+      {
+        "title": {
+          "en": "Distribution: Add device to this server",
+          "de": "Verteilung: Füge diesem Server ein Gerät hinzu."
+        },
+        "titleFormatted": {
+          "en": "Add [[client]] to this server.",
+          "de": "Füge [[client]] diesem Server hinzu."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "autocomplete",
+            "name": "client",
+            "title": {
+              "en": "Device",
+              "de": "Gerät"
+            }
+          }
+        ],
+        "id": "dist_server_add_client"
+      },
+      {
+        "title": {
+          "en": "Distribution: Remove device from this server",
+          "de": "Verteilung: Emntferne ein Gerät von diesem Server."
+        },
+        "titleFormatted": {
+          "en": "Remove [[client]] from this server.",
+          "de": "Entferne [[client]] von diesem Server."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "autocomplete",
+            "name": "client",
+            "title": {
+              "en": "Device",
+              "de": "Gerät"
+            }
+          }
+        ],
+        "id": "dist_server_remove_client"
+      },
+      {
+        "title": {
+          "en": "Distribution: Remove server group.",
+          "de": "Verteilung: Entferne Server-Gruppe."
+        },
+        "titleFormatted": {
+          "en": "Remove server group.",
+          "de": "Entferne Server-Gruppe."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "dist_server_remove_group"
+      },
+      {
+        "title": {
+          "en": "Distribution: Start distribution.",
+          "de": "Verteilung: Starte Verteilung."
+        },
+        "titleFormatted": {
+          "en": "Start distribution.",
+          "de": "Starte Verteilung."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "dist_server_start"
+      },
+      {
+        "title": {
+          "en": "Distribution: Stop distribution.",
+          "de": "Verteilung: Stoppe Verteilung."
+        },
+        "titleFormatted": {
+          "en": "Stop distribution.",
+          "de": "Stoppe Verteilung."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "dist_server_stop"
       },
       {
         "title": {

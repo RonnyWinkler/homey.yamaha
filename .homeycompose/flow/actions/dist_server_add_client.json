@@ -1,0 +1,25 @@
+{
+    "title": {
+        "en": "Distribution: Add device to this server",
+        "de": "Verteilung: Füge diesem Server ein Gerät hinzu."
+    },
+    "titleFormatted": {
+        "en": "Add [[client]] to this server.",
+        "de": "Füge [[client]] diesem Server hinzu."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+            "type": "autocomplete",
+            "name": "client",
+            "title": { 
+                "en": "Device",
+                "de": "Gerät"
+            }
+        }
+    ]
+}

@@ -1012,5 +1012,104 @@ class receiverDevice extends Homey.Device {
         await this._yamaha.SendGetToDevice(request);
     }
 
+    // Distribution
+    async getAutocompleteClientList(){
+        let clients = [];
+        let devices = await this.driver.getDevices();
+        for (let i=0; i<devices.length; i++){
+            clients.push(
+                {
+                    name: devices[i].getName(),
+                    ip: devices[i].getSetting('ip')
+                }
+            );
+        }
+        return clients;
+    }
+
+    async getAutocompleteGroupList(){
+        let dist = await this._yamaha.getDistributionInfo();
+        if (!dist || dist.response_code != 0){
+            return [];
+        }
+        return [{
+            name: dist.group_name,
+            id: dist.group_id,
+            zone: dist.server_zone
+        }];        
+    }
+
+    async distServerAddRemoveClient(args, action){
+
+        let dist = await this._yamaha.getDistributionInfo();
+        if (!dist){
+            throw new Error ("Server not ready.")
+        }
+        // if (dist.role != 'server'){
+        //     throw new Error ("Group has not role 'server'.")
+        // }
+        // if (dist.status != 'working' || dist.group_id != '00000000000000000000000000000000'){
+        //     throw new Error ("Server is currently not distributing.")
+        // }
+
+        let request = {
+            "group_id": dist.group_id,
+            "zone": "main",
+            "type": action,
+            "client_list": [
+            ]
+        };
+
+        if (!request.group_id || request.group_id == '00000000000000000000000000000000' ){
+            request.group_id = this.getGroupId();
+        }
+
+        if (args.client && args.client.ip){
+            request.client_list.push(args.client.ip);
+        }
+
+        let result = await this._yamaha.setServerInfo(JSON.stringify(request));
+        if (result.response_code != 0){
+            throw new Error ("Server error: RC "+result.response_code);
+        }
+    }
+
+    async distServerRemoveGroup(args){
+        let request = {
+            "group_id": ''
+        };
+
+        let result = await this._yamaha.setServerInfo(JSON.stringify(request));
+        if (result.response_code != 0){
+            throw new Error ("Server error: RC "+result.response_code);
+        }
+    }
+
+    async distServerStart(){
+        let result = await this._yamaha.startDistribution("01");
+        if (result.response_code != 0){
+            throw new Error ("Server error: RC "+result.response_code);
+        }
+    }
+
+    async distServerStop(){
+        let result = await this._yamaha.stopDistribution();
+        if (result.response_code != 0){
+            throw new Error ("Server error: RC "+result.response_code);
+        }
+    }
+
+    getGroupId() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        let id = '';
+        for (let i=0; i<8; i++){
+            id += s4();
+        }
+        return id;
+    }
 }
 module.exports = receiverDevice;

@@ -1,0 +1,25 @@
+{
+    "title": {
+        "en": "Distribution: Remove device from this server",
+        "de": "Verteilung: Emntferne ein Gerät von diesem Server."
+    },
+    "titleFormatted": {
+        "en": "Remove [[client]] from this server.",
+        "de": "Entferne [[client]] von diesem Server."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+            "type": "autocomplete",
+            "name": "client",
+            "title": { 
+                "en": "Device",
+                "de": "Gerät"
+            }
+        }
+    ]
+}

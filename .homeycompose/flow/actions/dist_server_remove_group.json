@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Distribution: Remove server group.",
+        "de": "Verteilung: Entferne Server-Gruppe."
+    },
+    "titleFormatted": {
+        "en": "Remove server group.",
+        "de": "Entferne Server-Gruppe."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}

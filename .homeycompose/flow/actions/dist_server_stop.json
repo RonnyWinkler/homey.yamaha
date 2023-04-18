@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Distribution: Stop distribution.",
+        "de": "Verteilung: Stoppe Verteilung."
+    },
+    "titleFormatted": {
+        "en": "Stop distribution.",
+        "de": "Stoppe Verteilung."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}
