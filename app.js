@@ -425,6 +425,25 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    // FLOW CONDITIONS
+		this._flowConditionDistServerRole = this.homey.flow.getConditionCard('dist_server_role')
+		.registerRunListener(async (args, state) => {
+      let dist = await args.device._yamaha.getDistributionInfo();
+      if (dist && dist.role){
+        return (dist.role == args.role);
+      }
+      else return false;
+		})
+
+    this._flowConditionDistServerWorking = this.homey.flow.getConditionCard('dist_server_working')
+		.registerRunListener(async (args, state) => {
+      let dist = await args.device._yamaha.getDistributionInfo();
+      if (dist && dist.status){
+        return (dist.status == 'working');
+      }
+      else return false;
+		})
+
   }
 
   async httpGet(url, options){

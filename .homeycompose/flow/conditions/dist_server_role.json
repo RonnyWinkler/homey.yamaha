@@ -1,0 +1,54 @@
+{
+    "title": {
+        "en": "MusicCast server role !{{is|isn't}}",
+        "de": "MusicCast Server Rolle !{{ist|ist nicht}}",
+        "nl": "MusicCast server rol !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "MusicCast server role !{{is|isn't}} [[role]]",
+        "de": "MusicCast Server Rolle !{{ist|ist nicht}} [[role]]",
+        "nl": "MusicCast server rol !{{is|is niet}} [[role]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+            "name": "role",
+            "type": "dropdown",
+            "title": { 
+                "en": "Role",
+                "de": "Rolle",
+                "nl": "Rol"
+            },
+            "values": [
+                {
+                    "id": "server",
+                    "title": {
+                    "en": "Server",
+                    "de": "Server",
+                    "nl": "Server"
+                    }
+                },
+                {
+                    "id": "client",
+                    "title": {
+                    "en": "Client",
+                    "de": "Client",
+                    "nl": "Client"
+                    }
+                },
+                {
+                    "id": "none",
+                    "title": {
+                    "en": "none",
+                    "de": "keine",
+                    "nl": "geen"
+                    }
+                }
+            ]
+        }
+    ]
+}

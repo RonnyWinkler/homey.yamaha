@@ -66,5 +66,9 @@
   "0.4.1": {
     "en": "Added flow cards to control MusicCast audio distribution.",
     "de": "Flowkarten ergänzt zur MusicCast Audio-Verteilung ."
+  },
+  "0.4.2": {
+    "en": "Added flow conditions for MusicCast states.",
+    "de": "Flow-Bedingungen ergänzt für MusicCast-Status."
   }
 }

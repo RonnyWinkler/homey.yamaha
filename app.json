@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -206,6 +206,83 @@
           }
         ],
         "id": "tuner_band_changed"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "MusicCast server role !{{is|isn't}}",
+          "de": "MusicCast Server Rolle !{{ist|ist nicht}}",
+          "nl": "MusicCast server rol !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "MusicCast server role !{{is|isn't}} [[role]]",
+          "de": "MusicCast Server Rolle !{{ist|ist nicht}} [[role]]",
+          "nl": "MusicCast server rol !{{is|is niet}} [[role]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "role",
+            "type": "dropdown",
+            "title": {
+              "en": "Role",
+              "de": "Rolle",
+              "nl": "Rol"
+            },
+            "values": [
+              {
+                "id": "server",
+                "title": {
+                  "en": "Server",
+                  "de": "Server",
+                  "nl": "Server"
+                }
+              },
+              {
+                "id": "client",
+                "title": {
+                  "en": "Client",
+                  "de": "Client",
+                  "nl": "Client"
+                }
+              },
+              {
+                "id": "none",
+                "title": {
+                  "en": "none",
+                  "de": "keine",
+                  "nl": "geen"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "dist_server_role"
+      },
+      {
+        "title": {
+          "en": "MusicCast server !{{is|isn't}} working",
+          "de": "MusicCast Server !{{arbeitet|arbeitet nicht}}",
+          "nl": "MusicCast server  !{{werkt|werkt niet}}"
+        },
+        "titleFormatted": {
+          "en": "MusicCast server !{{is|isn't}} working",
+          "de": "MusicCast Server !{{arbeitet|arbeitet nicht}}",
+          "nl": "MusicCast server  !{{werkt|werkt niet}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "id": "dist_server_working"
       }
     ],
     "actions": [

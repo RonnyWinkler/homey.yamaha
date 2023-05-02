@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "MusicCast server !{{is|isn't}} working",
+        "de": "MusicCast Server !{{arbeitet|arbeitet nicht}}",
+        "nl": "MusicCast server  !{{werkt|werkt niet}}"
+    },
+    "titleFormatted": {
+        "en": "MusicCast server !{{is|isn't}} working",
+        "de": "MusicCast Server !{{arbeitet|arbeitet nicht}}",
+        "nl": "MusicCast server  !{{werkt|werkt niet}}"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        }
+    ]
+}
