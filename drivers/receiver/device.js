@@ -1020,7 +1020,8 @@ class receiverDevice extends Homey.Device {
             clients.push(
                 {
                     name: devices[i].getName(),
-                    ip: devices[i].getSetting('ip')
+                    ip: devices[i].getSetting('ip'),
+                    id: devices[i].getData()
                 }
             );
         }
@@ -1040,8 +1041,11 @@ class receiverDevice extends Homey.Device {
     }
 
     async distServerAddRemoveClient(args, action){
+        this.log("distServerAddRemoveClient()");
+        let result = '';
 
         let dist = await this._yamaha.getDistributionInfo();
+        this.log("Current server distribution info: ", dist);
         if (!dist){
             throw new Error ("Server not ready.")
         }
@@ -1052,25 +1056,49 @@ class receiverDevice extends Homey.Device {
         //     throw new Error ("Server is currently not distributing.")
         // }
 
-        let request = {
+        let serverInfo = {
             "group_id": dist.group_id,
-            "zone": "main",
+            "zone": dist.server_zone,
             "type": action,
-            "client_list": [
-            ]
+            "client_list": []
         };
 
-        if (!request.group_id || request.group_id == '00000000000000000000000000000000' ){
-            request.group_id = this.getGroupId();
+        if (action == 'add'){
+            serverInfo.client_list = dist.client_list;
+        }
+
+        if (!serverInfo.group_id || serverInfo.group_id == '00000000000000000000000000000000' ){
+            serverInfo.group_id = this.getGroupId();
         }
 
         if (args.client && args.client.ip){
-            request.client_list.push(args.client.ip);
+            serverInfo.client_list.push(args.client.ip);
         }
 
-        let result = await this._yamaha.setServerInfo(JSON.stringify(request));
+        // Set client info, add/remove client to gropup
+        let clientDevice = this.driver.getDevice(args.client.id);
+        let clientDist = await clientDevice._yamaha.getDistributionInfo();
+        this.log("Current client distribution info: ", clientDist);
+        let clientInfo = {
+            "group_id": '',
+            "zone":[
+                dist.server_zone
+            ]
+        };
+        if (action == 'add'){
+            clientInfo.group_id = serverInfo.group_id;
+        }
+        this.log("Set client info: ", clientInfo);
+        result = await clientDevice._yamaha.setClientInfo(JSON.stringify(clientInfo));
         if (result.response_code != 0){
-            throw new Error ("Server error: RC "+result.response_code);
+            throw new Error ("SetClientInfo error: RC "+result.response_code);
+        }
+
+        // Set derver info, add client to server
+        this.log("Set server info: ", serverInfo);
+        result = await this._yamaha.setServerInfo(JSON.stringify(serverInfo));
+        if (result.response_code != 0){
+            throw new Error ("SetServerInfo error: RC "+result.response_code);
         }
     }
 
@@ -1086,7 +1114,7 @@ class receiverDevice extends Homey.Device {
     }
 
     async distServerStart(){
-        let result = await this._yamaha.startDistribution("01");
+        let result = await this._yamaha.startDistribution("0");
         if (result.response_code != 0){
             throw new Error ("Server error: RC "+result.response_code);
         }
@@ -1109,7 +1137,7 @@ class receiverDevice extends Homey.Device {
         for (let i=0; i<8; i++){
             id += s4();
         }
-        return id;
+        return id.toUpperCase();
     }
 }
 module.exports = receiverDevice;

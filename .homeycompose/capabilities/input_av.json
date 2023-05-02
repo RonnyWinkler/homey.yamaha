@@ -234,6 +234,12 @@
         "title": {
           "en": "Deezer"
         }
+      },
+      {
+        "id": "MusicCast Link",
+        "title": {
+          "en": "MusicCast Link"
+        }
       }
     ]
   }

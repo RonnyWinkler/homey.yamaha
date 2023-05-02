@@ -376,7 +376,7 @@ class yamahaApp extends Homey.App {
         throw new Error(error.message);
       }
     });
-    this._flowActionDistServerAddClient.registerArgumentAutocompleteListener('client', async (query, args) => {
+    this._flowActionDistServerRemoveClient.registerArgumentAutocompleteListener('client', async (query, args) => {
 			this.distClientList = await args.device.getAutocompleteClientList();
 			return this.distClientList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
