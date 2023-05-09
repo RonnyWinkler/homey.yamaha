@@ -70,5 +70,9 @@
   "0.4.2": {
     "en": "Added flow conditions for MusicCast states.",
     "de": "Flow-Bedingungen ergänzt für MusicCast-Status."
+  },
+  "0.4.3": {
+    "en": "Code cleanup.",
+    "de": "Code-Bereinigung."
   }
 }
