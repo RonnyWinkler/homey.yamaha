@@ -78,5 +78,9 @@
   "1.0.0": {
     "en": "Release of stable version.",
     "de": "Veröffentlichung der stabilen Version."
+  },
+  "1.0.1": {
+    "en": "Prevent errors caused by invalid JSON result.",
+    "de": "Fehler bei ungültiger JSON-Antwort unterbinden."
   }
 }
