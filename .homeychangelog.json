@@ -74,5 +74,9 @@
   "0.4.3": {
     "en": "Code cleanup.",
     "de": "Code-Bereinigung."
+  },
+  "1.0.0": {
+    "en": "Release of stable version.",
+    "de": "Veröffentlichung der stabilen Version."
   }
 }
