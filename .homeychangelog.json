@@ -82,5 +82,9 @@
   "1.0.1": {
     "en": "Prevent errors caused by invalid JSON result.",
     "de": "Fehler bei ungültiger JSON-Antwort unterbinden."
+  },
+  "1.0.2": {
+    "en": "Fix for error in AV receiver settings.",
+    "de": "Korrektur für Fehler in AV-Receiver-Einstellungen."
   }
 }

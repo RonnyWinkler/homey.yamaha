@@ -382,8 +382,8 @@ class receiverDevice extends Homey.Device {
         this.log('Settings where changed: ', newSettings);
         if (changedKeys.indexOf("ip") >= 0 ){
             try{
-                let localYamaha =  new (require("../../lib/yamaha-nodejs"))(newSettings["ip"]); 
-                await localYamaha.getBasicInfo();
+                let localYamaha =  new (require("../../lib/yamaha_av"))(newSettings["ip"]); 
+                await localYamaha.getBasicStatus();
                 await this._connect(newSettings["ip"]);
             }
             catch(error){
