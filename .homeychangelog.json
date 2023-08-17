@@ -86,5 +86,9 @@
   "1.0.2": {
     "en": "Fix for error in AV receiver settings.",
     "de": "Korrektur für Fehler in AV-Receiver-Einstellungen."
+  },
+  "1.0.3": {
+    "en": "Fix for async commands.",
+    "de": "Korrektur für asynchrone Kommandos."
   }
 }

@@ -519,7 +519,7 @@ class receiverDevice extends Homey.Device {
                 newVolume = 1;
             }
             this.setCapabilityValue("volume_set", newVolume);
-            this._onCapability({"volume_set": newVolume}, {"volume_set": {}})
+            await this._onCapability({"volume_set": newVolume}, {"volume_set": {}})
         }
 
         if( capabilityValues["volume_down"] != undefined){
@@ -529,7 +529,7 @@ class receiverDevice extends Homey.Device {
                 newVolume = 0;
             }
             this.setCapabilityValue("volume_set", newVolume);
-            this._onCapability({"volume_set": newVolume}, {"volume_set": {}})
+            await this._onCapability({"volume_set": newVolume}, {"volume_set": {}})
         }
 
         if( capabilityValues["volume_mute"] != undefined){
@@ -624,7 +624,7 @@ class receiverDevice extends Homey.Device {
                     break;
                 case "netusb":
                     if (input == "net_radio"){
-                        this.selectNetRadioPresetPrev();
+                        await this.selectNetRadioPresetPrev();
                     }
                     else{
                         await this._yamaha.prevNet();
@@ -643,7 +643,7 @@ class receiverDevice extends Homey.Device {
                     break;
                 case "netusb":
                     if (input == "net_radio"){
-                        this.selectNetRadioPresetNext();
+                        await this.selectNetRadioPresetNext();
                     }
                     else{
                         await this._yamaha.nextNet();
