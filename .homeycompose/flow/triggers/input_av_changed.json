@@ -4,7 +4,7 @@
         "de": "Eingang hat sich geändert"
     },
     "tokens": [{
-            "name": "input",
+            "name": "input_av",
             "type": "string",
             "title": {
                 "en": "Value",

@@ -90,5 +90,9 @@
   "1.0.3": {
     "en": "Fix for async commands.",
     "de": "Korrektur für asynchrone Kommandos."
+  },
+  "1.0.4": {
+    "en": "Fix for 'input changed' trigger of AV Receiver device",
+    "de": "Korrektur für 'Eingang geändert' Trigger des AV-Receiver-Gerätes."
   }
 }
