@@ -94,5 +94,9 @@
   "1.0.4": {
     "en": "Fix for 'input changed' trigger of AV Receiver device",
     "de": "Korrektur für 'Eingang geändert' Trigger des AV-Receiver-Gerätes."
+  },
+  "1.0.5": {
+    "en": "Fix for reding the correct receiver for a zone.",
+    "de": "Korrektur für Lesen des korrekten Receivers für eine Zone."
   }
 }

@@ -108,7 +108,7 @@ class receiverZoneDevice extends Homey.Device {
     _getParentDevice(){
         let receivers = this.homey.drivers.getDriver('receiver').getDevices();
         for (let i=0; i<receivers.length; i++){
-            if (receivers[i].getData().id = this.getData().id){
+            if (receivers[i].getData().id == this.getData().id){
                 return receivers[i];
             }
         }
