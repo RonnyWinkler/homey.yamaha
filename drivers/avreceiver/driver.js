@@ -104,7 +104,7 @@ class receiverDriver extends Homey.Driver {
             // let yamaha = new (require("../../lib/yamaha-nodejs"))(ip);
             let yamaha = new (require("../../lib/yamaha_av"))(ip);
             let system = await yamaha.getSystemConfig();
-            this.log("API data: ", system);
+            this.log("API data: ", JSON.stringify(system) );
             if (system && system.YAMAHA_AV && system.YAMAHA_AV.System && system.YAMAHA_AV.System.Config ){
                 let device = {
                     name: system.YAMAHA_AV.System.Config.Model_Name,

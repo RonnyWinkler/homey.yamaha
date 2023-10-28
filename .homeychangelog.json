@@ -96,7 +96,11 @@
     "de": "Korrektur für 'Eingang geändert' Trigger des AV-Receiver-Gerätes."
   },
   "1.0.5": {
-    "en": "Fix for reding the correct receiver for a zone.",
+    "en": "Fix for reading the correct receiver for a zone.",
     "de": "Korrektur für Lesen des korrekten Receivers für eine Zone."
+  },
+  "1.0.6": {
+    "en": "Fix for reading the correct receiver for a zone. Expanded log for AV receiver pair view.",
+    "de": "Korrektur für Lesen des korrekten Receivers für eine Zone. sLog für AV-Receiver Pair-View erweitert."
   }
 }

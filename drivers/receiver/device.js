@@ -5,6 +5,7 @@ const YamahaYXC = require('../../lib/yamaha_yxc');
 
 const CAPABILITY_DEBOUNCE = 500;
 const DEFAULT_ZONE = 'main';
+const ZONE_INIT_TIMEOUT = 2;
 
 const PLAY_SOURCE = {
     'tuner': 'tuner',
@@ -60,7 +61,8 @@ class receiverDevice extends Homey.Device {
             }
         }, CAPABILITY_DEBOUNCE);
 
-        this._initZoneDevices();
+        this._intervalInitZoneDevices = this.homey.setTimeout(() => 
+            this._initZoneDevices(),  ZONE_INIT_TIMEOUT * 1000 );
 
         await this._startInterval();
     } // end onInit
@@ -679,7 +681,7 @@ class receiverDevice extends Homey.Device {
     async _initZoneDevices(){
         let zones = this.homey.drivers.getDriver('receiver_zone').getDevices();
         for (let i=0; i<zones.length; i++){
-            if (zones[i].getData().id = this.getData().id){
+            if (zones[i].getData().id == this.getData().id){
                 zones[i].initDevice(this._yamaha);
             }
         }
