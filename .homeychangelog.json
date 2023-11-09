@@ -102,5 +102,9 @@
   "1.0.6": {
     "en": "Fix for reading the correct receiver for a zone. Expanded log for AV receiver pair view.",
     "de": "Korrektur für Lesen des korrekten Receivers für eine Zone. sLog für AV-Receiver Pair-View erweitert."
+  },
+  "1.1.0": {
+    "en": "MusicCast devices: Live update added. The Homey device is updated immediately when values in the MusicCast device change, e.g. by using the remote control.",
+    "de": "MusicCast-Geräte: Live-Aktualisierung ergänzt. Das Homey-Gerät wird sofort aktualisiert, wenn sich Werte im MusicCast-Gerät ändern, z.B. durch Verwendung der Fernbedienung."
   }
 }

@@ -15,11 +15,11 @@ class yamahaApp extends Homey.App {
     if (process.env.DEBUG === '1'){
       if (this.homey.platform == "local"){
         if (this.homey.platformVersion < 2){
-          require('inspector').open(9222, '0.0.0.0', true);
+          require('inspector').open(9230, '0.0.0.0', true);
         }
         else{
           // require('inspector').waitForDebugger();
-          require('inspector').open(9222, '0.0.0.0', true);
+          require('inspector').open(9230, '0.0.0.0', true);
         }
       }
     }

@@ -2,10 +2,14 @@
 
 const Homey = require('homey');
 const YamahaYXC = require('../../lib/yamaha_yxc');
+const dgram = require('dgram');
 
 const CAPABILITY_DEBOUNCE = 500;
 const DEFAULT_ZONE = 'main';
 const ZONE_INIT_TIMEOUT = 2;
+const DEVICE_UPDATE_TIMEOUT = 3;
+const UDP_PORT = 4000;
+const UDP_PORT_RANGE = 20;
 
 const PLAY_SOURCE = {
     'tuner': 'tuner',
@@ -64,7 +68,9 @@ class receiverDevice extends Homey.Device {
         this._intervalInitZoneDevices = this.homey.setTimeout(() => 
             this._initZoneDevices(),  ZONE_INIT_TIMEOUT * 1000 );
 
-        await this._startInterval();
+        this._intervalInitZoneDevices = this.homey.setTimeout(() => 
+            this._startInterval(),  DEVICE_UPDATE_TIMEOUT * 1000 );
+
     } // end onInit
 
     async _fixCapabilities() {
@@ -90,6 +96,49 @@ class receiverDevice extends Homey.Device {
                 await this.addCapability(newCapability);
             }
         }
+    }
+
+    async _startUdp(){
+        for (let i=0; i<UDP_PORT_RANGE; i++){
+            try{
+                return await this._createUdpSocket(UDP_PORT + i);      
+            }
+            catch(error){
+                // just try in next for loop
+            }
+        }
+    }
+
+    async _createUdpSocket(port){
+        return new Promise((resolve, reject) => {
+            const server = dgram.createSocket('udp4');
+
+            server.on('error', (error) => {
+                console.error("UDP server error: "+error.message);
+                server.close();
+                reject( new Error('Failed to create UDP socket '+error.message ));
+            });
+
+            server.on('message', (msg, rinfo) => this._onUdpMessage(msg, rinfo) );
+
+            server.on('listening', () => {
+                let address = server.address();
+                this.log("UDP server listening: "+address.address+":"+address.port);
+                resolve(address.port);
+            });
+
+            server.bind(port);
+        });
+    }
+
+    _onUdpMessage(msg, rinfo){
+        // Filter UDP events
+        let message = JSON.parse(msg.toString());
+        if (message.netusb && message.netusb.play_time && !message.netusb.play_info_updated){
+            return;
+        }
+        this.log("UDP server message: " + msg + " from " + rinfo.address+":"+rinfo.port);
+        this._updateDevice();
     }
 
     async _checkFeatures(){
@@ -657,16 +706,16 @@ class receiverDevice extends Homey.Device {
             }
             updateDevice = 1;
         }
-        // default devie update to refresh play info
-        if (updateDevice == 1){
-            this.homey.setTimeout(() => 
-                this._updateDevice(),  500 );
-        }
-        // second update for changes needing more time
-        if (updateDevice == 2){
-            this.homey.setTimeout(() => 
-                this._updateDevice(),  5000 );
-        }
+        // // default devie update to refresh play info
+        // if (updateDevice == 1){
+        //     this.homey.setTimeout(() => 
+        //         this._updateDevice(),  500 );
+        // }
+        // // second update for changes needing more time
+        // if (updateDevice == 2){
+        //     this.homey.setTimeout(() => 
+        //         this._updateDevice(),  5000 );
+        // }
     }
 
     async _updateZoneDevices(){
@@ -696,6 +745,7 @@ class receiverDevice extends Homey.Device {
             else{
                 this._yamaha = new YamahaYXC(this.getSetting("ip"));  
             }
+            this._yamaha.setUdpPort( await this._startUdp() );
         }
         catch(error){
             this.log("_connect() Error creating API instance: ", error.message);
@@ -905,8 +955,8 @@ class receiverDevice extends Homey.Device {
 
     async selectNetRadioPreset(item){
         await this._yamaha.recallPreset(item);
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
     async selectNetRadioPresetNext(){
         let playInfo = await this._yamaha.getPlayInfo('netusb');
@@ -919,20 +969,22 @@ class receiverDevice extends Homey.Device {
                         if (i<preset.length-1 && preset[i+1].text != ''){
                             this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+i+2+' ('+preset[i+1].text+')' );
                             await this._yamaha.recallPreset(i+2);
-                            // Preset switch takes really long. Update playInfo 2x
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  1000 );
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  5000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  1000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  5000 );
                         }
                         else{
                             this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: 1 ('+preset[0].text+')' );
                             await this._yamaha.recallPreset(1);
-                            // Preset switch takes really long. Update playInfo 2x
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  1000 );
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  5000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  1000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  5000 );
                         }
                     }
                 }
@@ -950,12 +1002,12 @@ class receiverDevice extends Homey.Device {
                         if (i>0 && preset[i-1].text != ''){
                             this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+(i)+' ('+preset[i-1].text+')' );
                             await this._yamaha.recallPreset(i);
-                            // Preset switch takes really long. Update playInfo 2x
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  1000 );
-                            // Preset switch takes really long. Update playInfo 2x
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  5000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  1000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  5000 );
                         }
                         else{
                             // get last entry
@@ -965,10 +1017,12 @@ class receiverDevice extends Homey.Device {
                             }
                             this.log('selectNetRadioPresetNext(): Current preset: '+(i+1)+' ('+preset[i].text+') Next preset: '+prev+' ('+preset[prev-1].text+')' );
                             await this._yamaha.recallPreset(prev);
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  1000 );
-                            this.homey.setTimeout(() => 
-                                this._updateDevice(),  5000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  1000 );
+                            // // Preset switch takes really long. Update playInfo 2x
+                            // this.homey.setTimeout(() => 
+                            //     this._updateDevice(),  5000 );
                         }
                     }
                 }
@@ -978,33 +1032,33 @@ class receiverDevice extends Homey.Device {
 
     async selectTunerPreset(item, band){
         await this._yamaha.setTunerPreset(item, band);
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+//         this.homey.setTimeout(() => 
+//             this._updateDevice(),  500 );
     }
     async selectTunerPresetNext(){
         await this._yamaha.switchPresetTuner('next');
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
     async selectTunerPresetPrev(){
         await this._yamaha.switchPresetTuner('previous');
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
     async tunerBandSelect(band){
         await this._yamaha.setBand(band);
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
     async bassSet(bass_set){
         await this._yamaha.setBassTo(bass_set);
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
     async trebleSet(treble_set){
         await this._yamaha.setTrebleTo(treble_set);
-        this.homey.setTimeout(() => 
-            this._updateDevice(),  500 );
+        // this.homey.setTimeout(() => 
+        //     this._updateDevice(),  500 );
     }
 
     async sendRcCode(code){

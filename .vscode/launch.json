@@ -10,7 +10,7 @@
             "restart": true,
             "name": "Attach Yamaha to HomeyDev",
             "address": "192.168.1.13",
-            "port": 9222,
+            "port": 9230,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
         }, 
@@ -20,7 +20,7 @@
             "restart": true,
             "name": "Attach Yamaha to Homey23 LAN",
             "address": "192.168.1.14",
-            "port": 9222,
+            "port": 9230,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"
         },
@@ -30,7 +30,7 @@
             "restart": true,
             "name": "Attach Yamaha to Homey23 Wifi",
             "address": "192.168.1.15",
-            "port": 9222,
+            "port": 9230,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"
         },
@@ -40,7 +40,7 @@
             "restart": true,
             "name": "Attach Yamaha to Homey23 Docker",
             "address": "192.168.1.15",
-            "port": 9229,
+            "port": 9230,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"
         }
