@@ -133,12 +133,17 @@ class receiverDevice extends Homey.Device {
 
     _onUdpMessage(msg, rinfo){
         // Filter UDP events
-        let message = JSON.parse(msg.toString());
-        if (message.netusb && message.netusb.play_time && !message.netusb.play_info_updated){
-            return;
+        try{
+            let message = JSON.parse(msg.toString());
+            if (message.netusb && message.netusb.play_time && !message.netusb.play_info_updated){
+                return;
+            }
+            this.log("UDP server message: " + msg + " from " + rinfo.address+":"+rinfo.port);
+            this._updateDevice();
         }
-        this.log("UDP server message: " + msg + " from " + rinfo.address+":"+rinfo.port);
-        this._updateDevice();
+        catch(error){
+            this.log("UDP server message: Invalid content: "+error.message);
+        }
     }
 
     async _checkFeatures(){

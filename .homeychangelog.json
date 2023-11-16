@@ -106,5 +106,9 @@
   "1.1.0": {
     "en": "MusicCast devices: Live update added. The Homey device is updated immediately when values in the MusicCast device change, e.g. by using the remote control.",
     "de": "MusicCast-Geräte: Live-Aktualisierung ergänzt. Das Homey-Gerät wird sofort aktualisiert, wenn sich Werte im MusicCast-Gerät ändern, z.B. durch Verwendung der Fernbedienung."
+  },
+  "1.1.1": {
+    "en": "Fix for crash caused by invalid live update messages.",
+    "de": "Korrektur für Abbruch druch ungültige Live-Update-Nachricht."
   }
 }
