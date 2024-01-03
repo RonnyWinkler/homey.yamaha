@@ -444,6 +444,18 @@ class yamahaApp extends Homey.App {
       else return false;
 		})
 
+    this._flowActionSceneSelect = this.homey.flow.getActionCard('scene_select')
+    this._flowActionSceneSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.sceneSelect(args.scene);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'scene_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
   }
 
   async httpGet(url, options){

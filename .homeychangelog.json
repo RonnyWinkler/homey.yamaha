@@ -110,5 +110,9 @@
   "1.1.1": {
     "en": "Fix for crash caused by invalid live update messages.",
     "de": "Korrektur für Abbruch druch ungültige Live-Update-Nachricht."
+  },
+  "1.1.2": {
+    "en": "Added flow action for scene selection.",
+    "de": "Flow-Aktion zur Szenen-Auswahl ergänzt."
   }
 }

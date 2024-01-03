@@ -1188,6 +1188,10 @@ class receiverDevice extends Homey.Device {
         }
     }
 
+    async sceneSelect(scene){
+        await this._yamaha.setScene(scene);
+    }
+
     getGroupId() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)

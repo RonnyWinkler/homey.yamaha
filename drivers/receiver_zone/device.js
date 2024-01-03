@@ -947,6 +947,10 @@ class receiverZoneDevice extends Homey.Device {
             this._updateDevice(),  500 );
     }
 
+    async sceneSelect(scene){
+        await this._yamaha.setScene(scene);
+    }
+
     // async sendRcCode(code){
     //     await this._yamaha.sendIrCode(code);
     // }
