@@ -112,7 +112,11 @@
     "de": "Korrektur für Abbruch druch ungültige Live-Update-Nachricht."
   },
   "1.1.2": {
-    "en": "Added flow action for scene selection.",
-    "de": "Flow-Aktion zur Szenen-Auswahl ergänzt."
+    "en": "Added flow action for scene selection (MusicCast).",
+    "de": "Flow-Aktion zur Szenen-Auswahl ergänzt (MusicCast)."
+  },
+  "1.1.3": {
+    "en": "Added flow action for scene selection (AV Receiver).",
+    "de": "Flow-Aktion zur Szenen-Auswahl ergänzt (AV-Receiver)."
   }
 }

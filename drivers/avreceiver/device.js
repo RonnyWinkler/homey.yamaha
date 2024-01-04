@@ -422,6 +422,9 @@ class receiverDevice extends Homey.Device {
         await this._yamaha.setInput(input);
         await this.setCapabilityValue("input_av", input ).catch(error => this.log("inputSelect() capability error: ", error));
     }
+    async sceneSelect(scene){
+        await this._yamaha.setScene(scene);
+    }
     async surroundProgramSelect(surroundProgram){
         await this._yamaha.setSurroundProgram(surroundProgram);
         await this.setCapabilityValue("surround_program_av", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));

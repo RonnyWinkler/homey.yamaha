@@ -12,7 +12,7 @@
         {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=receiver|receiver_zone"
+            "filter": "driver_id=receiver|receiver_zone|avreceiver"
         },
         {
           "type": "dropdown",
