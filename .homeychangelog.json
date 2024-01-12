@@ -126,5 +126,9 @@
   "1.1.5": {
     "en": "Added 'set surround decoder' flow action for MusicCast device/zone.",
     "de": "'Wähle Surround-Decoder' Flow-Aktion für MusicCast Geräte/Zonen ergänzt."
+  },
+  "1.1.6": {
+    "en": "Added 'All channel Stereo' sound program for MusicCast devices.",
+    "de": "Surround-Programm 'All channel Stereo' für MusicCast Geräte/Zonen ergänzt."
   }
 }

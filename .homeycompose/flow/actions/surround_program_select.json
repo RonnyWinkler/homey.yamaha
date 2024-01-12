@@ -89,6 +89,12 @@
               }
             },
             {
+              "id": "all_ch_stereo",
+              "title": {
+                "en": "All channel Stereo"
+              }
+            },
+            {
               "id": "surr_decoder",
               "title": {
                 "en": "Surround Decoder"
