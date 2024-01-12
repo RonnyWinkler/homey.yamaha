@@ -118,5 +118,9 @@
   "1.1.3": {
     "en": "Added flow action for scene selection (AV Receiver).",
     "de": "Flow-Aktion zur Szenen-Auswahl ergänzt (AV-Receiver)."
+  },
+  "1.1.4": {
+    "en": "Fixed zone selection for zone device flow actions.",
+    "de": "Zonenauswahl für Flowaktionen der Zonengeräte korrigiert."
   }
 }

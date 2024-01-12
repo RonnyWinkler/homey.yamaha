@@ -790,34 +790,34 @@ class receiverZoneDevice extends Homey.Device {
 
     // Flow actions  ========================================================================================================
     async inputSelect(input){
-        await this._yamaha.setInput(input);
+        await this._yamaha.setInput(input, this._zone);
         await this.setCapabilityValue("input", input ).catch(error => this.log("inputSelect() capability error: ", error));
     }
     async surroundProgramSelect(surroundProgram){
-        await this._yamaha.setSound(surroundProgram);
+        await this._yamaha.setSound(surroundProgram, this._zone);
         await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
     }
     async directSet(direct){
         if (this.hasCapability("direct")){
-            await this._yamaha.setDirect(direct);
+            await this._yamaha.setDirect(direct, this._zone);
             await this.setCapabilityValue("direct", direct ).catch(error => this.log("directSet() capability error: ", error));
         }
     }
     async enhancerSet(enhancer){
         if (this.hasCapability("enhancer")){
-            await this._yamaha.setEnhancer(enhancer);
+            await this._yamaha.setEnhancer(enhancer, this._zone);
             await this.setCapabilityValue("enhancer", enhancer ).catch(error => this.log("enhancerSet() capability error: ", error));
         }
     }
     async bassSet(bass){
         if (this.hasCapability("bass")){
-            await this._yamaha.setBassExtension(bass);
+            await this._yamaha.setBassExtension(bass, this._zone);
             await this.setCapabilityValue("bass", bass ).catch(error => this.log("bassSet() capability error: ", error));
         }
     }
     async partySet(party){
         if (this.hasCapability("party")){
-            await this._yamaha.setPartyMode(party);
+            await this._yamaha.setPartyMode(party, this._zone);
             await this.setCapabilityValue("party", party ).catch(error => this.log("partySet() capability error: ", error));
         }
     }
@@ -908,7 +908,7 @@ class receiverZoneDevice extends Homey.Device {
         if (this.getCapabilityValue("input") != 'tuner'){
             throw new Error("Tuner input is not active");
         }
-        await this._yamaha.setTunerPreset(item, band);
+        await this._yamaha.setTunerPreset(item, band, this._zone);
         this.homey.setTimeout(() => 
             this._updateDevice(),  500 );
     }
@@ -948,7 +948,7 @@ class receiverZoneDevice extends Homey.Device {
     }
 
     async sceneSelect(scene){
-        await this._yamaha.setScene(scene);
+        await this._yamaha.setScene(scene, this._zone);
     }
 
     // async sendRcCode(code){
