@@ -69,6 +69,18 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionSurroundDecoderSelect = this.homey.flow.getActionCard('surround_decoder_select')
+    this._flowActionSurroundDecoderSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.surroundDecoderSelect(args.surround_decoder);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'surround_decoder_select': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     this._flowActionSurroundProgramAvSelect = this.homey.flow.getActionCard('surround_program_av_select')
     this._flowActionSurroundProgramAvSelect.registerRunListener(async (args, state) => {
       try{

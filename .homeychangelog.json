@@ -122,5 +122,9 @@
   "1.1.4": {
     "en": "Fixed zone selection for zone device flow actions.",
     "de": "Zonenauswahl für Flowaktionen der Zonengeräte korrigiert."
+  },
+  "1.1.5": {
+    "en": "Added 'set surround decoder' flow action for MusicCast device/zone.",
+    "de": "'Wähle Surround-Decoder' Flow-Aktion für MusicCast Geräte/Zonen ergänzt."
   }
 }

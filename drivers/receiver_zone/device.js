@@ -797,6 +797,10 @@ class receiverZoneDevice extends Homey.Device {
         await this._yamaha.setSound(surroundProgram, this._zone);
         await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
     }
+    async surroundDecoderSelect(surroundDecoder){
+        await this._yamaha.setSurroundDecoder(surroundDecoder, this._zone);
+        // await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
+    }
     async directSet(direct){
         if (this.hasCapability("direct")){
             await this._yamaha.setDirect(direct, this._zone);

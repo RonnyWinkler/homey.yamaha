@@ -1,0 +1,64 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select surround decoder",
+        "de": "Wähle einen Surround-Decoder"
+    },
+    "titleFormatted": {
+        "en": "Select surround decoder [[surround_decoder]].",
+        "de": "Wähle einen Surround-Decoder [[surround_decoder]]."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+        },
+        {
+          "type": "dropdown",
+          "name": "surround_decoder",
+          "title": { 
+              "en": "Surround decoder",
+              "de": "Surround-Decoder"
+          },
+          "values": [
+            {
+              "id": "dolby_pl",
+              "title": {
+                "en": "Dolby Pro Logic"
+              }
+            },
+            {
+              "id": "dolby_pl2x_movie",
+              "title": {
+                "en": "DPL II Movie"
+              }
+            },
+            {
+              "id": "dolby_pl2x_music",
+              "title": {
+                "en": "DPL II Music"
+              }
+            },
+            {
+              "id": "dolby_pl2x_game",
+              "title": {
+                "en": "DPL II Game"
+              }
+            },
+            {
+              "id": "dts_neo6_cinema",
+              "title": {
+                "en": "DTS Neo:6 Cinema"
+              }
+            },
+            {
+              "id": "dts_neo6_music",
+              "title": {
+                "en": "DTS Neo:6 Music"
+              }
+            }
+          ]
+        }
+    ]
+}
