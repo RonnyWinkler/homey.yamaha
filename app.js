@@ -468,6 +468,26 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('input')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('input') == args.input);
+		})
+
+    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('input_av')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('input_av') == args.input);
+		})
+
+    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('surround_program')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('surround_program') == args.surround_program);
+		})
+
+    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('surround_program_av')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('surround_program_av') == args.surround_program);
+		})
+
   }
 
   async httpGet(url, options){

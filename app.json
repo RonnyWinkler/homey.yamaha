@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -283,6 +283,1162 @@
           }
         ],
         "id": "dist_server_working"
+      },
+      {
+        "title": {
+          "en": "Input !{{is|isn't}}",
+          "de": "Eingang !{{ist|ist nicht}}",
+          "nl": "Input !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Input !{{is|isn't}} [[input]]",
+          "de": "Eingang !{{ist|ist nicht}} [[input]]",
+          "nl": "Input !{{is|is niet}} [[input]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+          },
+          {
+            "name": "input",
+            "type": "dropdown",
+            "title": {
+              "en": "Input",
+              "de": "Eingang",
+              "nl": "Input"
+            },
+            "values": [
+              {
+                "id": "tuner",
+                "title": {
+                  "en": "Tuner"
+                }
+              },
+              {
+                "id": "net_radio",
+                "title": {
+                  "en": "Net Radio"
+                }
+              },
+              {
+                "id": "bluetooth",
+                "title": {
+                  "en": "Bluetooth"
+                }
+              },
+              {
+                "id": "cd",
+                "title": {
+                  "en": "CD"
+                }
+              },
+              {
+                "id": "tv",
+                "title": {
+                  "en": "TV"
+                }
+              },
+              {
+                "id": "bd_dvd",
+                "title": {
+                  "en": "BD DVD"
+                }
+              },
+              {
+                "id": "usb",
+                "title": {
+                  "en": "USB"
+                }
+              },
+              {
+                "id": "usb_dac",
+                "title": {
+                  "en": "USB DAC"
+                }
+              },
+              {
+                "id": "server",
+                "title": {
+                  "en": "Server"
+                }
+              },
+              {
+                "id": "multi_ch",
+                "title": {
+                  "en": "Multi CH"
+                }
+              },
+              {
+                "id": "phono",
+                "title": {
+                  "en": "Phono"
+                }
+              },
+              {
+                "id": "hdmi1",
+                "title": {
+                  "en": "HDMI 1"
+                }
+              },
+              {
+                "id": "hdmi2",
+                "title": {
+                  "en": "HDMI 2"
+                }
+              },
+              {
+                "id": "hdmi3",
+                "title": {
+                  "en": "HDMI 3"
+                }
+              },
+              {
+                "id": "hdmi4",
+                "title": {
+                  "en": "HDMI 4"
+                }
+              },
+              {
+                "id": "hdmi5",
+                "title": {
+                  "en": "HDMI 5"
+                }
+              },
+              {
+                "id": "hdmi6",
+                "title": {
+                  "en": "HDMI 6"
+                }
+              },
+              {
+                "id": "hdmi7",
+                "title": {
+                  "en": "HDMI 7"
+                }
+              },
+              {
+                "id": "hdmi8",
+                "title": {
+                  "en": "HDMI 8"
+                }
+              },
+              {
+                "id": "hdmi",
+                "title": {
+                  "en": "HDMI"
+                }
+              },
+              {
+                "id": "av1",
+                "title": {
+                  "en": "AV 1"
+                }
+              },
+              {
+                "id": "av2",
+                "title": {
+                  "en": "AV 2"
+                }
+              },
+              {
+                "id": "av3",
+                "title": {
+                  "en": "AV 3"
+                }
+              },
+              {
+                "id": "av4",
+                "title": {
+                  "en": "AV 4"
+                }
+              },
+              {
+                "id": "av5",
+                "title": {
+                  "en": "AV 5"
+                }
+              },
+              {
+                "id": "av6",
+                "title": {
+                  "en": "AV 6"
+                }
+              },
+              {
+                "id": "av7",
+                "title": {
+                  "en": "AV 7"
+                }
+              },
+              {
+                "id": "v_aux",
+                "title": {
+                  "en": "V_aux"
+                }
+              },
+              {
+                "id": "aux1",
+                "title": {
+                  "en": "Aux 1"
+                }
+              },
+              {
+                "id": "aux2",
+                "title": {
+                  "en": "Aux 2"
+                }
+              },
+              {
+                "id": "aux",
+                "title": {
+                  "en": "Aux"
+                }
+              },
+              {
+                "id": "audio1",
+                "title": {
+                  "en": "Audio 1"
+                }
+              },
+              {
+                "id": "audio2",
+                "title": {
+                  "en": "Audio 2"
+                }
+              },
+              {
+                "id": "audio3",
+                "title": {
+                  "en": "Audio 3"
+                }
+              },
+              {
+                "id": "audio4",
+                "title": {
+                  "en": "Audio 4"
+                }
+              },
+              {
+                "id": "audio_cd",
+                "title": {
+                  "en": "Audio_cd"
+                }
+              },
+              {
+                "id": "audio",
+                "title": {
+                  "en": "Audio"
+                }
+              },
+              {
+                "id": "optical1",
+                "title": {
+                  "en": "Optical 1"
+                }
+              },
+              {
+                "id": "optical2",
+                "title": {
+                  "en": "Optical 2"
+                }
+              },
+              {
+                "id": "optical",
+                "title": {
+                  "en": "Optical"
+                }
+              },
+              {
+                "id": "coaxial1",
+                "title": {
+                  "en": "Coaxial 1"
+                }
+              },
+              {
+                "id": "coaxial2",
+                "title": {
+                  "en": "Coaxial 2"
+                }
+              },
+              {
+                "id": "coaxial",
+                "title": {
+                  "en": "Coaxial"
+                }
+              },
+              {
+                "id": "digital1",
+                "title": {
+                  "en": "Digital 1"
+                }
+              },
+              {
+                "id": "digital2",
+                "title": {
+                  "en": "Digital 2"
+                }
+              },
+              {
+                "id": "digital",
+                "title": {
+                  "en": "Digital"
+                }
+              },
+              {
+                "id": "line1",
+                "title": {
+                  "en": "Line 1"
+                }
+              },
+              {
+                "id": "line2",
+                "title": {
+                  "en": "Line 2"
+                }
+              },
+              {
+                "id": "line3",
+                "title": {
+                  "en": "Line 3"
+                }
+              },
+              {
+                "id": "line_cd",
+                "title": {
+                  "en": "Line CD"
+                }
+              },
+              {
+                "id": "analog",
+                "title": {
+                  "en": "Analog"
+                }
+              },
+              {
+                "id": "rhapsody",
+                "title": {
+                  "en": "Rhapsody"
+                }
+              },
+              {
+                "id": "napster",
+                "title": {
+                  "en": "Napster"
+                }
+              },
+              {
+                "id": "pandora",
+                "title": {
+                  "en": "Pandora"
+                }
+              },
+              {
+                "id": "siriusxm",
+                "title": {
+                  "en": "Siriusxm"
+                }
+              },
+              {
+                "id": "spotify",
+                "title": {
+                  "en": "Spotify"
+                }
+              },
+              {
+                "id": "juke",
+                "title": {
+                  "en": "Juke"
+                }
+              },
+              {
+                "id": "airplay",
+                "title": {
+                  "en": "AirPlay"
+                }
+              },
+              {
+                "id": "radiko",
+                "title": {
+                  "en": "Radiko"
+                }
+              },
+              {
+                "id": "qobuz",
+                "title": {
+                  "en": "Qobuz"
+                }
+              },
+              {
+                "id": "mc_link",
+                "title": {
+                  "en": "MC link"
+                }
+              },
+              {
+                "id": "main_sync",
+                "title": {
+                  "en": "Main Sync"
+                }
+              },
+              {
+                "id": "tidal",
+                "title": {
+                  "en": "Tidal"
+                }
+              },
+              {
+                "id": "deezer",
+                "title": {
+                  "en": "Deezer"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "input"
+      },
+      {
+        "title": {
+          "en": "Input !{{is|isn't}}",
+          "de": "Eingang !{{ist|ist nicht}}",
+          "nl": "Input !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Input !{{is|isn't}} [[input]]",
+          "de": "Eingang !{{ist|ist nicht}} [[input]]",
+          "nl": "Input !{{is|is niet}} [[input]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+          },
+          {
+            "name": "input",
+            "type": "dropdown",
+            "title": {
+              "en": "Input",
+              "de": "Eingang",
+              "nl": "Input"
+            },
+            "values": [
+              {
+                "id": "TUNER",
+                "title": {
+                  "en": "Tuner"
+                }
+              },
+              {
+                "id": "NET RADIO",
+                "title": {
+                  "en": "Net Radio"
+                }
+              },
+              {
+                "id": "Bluetooth",
+                "title": {
+                  "en": "Bluetooth"
+                }
+              },
+              {
+                "id": "USB",
+                "title": {
+                  "en": "USB"
+                }
+              },
+              {
+                "id": "SERVER",
+                "title": {
+                  "en": "Server"
+                }
+              },
+              {
+                "id": "AUX",
+                "title": {
+                  "en": "AUX"
+                }
+              },
+              {
+                "id": "V-AUX",
+                "title": {
+                  "en": "V-AUX"
+                }
+              },
+              {
+                "id": "OPTICAL",
+                "title": {
+                  "en": "Optical"
+                }
+              },
+              {
+                "id": "HDMI",
+                "title": {
+                  "en": "HDMI"
+                }
+              },
+              {
+                "id": "HDMI1",
+                "title": {
+                  "en": "HDMI 1"
+                }
+              },
+              {
+                "id": "HDMI2",
+                "title": {
+                  "en": "HDMI 2"
+                }
+              },
+              {
+                "id": "HDMI3",
+                "title": {
+                  "en": "HDMI 3"
+                }
+              },
+              {
+                "id": "HDMI4",
+                "title": {
+                  "en": "HDMI 4"
+                }
+              },
+              {
+                "id": "HDMI5",
+                "title": {
+                  "en": "HDMI 5"
+                }
+              },
+              {
+                "id": "HDMI6",
+                "title": {
+                  "en": "HDMI 6"
+                }
+              },
+              {
+                "id": "HDMI7",
+                "title": {
+                  "en": "HDMI 7"
+                }
+              },
+              {
+                "id": "HDMI8",
+                "title": {
+                  "en": "HDMI 8"
+                }
+              },
+              {
+                "id": "AV",
+                "title": {
+                  "en": "AV"
+                }
+              },
+              {
+                "id": "AV1",
+                "title": {
+                  "en": "AV 1"
+                }
+              },
+              {
+                "id": "AV2",
+                "title": {
+                  "en": "AV 2"
+                }
+              },
+              {
+                "id": "AV3",
+                "title": {
+                  "en": "AV 3"
+                }
+              },
+              {
+                "id": "AV4",
+                "title": {
+                  "en": "AV 4"
+                }
+              },
+              {
+                "id": "AV5",
+                "title": {
+                  "en": "AV 5"
+                }
+              },
+              {
+                "id": "AV6",
+                "title": {
+                  "en": "AV 6"
+                }
+              },
+              {
+                "id": "AV7",
+                "title": {
+                  "en": "AV 7"
+                }
+              },
+              {
+                "id": "AV8",
+                "title": {
+                  "en": "AV 8"
+                }
+              },
+              {
+                "id": "AUDIO",
+                "title": {
+                  "en": "Audio 1"
+                }
+              },
+              {
+                "id": "AUDIO1",
+                "title": {
+                  "en": "Audio 1"
+                }
+              },
+              {
+                "id": "AUDIO2",
+                "title": {
+                  "en": "Audio 2"
+                }
+              },
+              {
+                "id": "AUDIO3",
+                "title": {
+                  "en": "Audio 3"
+                }
+              },
+              {
+                "id": "AUDIO4",
+                "title": {
+                  "en": "Audio 4"
+                }
+              },
+              {
+                "id": "AUDIO5",
+                "title": {
+                  "en": "Audio 5"
+                }
+              },
+              {
+                "id": "AUDIO6",
+                "title": {
+                  "en": "Audio 6"
+                }
+              },
+              {
+                "id": "AUDIO7",
+                "title": {
+                  "en": "Audio 7"
+                }
+              },
+              {
+                "id": "AUDIO8",
+                "title": {
+                  "en": "Audio 8"
+                }
+              },
+              {
+                "id": "SPOTIFY",
+                "title": {
+                  "en": "Spotify"
+                }
+              },
+              {
+                "id": "AIRPLAY",
+                "title": {
+                  "en": "AirPlay"
+                }
+              },
+              {
+                "id": "DEEZER",
+                "title": {
+                  "en": "Deezer"
+                }
+              },
+              {
+                "id": "MusicCast Link",
+                "title": {
+                  "en": "MusicCast Link"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "input_av"
+      },
+      {
+        "title": {
+          "en": "Surround program !{{is|isn't}}",
+          "de": "Surround-Programm !{{ist|ist nicht}}",
+          "nl": "Surround program !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Surround program !{{is|isn't}} [[surround_program]]",
+          "de": "Surround-Programm !{{ist|ist nicht}} [[surround_program]]",
+          "nl": "Surround program !{{is|is niet}} [[surround_program]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+          },
+          {
+            "name": "surround_program",
+            "type": "dropdown",
+            "title": {
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            },
+            "values": [
+              {
+                "id": "standard",
+                "title": {
+                  "en": "Standard"
+                }
+              },
+              {
+                "id": "spectacle",
+                "title": {
+                  "en": "Spectacle"
+                }
+              },
+              {
+                "id": "enhanced",
+                "title": {
+                  "en": "Enhanced"
+                }
+              },
+              {
+                "id": "straight",
+                "title": {
+                  "en": "Straight"
+                }
+              },
+              {
+                "id": "of",
+                "title": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "stereo",
+                "title": {
+                  "en": "Stereo"
+                }
+              },
+              {
+                "id": "2ch_stereo",
+                "title": {
+                  "en": "2ch Stereo"
+                }
+              },
+              {
+                "id": "5ch_stereo",
+                "title": {
+                  "en": "5ch Stereo"
+                }
+              },
+              {
+                "id": "7ch_stereo",
+                "title": {
+                  "en": "7ch Stereo"
+                }
+              },
+              {
+                "id": "9ch_stereo",
+                "title": {
+                  "en": "9ch Stereo"
+                }
+              },
+              {
+                "id": "11ch_stereo",
+                "title": {
+                  "en": "11ch Stereo"
+                }
+              },
+              {
+                "id": "all_ch_stereo",
+                "title": {
+                  "en": "All channel Stereo"
+                }
+              },
+              {
+                "id": "surr_decoder",
+                "title": {
+                  "en": "Surround Decoder"
+                }
+              },
+              {
+                "id": "music",
+                "title": {
+                  "en": "Music"
+                }
+              },
+              {
+                "id": "disco",
+                "title": {
+                  "en": "Disco"
+                }
+              },
+              {
+                "id": "arena",
+                "title": {
+                  "en": "Arena"
+                }
+              },
+              {
+                "id": "concert",
+                "title": {
+                  "en": "Concert"
+                }
+              },
+              {
+                "id": "jazz_club",
+                "title": {
+                  "en": "Jazz Club"
+                }
+              },
+              {
+                "id": "movie",
+                "title": {
+                  "en": "Movie"
+                }
+              },
+              {
+                "id": "sci-fi",
+                "title": {
+                  "en": "Sci-Fi"
+                }
+              },
+              {
+                "id": "adventure",
+                "title": {
+                  "en": "Adventure"
+                }
+              },
+              {
+                "id": "drama",
+                "title": {
+                  "en": "Drama"
+                }
+              },
+              {
+                "id": "talk_show",
+                "title": {
+                  "en": "Talk Show"
+                }
+              },
+              {
+                "id": "tv_program",
+                "title": {
+                  "en": "TV Program"
+                }
+              },
+              {
+                "id": "sports",
+                "title": {
+                  "en": "Sports"
+                }
+              },
+              {
+                "id": "mono_movie",
+                "title": {
+                  "en": "Mono Movie"
+                }
+              },
+              {
+                "id": "music_video",
+                "title": {
+                  "en": "Music Video"
+                }
+              },
+              {
+                "id": "game",
+                "title": {
+                  "en": "Game"
+                }
+              },
+              {
+                "id": "action_game",
+                "title": {
+                  "en": "Action Game"
+                }
+              },
+              {
+                "id": "roleplaying_game",
+                "title": {
+                  "en": "Roleplaying Game"
+                }
+              },
+              {
+                "id": "munich",
+                "title": {
+                  "en": "Hall in Munich"
+                }
+              },
+              {
+                "id": "vienna",
+                "title": {
+                  "en": "Hall in Vienna"
+                }
+              },
+              {
+                "id": "chamber",
+                "title": {
+                  "en": "Chamber"
+                }
+              },
+              {
+                "id": "cellar_club",
+                "title": {
+                  "en": "Cellar Club"
+                }
+              },
+              {
+                "id": "royaumont",
+                "title": {
+                  "en": "Church in Royaumont"
+                }
+              },
+              {
+                "id": "roxy_theatre",
+                "title": {
+                  "en": "The Roxy Theatre"
+                }
+              },
+              {
+                "id": "bottom_line",
+                "title": {
+                  "en": "The Bottom Line"
+                }
+              },
+              {
+                "id": "frankfurt",
+                "title": {
+                  "en": "Frankfurt"
+                }
+              },
+              {
+                "id": "stuttgart",
+                "title": {
+                  "en": "Stuttgart"
+                }
+              },
+              {
+                "id": "amsterdam",
+                "title": {
+                  "en": "Amsterdam"
+                }
+              },
+              {
+                "id": "tokyo",
+                "title": {
+                  "en": "Tokyo"
+                }
+              },
+              {
+                "id": "freiburg",
+                "title": {
+                  "en": "Freiburg"
+                }
+              },
+              {
+                "id": "village_gate",
+                "title": {
+                  "en": "Village Gate"
+                }
+              },
+              {
+                "id": "village_vanguard",
+                "title": {
+                  "en": "Village Vanguard"
+                }
+              },
+              {
+                "id": "warehouse_loft",
+                "title": {
+                  "en": "Warehouse Loft"
+                }
+              },
+              {
+                "id": "recital_opera",
+                "title": {
+                  "en": "Recital Opera"
+                }
+              },
+              {
+                "id": "pavilion",
+                "title": {
+                  "en": "Pavilion"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "surround_program"
+      },
+      {
+        "title": {
+          "en": "Surround program !{{is|isn't}}",
+          "de": "Surround-Programm !{{ist|ist nicht}}",
+          "nl": "Surround program !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Surround program !{{is|isn't}} [[surround_program]]",
+          "de": "Surround-Programm !{{ist|ist nicht}} [[surround_program]]",
+          "nl": "Surround program !{{is|is niet}} [[surround_program]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+          },
+          {
+            "name": "surround_program",
+            "type": "dropdown",
+            "title": {
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            },
+            "values": [
+              {
+                "id": "Action Game",
+                "title": {
+                  "en": "Action Game"
+                }
+              },
+              {
+                "id": "Roleplaying Game",
+                "title": {
+                  "en": "Roleplaying Game"
+                }
+              },
+              {
+                "id": "Music Video",
+                "title": {
+                  "en": "Music Video"
+                }
+              },
+              {
+                "id": "Standard",
+                "title": {
+                  "en": "Standard"
+                }
+              },
+              {
+                "id": "Spectacle",
+                "title": {
+                  "en": "Spectacle"
+                }
+              },
+              {
+                "id": "Sci-Fi",
+                "title": {
+                  "en": "Sci-Fi"
+                }
+              },
+              {
+                "id": "Adventure",
+                "title": {
+                  "en": "Adventure"
+                }
+              },
+              {
+                "id": "Drama",
+                "title": {
+                  "en": "Drama"
+                }
+              },
+              {
+                "id": "Hall in Munich",
+                "title": {
+                  "en": "Hall in Munich"
+                }
+              },
+              {
+                "id": "Hall in Vienna",
+                "title": {
+                  "en": "Hall in Vienna"
+                }
+              },
+              {
+                "id": "Chamber",
+                "title": {
+                  "en": "Chamber"
+                }
+              },
+              {
+                "id": "Cellar Club",
+                "title": {
+                  "en": "Cellar Club"
+                }
+              },
+              {
+                "id": "Church in Royaumont",
+                "title": {
+                  "en": "Church in Royaumont"
+                }
+              },
+              {
+                "id": "The Roxy Theatre",
+                "title": {
+                  "en": "The Roxy Theatre"
+                }
+              },
+              {
+                "id": "The Bottom Line",
+                "title": {
+                  "en": "The Bottom Line"
+                }
+              },
+              {
+                "id": "Sports",
+                "title": {
+                  "en": "Sports"
+                }
+              },
+              {
+                "id": "Mono Movie",
+                "title": {
+                  "en": "Mono Movie"
+                }
+              },
+              {
+                "id": "2ch Stereo",
+                "title": {
+                  "en": "2ch Stereo"
+                }
+              },
+              {
+                "id": "5ch Stereo",
+                "title": {
+                  "en": "5ch Stereo"
+                }
+              },
+              {
+                "id": "7ch Stereo",
+                "title": {
+                  "en": "7ch Stereo"
+                }
+              },
+              {
+                "id": "9ch Stereo",
+                "title": {
+                  "en": "9ch Stereo"
+                }
+              },
+              {
+                "id": "Surround Decoder",
+                "title": {
+                  "en": "Surround Decoder"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "surround_program_av"
       }
     ],
     "actions": [
@@ -2723,7 +3879,8 @@
       "type": "enum",
       "title": {
         "en": "Input",
-        "de": "Eingang"
+        "de": "Eingang",
+        "nl": "Input"
       },
       "getable": true,
       "setable": true,
@@ -3411,7 +4568,8 @@
       "type": "enum",
       "title": {
         "en": "Surround program",
-        "de": "Surround-Programm"
+        "de": "Surround-Programm",
+        "nl": "Surround program"
       },
       "getable": true,
       "setable": true,

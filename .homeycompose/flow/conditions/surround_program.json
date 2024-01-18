@@ -1,0 +1,313 @@
+{
+    "title": {
+        "en": "Surround program !{{is|isn't}}",
+        "de": "Surround-Programm !{{ist|ist nicht}}",
+        "nl": "Surround program !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Surround program !{{is|isn't}} [[surround_program]]",
+        "de": "Surround-Programm !{{ist|ist nicht}} [[surround_program]]",
+        "nl": "Surround program !{{is|is niet}} [[surround_program]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+        },
+        {
+            "name": "surround_program",
+            "type": "dropdown",
+            "title": { 
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            },
+            "values": [
+              {
+                "id": "standard",
+                "title": {
+                  "en": "Standard"
+                }
+              },
+              {
+                "id": "spectacle",
+                "title": {
+                  "en": "Spectacle"
+                }
+              },
+              {
+                "id": "enhanced",
+                "title": {
+                  "en": "Enhanced"
+                }
+              },
+              {
+                "id": "straight",
+                "title": {
+                  "en": "Straight"
+                }
+              },
+              {
+                "id": "of",
+                "title": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "stereo",
+                "title": {
+                  "en": "Stereo"
+                }
+              },
+              {
+                "id": "2ch_stereo",
+                "title": {
+                  "en": "2ch Stereo"
+                }
+              },
+              {
+                "id": "5ch_stereo",
+                "title": {
+                  "en": "5ch Stereo"
+                }
+              },
+              {
+                "id": "7ch_stereo",
+                "title": {
+                  "en": "7ch Stereo"
+                }
+              },
+              {
+                "id": "9ch_stereo",
+                "title": {
+                  "en": "9ch Stereo"
+                }
+              },
+              {
+                "id": "11ch_stereo",
+                "title": {
+                  "en": "11ch Stereo"
+                }
+              },
+              {
+                "id": "all_ch_stereo",
+                "title": {
+                  "en": "All channel Stereo"
+                }
+              },
+              {
+                "id": "surr_decoder",
+                "title": {
+                  "en": "Surround Decoder"
+                }
+              },
+              {
+                "id": "music",
+                "title": {
+                  "en": "Music"
+                }
+              },
+              {
+                "id": "disco",
+                "title": {
+                  "en": "Disco"
+                }
+              },
+              {
+                "id": "arena",
+                "title": {
+                  "en": "Arena"
+                }
+              },
+              {
+                "id": "concert",
+                "title": {
+                  "en": "Concert"
+                }
+              },
+              {
+                "id": "jazz_club",
+                "title": {
+                  "en": "Jazz Club"
+                }
+              },
+              {
+                "id": "movie",
+                "title": {
+                  "en": "Movie"
+                }
+              },
+              {
+                "id": "sci-fi",
+                "title": {
+                  "en": "Sci-Fi"
+                }
+              },
+              {
+                "id": "adventure",
+                "title": {
+                  "en": "Adventure"
+                }
+              },
+              {
+                "id": "drama",
+                "title": {
+                  "en": "Drama"
+                }
+              },
+              {
+                "id": "talk_show",
+                "title": {
+                  "en": "Talk Show"
+                }
+              },
+              {
+                "id": "tv_program",
+                "title": {
+                  "en": "TV Program"
+                }
+              },
+              {
+                "id": "sports",
+                "title": {
+                  "en": "Sports"
+                }
+              },
+              {
+                "id": "mono_movie",
+                "title": {
+                  "en": "Mono Movie"
+                }
+              },
+              {
+                "id": "music_video",
+                "title": {
+                  "en": "Music Video"
+                }
+              },
+              {
+                "id": "game",
+                "title": {
+                  "en": "Game"
+                }
+              },
+              {
+                "id": "action_game",
+                "title": {
+                  "en": "Action Game"
+                }
+              },
+              {
+                "id": "roleplaying_game",
+                "title": {
+                  "en": "Roleplaying Game"
+                }
+              },
+              {
+                "id": "munich",
+                "title": {
+                  "en": "Hall in Munich"
+                }
+              },
+              {
+                "id": "vienna",
+                "title": {
+                  "en": "Hall in Vienna"
+                }
+              },
+              {
+                "id": "chamber",
+                "title": {
+                  "en": "Chamber"
+                }
+              },
+              {
+                "id": "cellar_club",
+                "title": {
+                  "en": "Cellar Club"
+                }
+              },
+              {
+                "id": "royaumont",
+                "title": {
+                  "en": "Church in Royaumont"
+                }
+              },
+              {
+                "id": "roxy_theatre",
+                "title": {
+                  "en": "The Roxy Theatre"
+                }
+              },
+              {
+                "id": "bottom_line",
+                "title": {
+                  "en": "The Bottom Line"
+                }
+              },
+              {
+                "id": "frankfurt",
+                "title": {
+                  "en": "Frankfurt"
+                }
+              },
+              {
+                "id": "stuttgart",
+                "title": {
+                  "en": "Stuttgart"
+                }
+              },
+              {
+                "id": "amsterdam",
+                "title": {
+                  "en": "Amsterdam"
+                }
+              },
+              {
+                "id": "tokyo",
+                "title": {
+                  "en": "Tokyo"
+                }
+              },
+              {
+                "id": "freiburg",
+                "title": {
+                  "en": "Freiburg"
+                }
+              },
+              {
+                "id": "village_gate",
+                "title": {
+                  "en": "Village Gate"
+                }
+              },
+              {
+                "id": "village_vanguard",
+                "title": {
+                  "en": "Village Vanguard"
+                }
+              },
+              {
+                "id": "warehouse_loft",
+                "title": {
+                  "en": "Warehouse Loft"
+                }
+              },
+              {
+                "id": "recital_opera",
+                "title": {
+                  "en": "Recital Opera"
+                }
+              },
+              {
+                "id": "pavilion",
+                "title": {
+                  "en": "Pavilion"
+                }
+              }
+        
+            ]
+        }
+    ]
+}

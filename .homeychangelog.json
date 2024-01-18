@@ -130,5 +130,9 @@
   "1.1.6": {
     "en": "Added 'All channel Stereo' sound program for MusicCast devices.",
     "de": "Surround-Programm 'All channel Stereo' für MusicCast Geräte/Zonen ergänzt."
+  },
+  "1.1.7": {
+    "en": "Added flow conditions for input and surround program.",
+    "de": "Flow-Konditionen für Input und Surround-Programm ergänzt."
   }
 }

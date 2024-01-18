@@ -2,7 +2,8 @@
     "type": "enum",
     "title": {
       "en": "Surround program",
-      "de": "Surround-Programm"
+      "de": "Surround-Programm",
+      "nl": "Surround program"
     },
     "getable": true,
     "setable": true,

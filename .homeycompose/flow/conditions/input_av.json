@@ -1,0 +1,264 @@
+{
+    "title": {
+        "en": "Input !{{is|isn't}}",
+        "de": "Eingang !{{ist|ist nicht}}",
+        "nl": "Input !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Input !{{is|isn't}} [[input]]",
+        "de": "Eingang !{{ist|ist nicht}} [[input]]",
+        "nl": "Input !{{is|is niet}} [[input]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+        },
+        {
+            "name": "input",
+            "type": "dropdown",
+            "title": { 
+                "en": "Input",
+                "de": "Eingang",
+                "nl": "Input"
+            },
+            "values": [
+              {
+                "id": "TUNER",
+                "title": {
+                  "en": "Tuner"
+                }
+              },
+              {
+                "id": "NET RADIO",
+                "title": {
+                  "en": "Net Radio"
+                }
+              },
+              {
+                "id": "Bluetooth",
+                "title": {
+                  "en": "Bluetooth"
+                }
+              },
+              {
+                "id": "USB",
+                "title": {
+                  "en": "USB"
+                }
+              },
+              {
+                "id": "SERVER",
+                "title": {
+                  "en": "Server"
+                }
+              },
+              {
+                "id": "AUX",
+                "title": {
+                  "en": "AUX"
+                }
+              },
+              {
+                "id": "V-AUX",
+                "title": {
+                  "en": "V-AUX"
+                }
+              },
+              {
+                "id": "OPTICAL",
+                "title": {
+                  "en": "Optical"
+                }
+              },
+              {
+                "id": "HDMI",
+                "title": {
+                  "en": "HDMI"
+                }
+              },
+              {
+                "id": "HDMI1",
+                "title": {
+                  "en": "HDMI 1"
+                }
+              },
+              {
+                "id": "HDMI2",
+                "title": {
+                  "en": "HDMI 2"
+                }
+              },
+              {
+                "id": "HDMI3",
+                "title": {
+                  "en": "HDMI 3"
+                }
+              },
+              {
+                "id": "HDMI4",
+                "title": {
+                  "en": "HDMI 4"
+                }
+              },
+              {
+                "id": "HDMI5",
+                "title": {
+                  "en": "HDMI 5"
+                }
+              },
+              {
+                "id": "HDMI6",
+                "title": {
+                  "en": "HDMI 6"
+                }
+              },
+              {
+                "id": "HDMI7",
+                "title": {
+                  "en": "HDMI 7"
+                }
+              },
+              {
+                "id": "HDMI8",
+                "title": {
+                  "en": "HDMI 8"
+                }
+              },
+              {
+                "id": "AV",
+                "title": {
+                  "en": "AV"
+                }
+              },
+              {
+                "id": "AV1",
+                "title": {
+                  "en": "AV 1"
+                }
+              },
+              {
+                "id": "AV2",
+                "title": {
+                  "en": "AV 2"
+                }
+              },
+              {
+                "id": "AV3",
+                "title": {
+                  "en": "AV 3"
+                }
+              },
+              {
+                "id": "AV4",
+                "title": {
+                  "en": "AV 4"
+                }
+              },
+              {
+                "id": "AV5",
+                "title": {
+                  "en": "AV 5"
+                }
+              },
+              {
+                "id": "AV6",
+                "title": {
+                  "en": "AV 6"
+                }
+              },
+              {
+                "id": "AV7",
+                "title": {
+                  "en": "AV 7"
+                }
+              },
+              {
+                "id": "AV8",
+                "title": {
+                  "en": "AV 8"
+                }
+              },
+              {
+                "id": "AUDIO",
+                "title": {
+                  "en": "Audio 1"
+                }
+              },
+              {
+                "id": "AUDIO1",
+                "title": {
+                  "en": "Audio 1"
+                }
+              },
+              {
+                "id": "AUDIO2",
+                "title": {
+                  "en": "Audio 2"
+                }
+              },
+              {
+                "id": "AUDIO3",
+                "title": {
+                  "en": "Audio 3"
+                }
+              },
+              {
+                "id": "AUDIO4",
+                "title": {
+                  "en": "Audio 4"
+                }
+              },
+              {
+                "id": "AUDIO5",
+                "title": {
+                  "en": "Audio 5"
+                }
+              },
+              {
+                "id": "AUDIO6",
+                "title": {
+                  "en": "Audio 6"
+                }
+              },
+              {
+                "id": "AUDIO7",
+                "title": {
+                  "en": "Audio 7"
+                }
+              },
+              {
+                "id": "AUDIO8",
+                "title": {
+                  "en": "Audio 8"
+                }
+              },
+              {
+                "id": "SPOTIFY",
+                "title": {
+                  "en": "Spotify"
+                }
+              },
+              {
+                "id": "AIRPLAY",
+                "title": {
+                  "en": "AirPlay"
+                }
+              },
+              {
+                "id": "DEEZER",
+                "title": {
+                  "en": "Deezer"
+                }
+              },
+              {
+                "id": "MusicCast Link",
+                "title": {
+                  "en": "MusicCast Link"
+                }
+              }
+            ]
+        }
+    ]
+}
