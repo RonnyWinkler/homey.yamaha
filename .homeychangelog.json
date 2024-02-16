@@ -134,5 +134,9 @@
   "1.1.7": {
     "en": "Added flow conditions for input and surround program.",
     "de": "Flow-Konditionen für Input und Surround-Programm ergänzt."
+  },
+  "1.1.8": {
+    "en": "Added Adaptive DRC to AV receiver device.",
+    "de": "Adaptives DRC zu AV-Receiver-Gerät hinzugrfügt."
   }
 }

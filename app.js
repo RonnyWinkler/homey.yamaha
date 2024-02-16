@@ -117,6 +117,30 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionDirectOn = this.homey.flow.getActionCard('adaptive_drc_on')
+    this._flowActionDirectOn.registerRunListener(async (args, state) => {
+      try{
+        await args.device.adaptiveDrcSet(true);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'adaptive_drc_on': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
+    this._flowActionDirectOff = this.homey.flow.getActionCard('adaptive_drc_off')
+    this._flowActionDirectOff.registerRunListener(async (args, state) => {
+      try{
+        await args.device.adaptiveDrcSet(false);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'adaptive_drc_off': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+
     this._flowActionEnhancerOn = this.homey.flow.getActionCard('enhancer_on')
     this._flowActionEnhancerOn.registerRunListener(async (args, state) => {
       try{

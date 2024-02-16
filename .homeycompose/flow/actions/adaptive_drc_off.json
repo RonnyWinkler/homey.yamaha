@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Adaptive DRC off",
+        "de": "Adaptivev DRC aus"
+    },
+    "titleFormatted": {
+        "en": "Adaptive DRC off",
+        "de": "Adaptivev DRC aus"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=avreceiver"
+        }
+    ]
+}

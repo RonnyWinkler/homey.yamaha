@@ -51,7 +51,8 @@ class receiverDevice extends Homey.Device {
         let deprecatedCapabilities = [
             ],
             newCapabilities = [
-                "party"
+                "party",
+                "adaptive_drc"
             ];
         for (let i in deprecatedCapabilities) {
             let deprecatedCapability = deprecatedCapabilities[i];
@@ -129,6 +130,12 @@ class receiverDevice extends Homey.Device {
         try{
             let direct = await this._yamaha.isDirectEnabled(true);
             await this.setCapabilityValue("direct", direct ).catch(error => this.log("_updateDevice() capability error: ", error));
+        } catch(error){ this.log("_updateDevice() Error update direct: ", error.message)}
+
+        // AdaptiveDRC
+        try{
+            let adaptiveDrc = await this._yamaha.isAdaptiveDrcEnabled(true);
+            await this.setCapabilityValue("adaptive_drc", adaptiveDrc ).catch(error => this.log("_updateDevice() capability error: ", error));
         } catch(error){ this.log("_updateDevice() Error update direct: ", error.message)}
         
         // enhancer
@@ -270,6 +277,11 @@ class receiverDevice extends Homey.Device {
 
         if( capabilityValues["direct"] != undefined){
             await this._yamaha.setDirect(capabilityValues["direct"]);
+            updateDevice = true;
+        }
+
+        if( capabilityValues["adaptive_drc"] != undefined){
+            await this._yamaha.setAdaptiveDrc(capabilityValues["adaptive_drc"]);
             updateDevice = true;
         }
 
@@ -433,6 +445,12 @@ class receiverDevice extends Homey.Device {
         if (this.hasCapability("direct")){
             await this._yamaha.setDirect(direct);
             await this.setCapabilityValue("direct", direct ).catch(error => this.log("directSet() capability error: ", error));
+        }
+    }
+    async adaptiveDrcSet(state){
+        if (this.hasCapability("adaptive_drc")){
+            await this._yamaha.setAdaptiveDrc(state);
+            await this.setCapabilityValue("adaptive_drc", state ).catch(error => this.log("adaptiveDrcSet() capability error: ", error));
         }
     }
     async enhancerSet(enhancer){

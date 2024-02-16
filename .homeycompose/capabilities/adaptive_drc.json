@@ -1,0 +1,12 @@
+{
+    "type": "boolean",
+    "title": {
+      "en": "Adaptive DRC",
+      "de": "Adaptives DRC"
+    },
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "uiComponent": "button",
+    "icon": "/assets/capability_icons/adaptive_drc.svg"
+  }
