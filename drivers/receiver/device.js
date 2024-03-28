@@ -9,7 +9,7 @@ const DEFAULT_ZONE = 'main';
 const ZONE_INIT_TIMEOUT = 2;
 const DEVICE_UPDATE_TIMEOUT = 3;
 const UDP_PORT = 4000;
-const UDP_PORT_RANGE = 20;
+const UDP_PORT_RANGE = 200;
 
 const PLAY_SOURCE = {
     'tuner': 'tuner',
@@ -282,7 +282,7 @@ class receiverDevice extends Homey.Device {
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
-            this.log("_updateDevice() Error reading device info from API. Set device unavailable.");
+            this.log("_updateDevice() Error reading device info from API. Set device unavailable. Error: ", error.message);
             return;
         }
 
