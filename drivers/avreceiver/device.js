@@ -80,7 +80,7 @@ class receiverDevice extends Homey.Device {
         let basicStatus = {};
         try{
             basicStatus = await this._yamaha.getBasicStatus();
-            this.setAvailable();
+            await this.setAvailable();
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));

@@ -146,5 +146,9 @@
   "1.1.10": {
     "en": "Extended manual pair process.",
     "de": "Manuellen Pair-Prozess erweitert."
+  },
+  "1.1.11": {
+    "en": "Improved error handling.",
+    "de": "Fehlerbehandlung ergänzt."
   }
 }

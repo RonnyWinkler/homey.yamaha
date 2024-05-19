@@ -278,7 +278,7 @@ class receiverDevice extends Homey.Device {
         let deviceInfo = {};
         try{
            deviceInfo = await this._yamaha.getDeviceInfo();
-           this.setAvailable();
+           await this.setAvailable();
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
