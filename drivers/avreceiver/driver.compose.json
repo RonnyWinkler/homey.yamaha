@@ -54,6 +54,12 @@
             }
         },
         {
+            "id": "not_found",
+            "navigation": {
+                "prev": "add_by_ip"
+            }
+        },
+        {
             "id": "check_ip",
             "template": "loading",
             "navigation": {

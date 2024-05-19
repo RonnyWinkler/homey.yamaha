@@ -8,6 +8,9 @@
         },
         "list_devices_zone":{
             "zone": "Zone"
+        },
+        "not_found": {
+            "title": "No device found"
         }
     },
     "repair": {

@@ -69,14 +69,14 @@ class receiverDriver extends Homey.Driver {
                 }
                 catch(error){
                     this.log("showView:check_ip: ", error.message);
-                    await session.showView("add_by_ip");
+                    await session.showView("not_found");
                     // await session.emit("alert", "Device not found");
                 }
                 if (devices.length > 0){
                     await session.showView("list_devices");
                 }
                 else{
-                    await session.showView("add_by_ip");
+                    await session.showView("not_found");
                 }
             }
         });

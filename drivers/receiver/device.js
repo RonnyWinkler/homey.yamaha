@@ -562,6 +562,9 @@ class receiverDevice extends Homey.Device {
         }
         
         if( capabilityValues["volume_set"] != undefined){
+            if (capabilityValues["volume_set"] > 1 || capabilityValues["volume_set"] < 0){
+                throw new Error("Volume out of range");
+            }
             let volume = capabilityValues["volume_set"] * (this._deviceState.maxVol - this._deviceState.minVol) +  this._deviceState.minVol;
             volume = Math.round(volume);
             await this._yamaha.setVolumeTo(volume);
