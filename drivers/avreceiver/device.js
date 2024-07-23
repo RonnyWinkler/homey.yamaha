@@ -84,7 +84,7 @@ class receiverDevice extends Homey.Device {
         }
         catch(error){
             this.setUnavailable(this.homey.__("error.device_unavailable"));
-            this.log("_updateDevice() Error reading device basic status from API. Set device unavailable.");
+            this.log("_updateDevice() Error reading device basic status from API. Set device unavailable. Error: ", error.message);
             return;
         }
 

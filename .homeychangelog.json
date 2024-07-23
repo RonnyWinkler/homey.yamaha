@@ -150,5 +150,9 @@
   "1.1.11": {
     "en": "Improved error handling.",
     "de": "Fehlerbehandlung ergänzt."
+  },
+  "1.1.12": {
+    "en": "Added logging.",
+    "de": "Protokollierung ergänzt."
   }
 }
