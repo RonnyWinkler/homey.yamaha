@@ -7,7 +7,7 @@
         "en": "Select tuner preset number [[item]] for band [[band]].",
         "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]."
     },
-    "hint": { 
+    "hint": {
         "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
         "de": "Weise deiner Tuner-Station einen Preset zu (Memory-Button + Preset-Auswahl). Rufe danach den Preset mit diesem Flow auf."
     },
@@ -18,44 +18,44 @@
             "filter": "driver_id=receiver|receiver_zone"
         },
         {
-          "type": "number",
-          "name": "item",
-          "title": { 
-              "en": "Preset number",
-              "de": "Preset-Nummer"
-          },
-          "min": 1,
-          "max": 40,
-          "step": 1,
-          "placeholder": { 
-            "en": "Preset number",
-            "de": "Preset-Nummer"
-          }
+            "type": "number",
+            "name": "item",
+            "title": {
+                "en": "Preset number",
+                "de": "Preset-Nummer"
+            },
+            "min": 1,
+            "max": 40,
+            "step": 1,
+            "placeholder": {
+                "en": "Preset number",
+                "de": "Preset-Nummer"
+            }
         },
         {
             "type": "dropdown",
             "name": "band",
-            "title": { 
+            "title": {
                 "en": "Band",
                 "de": "Band"
             },
             "values": [
                 {
-                  "id": "fm",
-                  "title": {
-                    "en": "FM"
-                  }
+                    "id": "fm",
+                    "title": {
+                        "en": "FM"
+                    }
                 },
                 {
                     "id": "am",
                     "title": {
-                      "en": "AM"
+                        "en": "AM"
                     }
                 },
                 {
                     "id": "dab",
                     "title": {
-                      "en": "DAB"
+                        "en": "DAB"
                     }
                 }
             ]
