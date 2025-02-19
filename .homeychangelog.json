@@ -137,7 +137,7 @@
   },
   "1.1.8": {
     "en": "Added Adaptive DRC to AV receiver device.",
-    "de": "Adaptives DRC zu AV-Receiver-Gerät hinzugrfügt."
+    "de": "Adaptives DRC zu AV-Receiver-Gerät hinzugefügt."
   },
   "1.1.9": {
     "en": "Extended error log.",
@@ -154,5 +154,9 @@
   "1.1.12": {
     "en": "Added logging.",
     "de": "Protokollierung ergänzt."
+  },
+  "1.1.13": {
+    "en": "Added tuner band common.",
+    "de": "Tuner Band Common hinzugefügt."
   }
 }
