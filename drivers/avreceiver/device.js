@@ -77,8 +77,10 @@ class receiverDevice extends Homey.Device {
             this.log("_updateDevice() Error checking Yamaha API. Set device unavailable.");
             return;
         }
+        // let systemConfig = {};
         let basicStatus = {};
         try{
+            // systemConfig = await this._yamaha.getSystemConfig();
             basicStatus = await this._yamaha.getBasicStatus();
             await this.setAvailable();
         }

@@ -309,6 +309,26 @@ class receiverDevice extends Homey.Device {
             if (status.mute != undefined){
                 await this.setCapabilityValue("volume_mute", status.mute ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
+            // input
+            await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
+            // surround program
+            await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
+            // direct
+            if (status.direct != undefined && this.hasCapability("direct")){
+                await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // enhancer
+            if (status.enhancer != undefined && this.hasCapability("enhancer")){
+                await this.setCapabilityValue("enhancer", status.enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // bass_extension, set only if provided by API
+            if (status.bass_extension != undefined && this.hasCapability("bass")){
+                await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
+            // party mode
+            if (status.party_enable != undefined && this.hasCapability("party")){
+                await this.setCapabilityValue("party", status.party_enable ).catch(error => this.log("_updateDevice() capability error: ", error));
+            }
             // bass slider
             if (this.hasCapability("bass_set")){
                 if (    status.tone_control != undefined 
@@ -334,27 +354,6 @@ class receiverDevice extends Homey.Device {
                     await this.setCapabilityValue("treble_set", 0 );
                     await this.setCapabilityValue("measure_treble", 0 );
                 }
-            }
-
-            // input
-            await this.setCapabilityValue("input", status.input ).catch(error => this.log("_updateDevice() capability error: ", error));
-            // surround program
-            await this.setCapabilityValue("surround_program", status.sound_program ).catch(error => this.log("_updateDevice() capability error: ", error));
-            // direct
-            if (status.direct != undefined && this.hasCapability("direct")){
-                await this.setCapabilityValue("direct", status.direct ).catch(error => this.log("_updateDevice() capability error: ", error));
-            }
-            // enhancer
-            if (status.enhancer != undefined && this.hasCapability("enhancer")){
-                await this.setCapabilityValue("enhancer", status.enhancer ).catch(error => this.log("_updateDevice() capability error: ", error));
-            }
-            // bass_extension, set only if provided by API
-            if (status.bass_extension != undefined && this.hasCapability("bass")){
-                await this.setCapabilityValue("bass", status.bass_extension ).catch(error => this.log("_updateDevice() capability error: ", error));
-            }
-            // party mode
-            if (status.party_enable != undefined && this.hasCapability("party")){
-                await this.setCapabilityValue("party", status.party_enable ).catch(error => this.log("_updateDevice() capability error: ", error));
             }
         }
         catch(error){

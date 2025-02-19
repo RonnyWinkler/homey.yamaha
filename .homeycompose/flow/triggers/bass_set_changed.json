@@ -13,5 +13,10 @@
         },
         "example": 0.5
       }
-    ]
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=receiver"
+    }]
   }

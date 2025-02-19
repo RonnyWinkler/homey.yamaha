@@ -8,9 +8,9 @@
             "type": "node",
             "request": "attach",
             "restart": true,
-            "name": "Attach Yamaha to HomeyDev",
+            "name": "Attach Yamaha to Homey19 Dev",
             "address": "192.168.1.13",
-            "port": 9230,
+            "port": 9904,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
         }, 
@@ -18,29 +18,29 @@
             "type": "node",
             "request": "attach",
             "restart": true,
+            "name": "Attach Yamaha to Homey23 DEV",
+            "address": "192.168.1.16",
+            "port": 9904,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach Yamaha to Homey23 DEV Docker",
+            "address": "192.168.1.16",
+            "port": 9252,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
             "name": "Attach Yamaha to Homey23 LAN",
             "address": "192.168.1.14",
-            "port": 9230,
-            "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/app/"
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "restart": true,
-            "name": "Attach Yamaha to Homey23 Wifi",
-            "address": "192.168.1.15",
-            "port": 9230,
-            "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/app/"
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "restart": true,
-            "name": "Attach Yamaha to Homey23 Docker",
-            "address": "192.168.1.15",
-            "port": 9230,
+            "port": 9904,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"
         }
