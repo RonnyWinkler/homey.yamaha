@@ -158,5 +158,9 @@
   "1.1.13": {
     "en": "Added tuner band common.",
     "de": "Tuner Band Common hinzugefügt."
+  },
+  "1.1.14": {
+    "en": "Added AmazonMusic and Alexa to Musiccast input.",
+    "de": "AmazonMusic und Alexa zur Musiccast-Input hinzugefügt."
   }
 }

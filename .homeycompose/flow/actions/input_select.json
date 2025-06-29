@@ -365,6 +365,30 @@
               }
             },
             {
+              "id": "tidal",
+              "title": {
+                "en": "Tidal"
+              }
+            },
+            {
+              "id": "deezer",
+              "title": {
+                "en": "Deezer"
+              }
+            },
+            {
+              "id": "amazon_music",
+              "title": {
+                "en": "Amazon Music"
+              }
+            },
+            {
+              "id": "alexa",
+              "title": {
+                "en": "Alexa"
+              }
+            },
+            {
               "id": "airplay",
               "title": {
                 "en": "AirPlay"
@@ -392,18 +416,6 @@
               "id": "main_sync",
               "title": {
                 "en": "Main Sync"
-              }
-            },
-            {
-              "id": "tidal",
-              "title": {
-                "en": "Tidal"
-              }
-            },
-            {
-              "id": "deezer",
-              "title": {
-                "en": "Deezer"
               }
             }
           ]
