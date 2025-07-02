@@ -5,8 +5,8 @@
         "de": "Wähle eine Surround-Programm"
     },
     "titleFormatted": {
-        "en": "Select surround program [[surround_program]].",
-        "de": "Wähle eine Surround-Programm [[surround_program]]."
+        "en": "Select surround program [[surround_program]]",
+        "de": "Wähle eine Surround-Programm [[surround_program]]"
     },
     "args": [
         {

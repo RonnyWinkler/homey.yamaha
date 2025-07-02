@@ -5,8 +5,8 @@
         "de": "Sende RC-Code"
     },
     "titleFormatted": {
-        "en": "Send RC code [[code]].",
-        "de": "Sende RC-Code [[code]]."
+        "en": "Send RC code [[code]]",
+        "de": "Sende RC-Code [[code]]"
     },
     "hint": { 
         "en": "Send remote control codes like 7C80 for Power on/off.",

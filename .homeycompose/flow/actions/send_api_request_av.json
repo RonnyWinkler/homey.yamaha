@@ -4,8 +4,8 @@
         "de": "Sende API-Aufruf"
     },
     "titleFormatted": {
-        "en": "Send API request [[request]].",
-        "de": "Sende API-Aufruf [[request]]."
+        "en": "Send API request [[request]]",
+        "de": "Sende API-Aufruf [[request]]"
     },
     "hint": { 
         "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",

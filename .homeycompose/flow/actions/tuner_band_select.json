@@ -5,8 +5,8 @@
         "de": "Wähle ein Tuner-Band"
     },
     "titleFormatted": {
-        "en": "Select tuner band [[band]].",
-        "de": "Wähle ein Tuner-Band [[band]]."
+        "en": "Select tuner band [[band]]",
+        "de": "Wähle ein Tuner-Band [[band]]"
     },
     "args": [
         {

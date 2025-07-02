@@ -1,11 +1,11 @@
 {
     "title": {
-        "en": "Distribution: Remove server group.",
-        "de": "Verteilung: Entferne Server-Gruppe."
+        "en": "Distribution: Remove server group",
+        "de": "Verteilung: Entferne Server-Gruppe"
     },
     "titleFormatted": {
-        "en": "Remove server group.",
-        "de": "Entferne Server-Gruppe."
+        "en": "Remove server group",
+        "de": "Entferne Server-Gruppe"
     },
     "args": [
         {

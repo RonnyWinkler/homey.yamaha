@@ -5,8 +5,8 @@
         "de": "Wähle einen Eingang"
     },
     "titleFormatted": {
-        "en": "Select input [[input]].",
-        "de": "Wähle einen Eingang [[input]]."
+        "en": "Select input [[input]]",
+        "de": "Wähle einen Eingang [[input]]"
     },
     "args": [
         {

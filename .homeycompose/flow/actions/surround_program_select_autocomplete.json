@@ -1,0 +1,30 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select surround program",
+        "de": "Wähle eine Surround-Programm"
+    },
+    "titleFormatted": {
+        "en": "Select surround program [[surround_program]]",
+        "de": "Wähle eine Surround-Programm [[surround_program]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+          "type": "autocomplete",
+          "name": "surround_program",
+          "title": { 
+              "en": "Surround program",
+              "de": "Surround-Programm"
+          },
+          "placeholder": { 
+              "en": "Surround program",
+              "de": "Surround-Programm"
+          }
+        }
+    ]
+}

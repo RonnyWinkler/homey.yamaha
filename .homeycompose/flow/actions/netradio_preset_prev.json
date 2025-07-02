@@ -4,8 +4,8 @@
         "de": "Wähle vorherigen NetRadio-Preset"
     },
     "titleFormatted": {
-        "en": "Select previous NetRadio preset.",
-        "de": "Wähle vorherigen NetRadio-Preset."
+        "en": "Select previous NetRadio preset",
+        "de": "Wähle vorherigen NetRadio-Preset"
     },
     "hint": { 
         "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",

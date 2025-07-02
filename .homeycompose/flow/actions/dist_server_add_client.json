@@ -1,11 +1,11 @@
 {
     "title": {
         "en": "Distribution: Add device to this server",
-        "de": "Verteilung: Füge diesem Server ein Gerät hinzu."
+        "de": "Verteilung: Füge diesem Server ein Gerät hinzu"
     },
     "titleFormatted": {
-        "en": "Add [[client]] to this server.",
-        "de": "Füge [[client]] diesem Server hinzu."
+        "en": "Add [[client]] to this server",
+        "de": "Füge [[client]] diesem Server hinzu"
     },
     "args": [
         {

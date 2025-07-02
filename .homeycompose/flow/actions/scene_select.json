@@ -5,8 +5,8 @@
         "de": "Wähle eine Szene"
     },
     "titleFormatted": {
-        "en": "Select scene [[scene]].",
-        "de": "Wähle eine Szene [[scene]]."
+        "en": "Select scene [[scene]]",
+        "de": "Wähle eine Szene [[scene]]"
     },
     "args": [
         {

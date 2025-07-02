@@ -136,6 +136,7 @@ class receiverZoneDevice extends Homey.Device {
         }
         // Zone features
         if (features && features.zone && features.zone[this._zoneId] && features.zone[this._zoneId].func_list ){
+          if (features.zone[0].func_list){  
             let funct = features.zone[this._zoneId].func_list;
             if (funct.indexOf("power") == -1 && this.hasCapability("onoff")){
                 await  this.removeCapability("onoff");
@@ -179,6 +180,27 @@ class receiverZoneDevice extends Homey.Device {
             if (funct.indexOf("bass_extension") > -1 && !this.hasCapability("bass")){
                 await this.addCapability("bass");
             }
+          }
+          if (features.zone[this._zoneId].input_list){
+            let inputList = [];
+            for (let i=0; i<features.zone[this._zoneId].input_list.length; i++){
+              let capabilityEntry = this.homey.manifest.capabilities.input.values.find(input => {
+                return input.id == features.zone[this._zoneId].input_list[i];
+              });
+              if (capabilityEntry != undefined){
+                inputList.push(capabilityEntry);
+              }
+              else{
+                inputList.push({
+                  id: features.zone[0].input_list[i],
+                  title: features.zone[0].input_list[i]
+                });
+              }
+            }
+            if (inputList.length > 0 && this.hasCapability("input")){
+                await this.setCapabilityOptions("input", {values: inputList});
+            }
+          }
         }
         // Get volume range
         try{
@@ -788,15 +810,33 @@ class receiverZoneDevice extends Homey.Device {
         await this._updateDevice();
     }
 
+    // Autocompleete functions ========================================================================================================
+    async getAutocompleteInputList(){
+      let inputList = [];
+      try{
+        let capabilityOptions = await this.getCapabilityOptions('input');
+        for (let i=0; i<capabilityOptions.values.length; i++){
+          inputList.push({
+            id: capabilityOptions.values[i].id,
+            name: capabilityOptions.values[i].title['en'] || capabilityOptions.values[i].title
+          });
+        }
+        return inputList;
+      }
+      catch(error){
+        return inputList;
+      }
+    }
+
     // Flow actions  ========================================================================================================
     async inputSelect(input){
         await this._yamaha.setInput(input, this._zone);
         await this.setCapabilityValue("input", input ).catch(error => this.log("inputSelect() capability error: ", error));
     }
-    async surroundProgramSelect(surroundProgram){
-        await this._yamaha.setSound(surroundProgram, this._zone);
-        await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
-    }
+    // async surroundProgramSelect(surroundProgram){
+    //     await this._yamaha.setSound(surroundProgram, this._zone);
+    //     await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));
+    // }
     async surroundDecoderSelect(surroundDecoder){
         await this._yamaha.setSurroundDecoder(surroundDecoder, this._zone);
         // await this.setCapabilityValue("surround_program", surroundProgram ).catch(error => this.log("surroundProgramSelect() capability error: ", error));

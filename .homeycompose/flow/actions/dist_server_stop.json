@@ -1,11 +1,11 @@
 {
     "title": {
-        "en": "Distribution: Stop distribution.",
-        "de": "Verteilung: Stoppe Verteilung."
+        "en": "Distribution: Stop distribution",
+        "de": "Verteilung: Stoppe Verteilung"
     },
     "titleFormatted": {
-        "en": "Stop distribution.",
-        "de": "Stoppe Verteilung."
+        "en": "Stop distribution",
+        "de": "Stoppe Verteilung"
     },
     "args": [
         {

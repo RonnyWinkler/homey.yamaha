@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.yamaha.yxc",
-  "version": "1.1.14",
+  "version": "1.2.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "name": {
@@ -299,6 +299,7 @@
         "id": "dist_server_working"
       },
       {
+        "deprecated": true,
         "title": {
           "en": "Input !{{is|isn't}}",
           "de": "Eingang !{{ist|ist nicht}}",
@@ -728,6 +729,39 @@
           {
             "name": "device",
             "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+          },
+          {
+            "name": "input",
+            "type": "autocomplete",
+            "title": {
+              "en": "Input",
+              "de": "Eingang",
+              "nl": "Input"
+            },
+            "placeholder": {
+              "en": "Select the input",
+              "de": "Wähle den Eingang"
+            }
+          }
+        ],
+        "id": "input_autocomplete"
+      },
+      {
+        "title": {
+          "en": "Input !{{is|isn't}}",
+          "de": "Eingang !{{ist|ist nicht}}",
+          "nl": "Input !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Input !{{is|isn't}} [[input]]",
+          "de": "Eingang !{{ist|ist nicht}} [[input]]",
+          "nl": "Input !{{is|is niet}} [[input]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
             "filter": "driver_id=avreceiver"
           },
           {
@@ -979,6 +1013,7 @@
         "id": "input_av"
       },
       {
+        "deprecated": true,
         "title": {
           "en": "Surround program !{{is|isn't}}",
           "de": "Surround-Programm !{{ist|ist nicht}}",
@@ -993,7 +1028,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=receiver|receiver_zone"
+            "filter": "driver_id=receiver"
           },
           {
             "name": "surround_program",
@@ -1306,6 +1341,40 @@
           {
             "name": "device",
             "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "surround_program",
+            "type": "autocomplete",
+            "title": {
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            },
+            "placeholder": {
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            }
+          }
+        ],
+        "id": "surround_program_autocomplete"
+      },
+      {
+        "title": {
+          "en": "Surround program !{{is|isn't}}",
+          "de": "Surround-Programm !{{ist|ist nicht}}",
+          "nl": "Surround program !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Surround program !{{is|isn't}} [[surround_program]]",
+          "de": "Surround-Programm !{{ist|ist nicht}} [[surround_program]]",
+          "nl": "Surround program !{{is|is niet}} [[surround_program]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
             "filter": "driver_id=avreceiver"
           },
           {
@@ -1596,11 +1665,11 @@
       {
         "title": {
           "en": "Distribution: Add device to this server",
-          "de": "Verteilung: Füge diesem Server ein Gerät hinzu."
+          "de": "Verteilung: Füge diesem Server ein Gerät hinzu"
         },
         "titleFormatted": {
-          "en": "Add [[client]] to this server.",
-          "de": "Füge [[client]] diesem Server hinzu."
+          "en": "Add [[client]] to this server",
+          "de": "Füge [[client]] diesem Server hinzu"
         },
         "args": [
           {
@@ -1622,11 +1691,11 @@
       {
         "title": {
           "en": "Distribution: Remove device from this server",
-          "de": "Verteilung: Emntferne ein Gerät von diesem Server."
+          "de": "Verteilung: Emntferne ein Gerät von diesem Server"
         },
         "titleFormatted": {
-          "en": "Remove [[client]] from this server.",
-          "de": "Entferne [[client]] von diesem Server."
+          "en": "Remove [[client]] from this server",
+          "de": "Entferne [[client]] von diesem Server"
         },
         "args": [
           {
@@ -1647,12 +1716,12 @@
       },
       {
         "title": {
-          "en": "Distribution: Remove server group.",
-          "de": "Verteilung: Entferne Server-Gruppe."
+          "en": "Distribution: Remove server group",
+          "de": "Verteilung: Entferne Server-Gruppe"
         },
         "titleFormatted": {
-          "en": "Remove server group.",
-          "de": "Entferne Server-Gruppe."
+          "en": "Remove server group",
+          "de": "Entferne Server-Gruppe"
         },
         "args": [
           {
@@ -1665,12 +1734,12 @@
       },
       {
         "title": {
-          "en": "Distribution: Start distribution.",
-          "de": "Verteilung: Starte Verteilung."
+          "en": "Distribution: Start distribution",
+          "de": "Verteilung: Starte Verteilung"
         },
         "titleFormatted": {
-          "en": "Start distribution.",
-          "de": "Starte Verteilung."
+          "en": "Start distribution",
+          "de": "Starte Verteilung"
         },
         "args": [
           {
@@ -1683,12 +1752,12 @@
       },
       {
         "title": {
-          "en": "Distribution: Stop distribution.",
-          "de": "Verteilung: Stoppe Verteilung."
+          "en": "Distribution: Stop distribution",
+          "de": "Verteilung: Stoppe Verteilung"
         },
         "titleFormatted": {
-          "en": "Stop distribution.",
-          "de": "Stoppe Verteilung."
+          "en": "Stop distribution",
+          "de": "Stoppe Verteilung"
         },
         "args": [
           {
@@ -1742,8 +1811,8 @@
           "de": "Wähle einen Eingang"
         },
         "titleFormatted": {
-          "en": "Select input [[input]].",
-          "de": "Wähle einen Eingang [[input]]."
+          "en": "Select input [[input]]",
+          "de": "Wähle einen Eingang [[input]]"
         },
         "args": [
           {
@@ -1993,14 +2062,15 @@
         "id": "input_av_select"
       },
       {
+        "deprecated": true,
         "highlight": true,
         "title": {
           "en": "Select input",
           "de": "Wähle einen Eingang"
         },
         "titleFormatted": {
-          "en": "Select input [[input]].",
-          "de": "Wähle einen Eingang [[input]]."
+          "en": "Select input [[input]]",
+          "de": "Wähle einen Eingang [[input]]"
         },
         "args": [
           {
@@ -2418,13 +2488,44 @@
         "id": "input_select"
       },
       {
+        "highlight": true,
+        "title": {
+          "en": "Select input",
+          "de": "Wähle einen Eingang"
+        },
+        "titleFormatted": {
+          "en": "Select input [[input]]",
+          "de": "Wähle einen Eingang [[input]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+          },
+          {
+            "type": "autocomplete",
+            "name": "input",
+            "title": {
+              "en": "Input",
+              "de": "Eingang"
+            },
+            "placeholder": {
+              "en": "Select the input",
+              "de": "Wähle den Eingang"
+            }
+          }
+        ],
+        "id": "input_select_autocomplete"
+      },
+      {
         "title": {
           "en": "Select next NetRadio preset",
           "de": "Wähle nächsten NetRadio-Preset"
         },
         "titleFormatted": {
-          "en": "Select next NetRadio preset.",
-          "de": "Wähle nächsten NetRadio-Preset."
+          "en": "Select next NetRadio preset",
+          "de": "Wähle nächsten NetRadio-Preset"
         },
         "hint": {
           "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -2445,8 +2546,8 @@
           "de": "Wähle vorherigen NetRadio-Preset"
         },
         "titleFormatted": {
-          "en": "Select previous NetRadio preset.",
-          "de": "Wähle vorherigen NetRadio-Preset."
+          "en": "Select previous NetRadio preset",
+          "de": "Wähle vorherigen NetRadio-Preset"
         },
         "hint": {
           "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -2467,8 +2568,8 @@
           "de": "Wähle NetRadio-Preset"
         },
         "titleFormatted": {
-          "en": "Select NetRadio preset number [[item]].",
-          "de": "Wähle NetRadio-Preset-Nummer [[item]]."
+          "en": "Select NetRadio preset number [[item]]",
+          "de": "Wähle NetRadio-Preset-Nummer [[item]]"
         },
         "hint": {
           "en": "Assign your favorite NetRadio station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -2541,8 +2642,8 @@
           "de": "Wähle eine Szene"
         },
         "titleFormatted": {
-          "en": "Select scene [[scene]].",
-          "de": "Wähle eine Szene [[scene]]."
+          "en": "Select scene [[scene]]",
+          "de": "Wähle eine Szene [[scene]]"
         },
         "args": [
           {
@@ -2625,8 +2726,8 @@
           "de": "Sende API-Aufruf"
         },
         "titleFormatted": {
-          "en": "Send API request [[request]].",
-          "de": "Sende API-Aufruf [[request]]."
+          "en": "Send API request [[request]]",
+          "de": "Sende API-Aufruf [[request]]"
         },
         "hint": {
           "en": "The API request contains URL path and parameters like /main/setPower?power=on.",
@@ -2659,8 +2760,8 @@
           "de": "Sende API-Aufruf"
         },
         "titleFormatted": {
-          "en": "Send API request [[request]].",
-          "de": "Sende API-Aufruf [[request]]."
+          "en": "Send API request [[request]]",
+          "de": "Sende API-Aufruf [[request]]"
         },
         "hint": {
           "en": "The API request contains XML data like <YAMAHA_AV cmd=\"PUT\"><Main_Zone><Power_Control><Power>On</Power></Power_Control></Main_Zone></YAMAHA_AV>.",
@@ -2694,8 +2795,8 @@
           "de": "Sende RC-Code"
         },
         "titleFormatted": {
-          "en": "Send RC code [[code]].",
-          "de": "Sende RC-Code [[code]]."
+          "en": "Send RC code [[code]]",
+          "de": "Sende RC-Code [[code]]"
         },
         "hint": {
           "en": "Send remote control codes like 7C80 for Power on/off.",
@@ -2729,8 +2830,8 @@
           "de": "Wähle einen Surround-Decoder"
         },
         "titleFormatted": {
-          "en": "Select surround decoder [[surround_decoder]].",
-          "de": "Wähle einen Surround-Decoder [[surround_decoder]]."
+          "en": "Select surround decoder [[surround_decoder]]",
+          "de": "Wähle einen Surround-Decoder [[surround_decoder]]"
         },
         "args": [
           {
@@ -2794,8 +2895,8 @@
           "de": "Wähle eine Surround-Programm"
         },
         "titleFormatted": {
-          "en": "Select surround program [[surround_program]].",
-          "de": "Wähle eine Surround-Programm [[surround_program]]."
+          "en": "Select surround program [[surround_program]]",
+          "de": "Wähle eine Surround-Programm [[surround_program]]"
         },
         "args": [
           {
@@ -2949,20 +3050,21 @@
         "id": "surround_program_av_select"
       },
       {
+        "deprecated": true,
         "highlight": true,
         "title": {
           "en": "Select surround program",
           "de": "Wähle eine Surround-Programm"
         },
         "titleFormatted": {
-          "en": "Select surround program [[surround_program]].",
-          "de": "Wähle eine Surround-Programm [[surround_program]]."
+          "en": "Select surround program [[surround_program]]",
+          "de": "Wähle eine Surround-Programm [[surround_program]]"
         },
         "args": [
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=receiver|receiver_zone"
+            "filter": "driver_id=receiver"
           },
           {
             "type": "dropdown",
@@ -3260,6 +3362,37 @@
         "id": "surround_program_select"
       },
       {
+        "highlight": true,
+        "title": {
+          "en": "Select surround program",
+          "de": "Wähle eine Surround-Programm"
+        },
+        "titleFormatted": {
+          "en": "Select surround program [[surround_program]]",
+          "de": "Wähle eine Surround-Programm [[surround_program]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "type": "autocomplete",
+            "name": "surround_program",
+            "title": {
+              "en": "Surround program",
+              "de": "Surround-Programm"
+            },
+            "placeholder": {
+              "en": "Surround program",
+              "de": "Surround-Programm"
+            }
+          }
+        ],
+        "id": "surround_program_select_autocomplete"
+      },
+      {
         "title": {
           "en": "Set treble to",
           "de": "Höhen setzen auf"
@@ -3295,8 +3428,8 @@
           "de": "Wähle ein Tuner-Band"
         },
         "titleFormatted": {
-          "en": "Select tuner band [[band]].",
-          "de": "Wähle ein Tuner-Band [[band]]."
+          "en": "Select tuner band [[band]]",
+          "de": "Wähle ein Tuner-Band [[band]]"
         },
         "args": [
           {
@@ -3341,8 +3474,8 @@
           "de": "Wähle nächeten Tuner-Preset"
         },
         "titleFormatted": {
-          "en": "Select next tuner preset.",
-          "de": "Wähle nächsten Tuner-Preset."
+          "en": "Select next tuner preset",
+          "de": "Wähle nächsten Tuner-Preset"
         },
         "hint": {
           "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -3363,8 +3496,8 @@
           "de": "Wähle vorherigen Tuner-Preset"
         },
         "titleFormatted": {
-          "en": "Select previous tuner preset.",
-          "de": "Wähle vorherigen Tuner-Preset."
+          "en": "Select previous tuner preset",
+          "de": "Wähle vorherigen Tuner-Preset"
         },
         "hint": {
           "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -3385,8 +3518,8 @@
           "de": "Wähle Tuner-Preset"
         },
         "titleFormatted": {
-          "en": "Select tuner preset number [[item]] for band [[band]].",
-          "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]."
+          "en": "Select tuner preset number [[item]] for band [[band]]",
+          "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]"
         },
         "hint": {
           "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",
@@ -3456,8 +3589,8 @@
           "de": "Wähle Tuner-Preset"
         },
         "titleFormatted": {
-          "en": "Select tuner preset number [[item]].",
-          "de": "Wähle Tuner-Preset-Nummer [[item]]."
+          "en": "Select tuner preset number [[item]]",
+          "de": "Wähle Tuner-Preset-Nummer [[item]]"
         },
         "hint": {
           "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",

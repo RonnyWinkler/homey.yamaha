@@ -1,4 +1,5 @@
 {
+    "deprecated": true,
     "title": {
         "en": "Surround program !{{is|isn't}}",
         "de": "Surround-Programm !{{ist|ist nicht}}",
@@ -13,7 +14,7 @@
         {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=receiver|receiver_zone"
+            "filter": "driver_id=receiver"
         },
         {
             "name": "surround_program",

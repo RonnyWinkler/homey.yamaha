@@ -44,6 +44,24 @@ class yamahaApp extends Homey.App {
       }
     });
 
+    this._flowActionInputSelectAutocomplete = this.homey.flow.getActionCard('input_select_autocomplete')
+    this._flowActionInputSelectAutocomplete.registerRunListener(async (args, state) => {
+      try{
+        await args.device.inputSelect(args.input.id);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'input_select_autocomplete': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionInputSelectAutocomplete.registerArgumentAutocompleteListener('input', async (query, args) => {
+			const inputList = await args.device.getAutocompleteInputList();
+			return inputList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});			
+		});
+
     this._flowActionInputAvSelect = this.homey.flow.getActionCard('input_av_select')
     this._flowActionInputAvSelect.registerRunListener(async (args, state) => {
       try{
@@ -67,6 +85,24 @@ class yamahaApp extends Homey.App {
         throw new Error(error.message);
       }
     });
+
+    this._flowActionSurroundProgramSelect = this.homey.flow.getActionCard('surround_program_select_autocomplete')
+    this._flowActionSurroundProgramSelect.registerRunListener(async (args, state) => {
+      try{
+        await args.device.surroundProgramSelect(args.surround_program.id);
+        return true;
+      }
+      catch(error){
+        this.error("Error executing flowAction 'surround_program_select_autocomplete': "+  error.message);
+        throw new Error(error.message);
+      }
+    });
+    this._flowActionSurroundProgramSelect.registerArgumentAutocompleteListener('surround_program', async (query, args) => {
+			const surroundProgramList = await args.device.getAutocompleteSurroundProgramList();
+			return surroundProgramList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});			
+		});
 
     this._flowActionSurroundDecoderSelect = this.homey.flow.getActionCard('surround_decoder_select')
     this._flowActionSurroundDecoderSelect.registerRunListener(async (args, state) => {
@@ -491,22 +527,45 @@ class yamahaApp extends Homey.App {
       }
     });
 
-    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('input')
+    this._flowConditionInput = this.homey.flow.getConditionCard('input')
 		.registerRunListener(async (args, state) => {
         return (args.device.getCapabilityValue('input') == args.input);
 		})
 
-    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('input_av')
+    this._flowConditionInputAutocomplete = this.homey.flow.getConditionCard('input_autocomplete')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('input') == args.input.id);
+		})
+    this._flowConditionInputAutocomplete.registerArgumentAutocompleteListener('input', async (query, args) => {
+			const inputList = await args.device.getAutocompleteInputList();
+			return inputList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});			
+		});
+
+
+    this._flowConditionInputAv = this.homey.flow.getConditionCard('input_av')
 		.registerRunListener(async (args, state) => {
         return (args.device.getCapabilityValue('input_av') == args.input);
 		})
 
-    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('surround_program')
+    this._flowConditionSurroundProgram = this.homey.flow.getConditionCard('surround_program')
 		.registerRunListener(async (args, state) => {
         return (args.device.getCapabilityValue('surround_program') == args.surround_program);
 		})
 
-    this._flowConditionDistServerRole = this.homey.flow.getConditionCard('surround_program_av')
+    this._flowConditionSurroundProgramAutocomplete = this.homey.flow.getConditionCard('surround_program_autocomplete')
+		.registerRunListener(async (args, state) => {
+        return (args.device.getCapabilityValue('surround_program') == args.surround_program.id);
+		})
+    this._flowConditionSurroundProgramAutocomplete.registerArgumentAutocompleteListener('surround_program', async (query, args) => {
+			const surroundProgramList = await args.device.getAutocompleteSurroundProgramList();
+			return surroundProgramList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});			
+		});
+
+    this._flowConditionSurroundProgramAv = this.homey.flow.getConditionCard('surround_program_av')
 		.registerRunListener(async (args, state) => {
         return (args.device.getCapabilityValue('surround_program_av') == args.surround_program);
 		})

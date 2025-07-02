@@ -1,0 +1,32 @@
+{
+    "title": {
+        "en": "Input !{{is|isn't}}",
+        "de": "Eingang !{{ist|ist nicht}}",
+        "nl": "Input !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Input !{{is|isn't}} [[input]]",
+        "de": "Eingang !{{ist|ist nicht}} [[input]]",
+        "nl": "Input !{{is|is niet}} [[input]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+        },
+        {
+            "name": "input",
+            "type": "autocomplete",
+            "title": { 
+                "en": "Input",
+                "de": "Eingang",
+                "nl": "Input"
+            },
+            "placeholder": { 
+              "en": "Select the input",
+              "de": "Wähle den Eingang"
+            }
+        }
+    ]
+}

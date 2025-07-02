@@ -1,12 +1,13 @@
 {
-    "highlight": true,
-    "title": {
-        "en": "Select input",
-        "de": "Wähle einen Eingang"
-    },
+  "deprecated": true,
+  "highlight": true,
+  "title": {
+      "en": "Select input",
+      "de": "Wähle einen Eingang"
+  },
     "titleFormatted": {
-        "en": "Select input [[input]].",
-        "de": "Wähle einen Eingang [[input]]."
+        "en": "Select input [[input]]",
+        "de": "Wähle einen Eingang [[input]]"
     },
     "args": [
         {

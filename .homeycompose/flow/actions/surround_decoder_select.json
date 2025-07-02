@@ -5,8 +5,8 @@
         "de": "Wähle einen Surround-Decoder"
     },
     "titleFormatted": {
-        "en": "Select surround decoder [[surround_decoder]].",
-        "de": "Wähle einen Surround-Decoder [[surround_decoder]]."
+        "en": "Select surround decoder [[surround_decoder]]",
+        "de": "Wähle einen Surround-Decoder [[surround_decoder]]"
     },
     "args": [
         {

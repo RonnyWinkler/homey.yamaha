@@ -1,11 +1,11 @@
 {
     "title": {
         "en": "Distribution: Remove device from this server",
-        "de": "Verteilung: Emntferne ein Gerät von diesem Server."
+        "de": "Verteilung: Emntferne ein Gerät von diesem Server"
     },
     "titleFormatted": {
-        "en": "Remove [[client]] from this server.",
-        "de": "Entferne [[client]] von diesem Server."
+        "en": "Remove [[client]] from this server",
+        "de": "Entferne [[client]] von diesem Server"
     },
     "args": [
         {

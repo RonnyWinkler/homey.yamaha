@@ -4,8 +4,8 @@
         "de": "Wähle Tuner-Preset"
     },
     "titleFormatted": {
-        "en": "Select tuner preset number [[item]] for band [[band]].",
-        "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]."
+        "en": "Select tuner preset number [[item]] for band [[band]]",
+        "de": "Wähle Tuner-Preset-Nummer [[item]] für Band [[band]]"
     },
     "hint": {
         "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",

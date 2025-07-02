@@ -162,5 +162,9 @@
   "1.1.14": {
     "en": "Added AmazonMusic and Alexa to Musiccast input.",
     "de": "AmazonMusic und Alexa zur Musiccast-Input hinzugefügt."
+  },
+  "1.2.0": {
+    "en": "Added dynamic mode list and autocomplete flow cards for Input and SurroundProgram.",
+    "de": "Dynamische Modusliste und Autocomplete-Flow-Karten für Input und SurroundProgram hinzugefügt."
   }
 }

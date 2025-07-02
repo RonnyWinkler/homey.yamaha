@@ -4,8 +4,8 @@
         "de": "Sende API-Aufruf"
     },
     "titleFormatted": {
-        "en": "Send API request [[request]].",
-        "de": "Sende API-Aufruf [[request]]."
+        "en": "Send API request [[request]]",
+        "de": "Sende API-Aufruf [[request]]"
     },
     "hint": { 
         "en": "The API request contains URL path and parameters like /main/setPower?power=on.",

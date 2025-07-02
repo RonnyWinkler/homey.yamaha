@@ -1,0 +1,33 @@
+{
+    "title": {
+        "en": "Surround program !{{is|isn't}}",
+        "de": "Surround-Programm !{{ist|ist nicht}}",
+        "nl": "Surround program !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Surround program !{{is|isn't}} [[surround_program]]",
+        "de": "Surround-Programm !{{ist|ist nicht}} [[surround_program]]",
+        "nl": "Surround program !{{is|is niet}} [[surround_program]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver"
+        },
+        {
+            "name": "surround_program",
+            "type": "autocomplete",
+            "title": { 
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+            },
+            "placeholder": { 
+              "en": "Surround program",
+              "de": "Surround-Programm",
+              "nl": "Surround program"
+          }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select input",
+        "de": "Wähle einen Eingang"
+    },
+    "titleFormatted": {
+        "en": "Select input [[input]]",
+        "de": "Wähle einen Eingang [[input]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=receiver|receiver_zone"
+        },
+        {
+          "type": "autocomplete",
+          "name": "input",
+          "title": { 
+              "en": "Input",
+              "de": "Eingang"
+          },
+          "placeholder": { 
+              "en": "Select the input",
+              "de": "Wähle den Eingang"
+          }
+        }
+    ]
+}

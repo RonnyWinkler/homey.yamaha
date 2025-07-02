@@ -4,8 +4,8 @@
         "de": "Wähle vorherigen Tuner-Preset"
     },
     "titleFormatted": {
-        "en": "Select previous tuner preset.",
-        "de": "Wähle vorherigen Tuner-Preset."
+        "en": "Select previous tuner preset",
+        "de": "Wähle vorherigen Tuner-Preset"
     },
     "hint": { 
         "en": "Assign your favorite tuner station to a preset number (memory button + preset selection). Then recall the preset with this flow.",

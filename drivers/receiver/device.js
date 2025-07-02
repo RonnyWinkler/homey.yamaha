@@ -166,7 +166,8 @@ class receiverDevice extends Homey.Device {
             }
         }
         // Zone features
-        if (features && features.zone && features.zone[0] && features.zone[0].func_list ){
+        if (features && features.zone && features.zone[0]){
+          if (features.zone[0].func_list){
             let funct = features.zone[0].func_list;
             if (funct.indexOf("power") == -1 && this.hasCapability("onoff")){
                 await  this.removeCapability("onoff");
@@ -210,6 +211,47 @@ class receiverDevice extends Homey.Device {
             if (funct.indexOf("bass_extension") > -1 && !this.hasCapability("bass")){
                 await this.addCapability("bass");
             }
+          }
+          if (features.zone[0].input_list){
+            let inputList = [];
+            for (let i=0; i<features.zone[0].input_list.length; i++){
+              let capabilityEntry = this.homey.manifest.capabilities.input.values.find(input => {
+                return input.id == features.zone[0].input_list[i];
+              });
+              if (capabilityEntry != undefined){
+                inputList.push(capabilityEntry);
+              }
+              else{
+                inputList.push({
+                  id: features.zone[0].input_list[i],
+                  title: features.zone[0].input_list[i]
+                });
+              }
+            }
+            if (inputList.length > 0 && this.hasCapability("input")){
+                await this.setCapabilityOptions("input", {values: inputList});
+            }
+          }
+          if (features.zone[0].sound_program_list){
+            let inputList = [];
+            for (let i=0; i<features.zone[0].sound_program_list.length; i++){
+              let capabilityEntry = this.homey.manifest.capabilities.surround_program.values.find(input => {
+                return input.id == features.zone[0].sound_program_list[i];
+              });
+              if (capabilityEntry != undefined){
+                inputList.push(capabilityEntry);
+              }
+              else{
+                inputList.push({
+                  id: features.zone[0].sound_program_list[i],
+                  title: features.zone[0].sound_program_list[i]
+                });
+              }
+            }
+            if (inputList.length > 0 && this.hasCapability("surround_program")){
+                await this.setCapabilityOptions("surround_program", {values: inputList});
+            }
+          }
         }
         // Get volume range
         try{
@@ -926,6 +968,68 @@ class receiverDevice extends Homey.Device {
         }
     }
 
+    // Autocompleete functions ========================================================================================================
+    async getAutocompleteInputList(){
+      let inputList = [];
+      try{
+        let capabilityOptions = await this.getCapabilityOptions('input');
+        for (let i=0; i<capabilityOptions.values.length; i++){
+          inputList.push({
+            id: capabilityOptions.values[i].id,
+            name: capabilityOptions.values[i].title['en'] || capabilityOptions.values[i].title
+          });
+        }
+        return inputList;
+      }
+      catch(error){
+        return inputList;
+      }
+    }
+
+    async getAutocompleteSurroundProgramList(){
+      let surroundProgramList = [];
+      try{
+        let capabilityOptions = await this.getCapabilityOptions('surround_program');
+        for (let i=0; i<capabilityOptions.values.length; i++){
+          surroundProgramList.push({
+            id: capabilityOptions.values[i].id,
+            name: capabilityOptions.values[i].title['en'] || capabilityOptions.values[i].title
+          });
+        }
+        return surroundProgramList;
+      }
+      catch(error){
+        return surroundProgramList;
+      }
+    }
+
+    async getAutocompleteClientList(){
+        let clients = [];
+        let devices = await this.driver.getDevices();
+        for (let i=0; i<devices.length; i++){
+            clients.push(
+                {
+                    name: devices[i].getName(),
+                    ip: devices[i].getSetting('ip'),
+                    id: devices[i].getData()
+                }
+            );
+        }
+        return clients;
+    }
+
+    async getAutocompleteGroupList(){
+        let dist = await this._yamaha.getDistributionInfo();
+        if (!dist || dist.response_code != 0){
+            return [];
+        }
+        return [{
+            name: dist.group_name,
+            id: dist.group_id,
+            zone: dist.server_zone
+        }];        
+    }
+
     // Flow actions  ========================================================================================================
     async inputSelect(input){
         await this._yamaha.setInput(input);
@@ -1080,33 +1184,6 @@ class receiverDevice extends Homey.Device {
     }
 
     // Distribution
-    async getAutocompleteClientList(){
-        let clients = [];
-        let devices = await this.driver.getDevices();
-        for (let i=0; i<devices.length; i++){
-            clients.push(
-                {
-                    name: devices[i].getName(),
-                    ip: devices[i].getSetting('ip'),
-                    id: devices[i].getData()
-                }
-            );
-        }
-        return clients;
-    }
-
-    async getAutocompleteGroupList(){
-        let dist = await this._yamaha.getDistributionInfo();
-        if (!dist || dist.response_code != 0){
-            return [];
-        }
-        return [{
-            name: dist.group_name,
-            id: dist.group_id,
-            zone: dist.server_zone
-        }];        
-    }
-
     async distServerAddRemoveClient(args, action){
         this.log("distServerAddRemoveClient()");
         let result = '';
